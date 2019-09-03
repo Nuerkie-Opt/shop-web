@@ -1,7 +1,7 @@
 <template>
 <div>
-  <el-input placeholder="Find something, or someone" size="medium" v-model="search" class="input-with-select">
-    <el-button slot="append" icon="el-icon-search" type="primary"></el-button>
+  <el-input placeholder="Find something, or someone" size="small" v-model="search" class="input-with-select">
+    <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
 </template>

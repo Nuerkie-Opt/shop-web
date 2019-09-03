@@ -1,9 +1,9 @@
 <template>
-<el-row type="flex" align="middle" justify="left">
+<el-row type="flex" align="middle" justify="start">
 <el-col v-for="menu in menus" :key="menu">
-<el-dropdown szie="medium">
+<el-dropdown size="medium">
   <span class="el-dropdown-link">
-    Category<i class="el-icon-arrow-down el-icon--right"></i>
+    Category
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>Action 1</el-dropdown-item>
@@ -33,6 +33,7 @@ export default {
   }
   .el-dropdown-link:hover{
       color: #E6A23C;
+      border-bottom:1px
   }
   .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
     background-color: #fff7ea;
