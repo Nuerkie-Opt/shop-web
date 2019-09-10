@@ -3,7 +3,7 @@ import MenusData from './MenusData.js';
 
 const data = {
     state : {
-        items: ItemsData,
+        productMatrix: [ItemsData],
         menus: MenusData
     }
 };

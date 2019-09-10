@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    props:['mode','item']
+    props:['mode','item','row', 'col']
 }
 </script>
 

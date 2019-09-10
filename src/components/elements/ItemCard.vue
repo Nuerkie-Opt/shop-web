@@ -1,6 +1,10 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover">
-    <el-image :src="item.images[0]">
+    <el-image
+      :src="item.images[0]"
+      @click="itemDetails"
+      lazy
+    >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
       </div>
@@ -21,7 +25,9 @@
         <el-button class="bots" icon="el-icon-share" size="small" circle></el-button>
         <el-button class="bots" icon="el-icon-more-outline" size="small" circle></el-button>
         <el-button class="bots" icon="el-icon-view" size="small" circle></el-button>
-        <el-button class="rbutton bots" size="small" round><MoneySign :price="item.price"/> </el-button>
+        <el-button class="rbutton bots" size="small" round>
+          <MoneySign :price="item.price" />
+        </el-button>
       </div>
     </div>
   </el-card>
@@ -34,7 +40,12 @@ export default {
   components: {
     MoneySign
   },
-  props: ["mode", "item"]
+  props: ["mode", "item", "row", "col"],
+  methods: {
+    itemDetails(){
+      this.$router.push({ path:`items/${this.item.link}`,query:{ r: this.row, c:this.col } });
+    }
+  }
 };
 </script>
 

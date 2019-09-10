@@ -1,4 +1,5 @@
 import ItemDisplay from './ItemDisplay.vue';
+import ItemDetails from './ItemDetails.vue';
 import Auth from './Auth.vue';
 
 
@@ -31,7 +32,8 @@ const shopRoutes = [
         ]
     },
     {
-        path:'items/:item'
+        path:'items/:item',
+        component:ItemDetails
     },
     {
         path:'search/:query'

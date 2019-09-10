@@ -5,7 +5,7 @@
     infinite-scroll-delay="1000"
   >
 
-    <ItemRow v-for="i in count" :key="i" :rowData="items" />
+    <ItemRow v-for="(row, i) in productMatrix" :key="i" :row="i" :rowData="row" />
     <p v-if="loading">Loading...</p>
   </div>
 </template>
@@ -32,11 +32,12 @@ export default {
       return this.loading || this.noMore;
     },
     ...mapState([
-      'items'
+      'productMatrix'
     ])
   },
   methods: {
     load() {
+      // append rows to product matrix
       this.loading = true;
       setTimeout(() => {
         this.count += 2;

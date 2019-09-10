@@ -2,23 +2,29 @@
   <el-row :gutter="20">
     <el-col 
     :xs="24" :sm="smUp" :md="mdUp" :lg="lgUp" :xl="lgUp" 
-    v-for="col in rowData.ncols" 
+    v-for="(col, i) in rowData.ncols" 
     :key="col">
 
       <ItemCard 
       v-if="isCanvasType('card', col)" 
       :mode="getMode(col)" 
-      :item="getItem(col)" />
+      :item="getItem(col)" 
+      :row="row"
+      :col="i"/>
 
       <ItemJumbo 
       v-if="isCanvasType('jumbo', col)" 
       :mode="getMode(col)" 
-      :item="getItem(col)" />
+      :item="getItem(col)"
+      :row="row"
+      :col="i"/>
 
       <ItemCollage 
       v-if="isCanvasType('collage', col)" 
       :mode="getMode(col)" 
-      :item="getItem(col)" />
+      :item="getItem(col)"
+      :row="row"
+      :col="i"/>
       
     </el-col>
   </el-row>
@@ -35,7 +41,7 @@ export default {
       ItemJumbo,
       ItemCard
   },
-  props: ["rowData"],
+  props: ["rowData", "row"],
   computed: {
     lgUp() {
       return 24 / this.rowData.ncols;
