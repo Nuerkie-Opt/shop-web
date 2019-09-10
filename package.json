@@ -1,7 +1,7 @@
 {
-  "name": "element-starter",
+  "name": "Shop-4.0",
   "description": "A Vue.js project",
-  "author": "yi.shyang@ele.me",
+  "author": "sbksoftwares@gmail.com",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --env.dev",
@@ -10,7 +10,9 @@
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.10.2",
     "element-ui": "^2.3.4",
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.1"
   },
   "engines": {
     "node": ">=6"

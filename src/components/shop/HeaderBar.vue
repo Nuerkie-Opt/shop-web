@@ -49,8 +49,8 @@
   </el-card>
 </template>
 <script>
-import SearchBar from "./elements/SearchBar.vue";
-import MenuBar from "./elements/MenuBar.vue";
+import SearchBar from "../elements/SearchBar.vue";
+import MenuBar from "../elements/MenuBar.vue";
 
 export default {
   components: {
