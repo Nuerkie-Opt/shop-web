@@ -10,6 +10,7 @@ const rowData = {
             price:100,
             images:[
                 '/images/3.jpg',
+                '/images/1.jpg',
             ],
             tags:[
                 'tree','twig','node'
@@ -27,6 +28,13 @@ const rowData = {
             price:100,
             images:[
                 '/images/7.jpg',
+                '/images/1.jpg',
+                '/images/6.jpg',
+                '/images/2.jpg',
+                '/images/7.jpg',
+                '/images/1.jpg',
+                '/images/6.jpg',
+                '/images/2.jpg',
             ],
             tags:[
                 'tree','root','node'
@@ -44,6 +52,7 @@ const rowData = {
             price:100,
             images:[
                 '/images/6.jpg',
+                '/images/2.jpg',
             ],
             tags:[
                 'tree','caterpillar','node'

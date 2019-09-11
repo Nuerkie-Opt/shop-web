@@ -1,8 +1,7 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }" shadow="hover">
+  <el-card :body-style="{ padding: '0px' }">
     <el-image
-      :src="item.image"
-      lazy
+      :src="image"
     >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
@@ -15,14 +14,9 @@
 </template>
 
 <script>
-import MoneySign from "./MoneySign.vue";
-
 export default {
-  components: {
-    MoneySign
-  },
-  props: ["item"]
-};
+  props:['image']
+}
 </script>
 
 <style scoped>
@@ -33,7 +27,7 @@ export default {
   cursor: pointer;
 }
 .el-card:hover {
-  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .image-slot {
   display: flex;

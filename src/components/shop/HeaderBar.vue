@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       circleUrl:
-        "../images/4.jpg"
+        "/images/4.jpg"
     };
   }
 };
