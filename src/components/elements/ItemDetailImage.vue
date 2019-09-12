@@ -26,6 +26,9 @@ export default {
   border-radius: 7px;
   cursor: pointer;
 }
+.el-image {
+  cursor: zoom-in;
+}
 .el-card:hover {
   box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
 }

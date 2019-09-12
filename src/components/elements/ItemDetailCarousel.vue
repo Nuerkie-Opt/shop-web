@@ -9,7 +9,7 @@
     :height="height"
   >
     <el-carousel-item v-for="(image, i) in images" :key="i">
-      <ItemDetailImage :image="image" ref="im"/>
+      <ItemDetailImage :image="image" ref="im" />
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -24,7 +24,17 @@ export default {
   props: ["images"],
   data(){
     return{
-      height:'400px'
+      width: window.innerWidth
+    }
+  },
+  computed: {
+    height() {
+     if (this.width > 768) {
+        return `${this.width / 2.2}px`
+      } else{
+        return `${this.width / 1.2}px`
+      }
+      
     }
   },
   methods: {
@@ -36,6 +46,9 @@ export default {
     this.$eventBus.$on("thumbed", key => {
       this.$refs.rousel.setActiveItem(key);
     });
+  },
+  created(){
+    window.addEventListener('resize', () => this.width = window.innerWidth)
   }
 };
 </script>
@@ -44,7 +57,4 @@ export default {
 .el-carousel__arrow {
   background-color: rgba(31, 45, 61, 0.4);
 }
-/* .el-carousel {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-} */
 </style>
