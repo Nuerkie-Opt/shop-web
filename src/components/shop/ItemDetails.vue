@@ -9,8 +9,10 @@
       </el-row>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12">
+      <ItemDetailInfo :item="item" /><br><br>
       <ItemDetailInfo :item="item" />
     </el-col>
+    <ItemDetailInfo :item="item" />
     <el-dialog :visible.sync="dialogVisible" width="60%" custom-class="transmodal" style="cursor:zoom-out">
       <img width="100%" :src="currentImage" alt @click="imgClose" />
     </el-dialog>

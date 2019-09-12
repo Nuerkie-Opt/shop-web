@@ -2,6 +2,7 @@
   <el-card :body-style="{ padding: '0px' }">
     <el-image
       :src="image"
+      :style="{cursor: mouse}"
     >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
@@ -15,7 +16,10 @@
 
 <script>
 export default {
-  props:['image']
+  props:{
+    image:String,
+    mouse:{default:'zoom-in', type: String}
+  }
 }
 </script>
 
