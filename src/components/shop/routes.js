@@ -1,5 +1,7 @@
 import ItemDisplay from './ItemDisplay.vue';
 import ItemDetails from './ItemDetails.vue';
+import Checkout from './Checkout.vue';
+import Cart from './Cart.vue';
 import Auth from './Auth.vue';
 
 
@@ -34,6 +36,14 @@ const shopRoutes = [
     {
         path:'items/:item',
         component:ItemDetails
+    },
+    {
+        path: 'checkout',
+        component: Checkout
+    },
+    {
+        path: 'cart',
+        component: Cart
     },
     {
         path:'search/:query'
