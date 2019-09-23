@@ -26,7 +26,7 @@
           </el-col>
           <el-col>
             <el-badge :value="0" :max="99" class="counter">
-              <el-button type="danger" size="small" icon="el-icon-goods" plain circle></el-button>
+              <el-button type="danger" size="small" @click="$router.push('/cart')" icon="el-icon-goods" plain circle></el-button>
             </el-badge>
           </el-col>
           <el-col>

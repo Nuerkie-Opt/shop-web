@@ -6,34 +6,21 @@
       </template>
     </el-col>
     <el-col :xs="24" :sm="8">
-      <el-card >
-        <el-row style="font-size:18px">
-          <el-col :span="20"><i>Total :</i></el-col>
-          <el-col :span="4"><i>$999</i></el-col>
-        </el-row>
-        <el-row style="font-size:18px">
-          <el-col :span="20"><i>Total :</i></el-col>
-          <el-col :span="4"><i>$999</i></el-col>
-        </el-row>
-        <el-divider></el-divider>
-        <el-button style="width:100%" type="info">
-          <i style="font-size:18px"><b>Checkout</b></i>
-        </el-button>
-        <el-divider content-position="left"><i>Payment Options</i></el-divider>
-        <el-row :gutter="5">
-          <el-col v-for="i in 9" :key="i" :span="4">pay</el-col>
-        </el-row>
-      </el-card>
+      <OrderSummary :summary="true"/>
     </el-col>
   </el-row>
 </template>
 
 <script>
 import CartItem from "../elements/CartItem.vue";
+import MoneySign from "../elements/MoneySign.vue";
+import OrderSummary from "../elements/OrderSummary.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
+    OrderSummary,
+    MoneySign,
     CartItem
   },
   computed: {
