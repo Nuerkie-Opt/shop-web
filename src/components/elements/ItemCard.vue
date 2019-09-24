@@ -21,24 +21,18 @@
       <el-divider></el-divider>
 
       <div class="sbottom clearfix">
-        <el-button class="bots" icon="el-icon-star-off" size="small" circle></el-button>
-        <el-button class="bots" icon="el-icon-share" size="small" circle></el-button>
-        <el-button class="bots" icon="el-icon-more-outline" size="small" circle></el-button>
-        <el-button class="bots" icon="el-icon-view" size="small" circle></el-button>
-        <el-button class="rbutton bots" size="small" round>
-          <MoneySign :price="item.price" />
-        </el-button>
+          <ActionBtns :item="item" />
       </div>
     </div>
   </el-card>
 </template>
 
 <script>
-import MoneySign from "./MoneySign.vue";
+import ActionBtns from "./ActionBtns.vue";
 
 export default {
   components: {
-    MoneySign
+    ActionBtns
   },
   props: ["mode", "item", "row", "col"],
   methods: {
@@ -59,13 +53,6 @@ export default {
 .el-card:hover {
   box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.03);
 }
-.bots {
-  font-weight: bold;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
-.bots:hover {
-  box-shadow: 0 0 0 5px rgba(23, 135, 251, 0.05);
-}
 .el-divider {
   margin: 0px;
 }
@@ -76,10 +63,6 @@ export default {
 .sbottom {
   margin: 8px;
   line-height: 12px;
-}
-.rbutton {
-  /* padding: 0; */
-  float: right;
 }
 .lbutton {
   /* padding: 0; */

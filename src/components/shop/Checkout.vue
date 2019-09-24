@@ -15,12 +15,15 @@
             <CartItem :item="cart.item" :quantity="cart.quantity" :options="cart.options" :key="i"></CartItem>
           </template>
         </template>
-        <el-button-group>
+        <template v-if="active==3">
+          processing
+        </template>
+        <el-button-group v-if="active!=3">
           <el-button type="primary" @click="prev" plain>
             <i class="el-icon-arrow-left"></i>Previous step
           </el-button>
-          <el-button type="primary" @click="next">
-            Next step
+          <el-button :type="nextStep[0]" @click="next">
+            {{nextStep[1]}}
             <i class="el-icon-arrow-right"></i>
           </el-button>
         </el-button-group>
@@ -60,12 +63,16 @@ export default {
 
   methods: {
     next() {
-      let form = this.infos[this.active];
+      if (this.active >= 2){
+        this.active++;
+        return false;
+      }
+      const form = this.infos[this.active];
       this.$refs[form]
         .getData()
         .then(value => {
           this.orderDetails[form] = value;
-          if (this.active++ > 2) this.active = 2;
+          this.active++;
           console.log(this.orderDetails[form]);
         })
         .catch(reason => {
@@ -77,6 +84,13 @@ export default {
     }
   },
   computed:{
+    nextStep(){
+      if (this.active == 2){
+        return ['success','Proceed to Checkout.']
+      }else{
+        return ['primary','Next Step']
+      }
+    },
     ...mapState(["cartItems"])
   }
 };

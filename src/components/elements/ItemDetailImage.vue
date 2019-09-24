@@ -3,6 +3,7 @@
     <el-image
       :src="image"
       :style="{cursor: mouse}"
+      :preview-src-list="[image]"
     >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
