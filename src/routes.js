@@ -11,8 +11,8 @@ import adminRoutes from './components/admin/routes.js';
 
 const routes = [
     { path:'', component: Shop, children: shopRoutes },
-    { path:'profile', component: Profile, children: profileRoutes },
-    { path:'admin', component: Admin, children: adminRoutes },
+    { path:'/profile', component: Profile, children: profileRoutes },
+    { path:'/admin', component: Admin, children: adminRoutes },
     { path:'*', component: Shop, children: shopRoutes }
 ];
 

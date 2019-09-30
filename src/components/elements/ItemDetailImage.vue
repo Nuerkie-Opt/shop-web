@@ -19,7 +19,7 @@
 export default {
   props:{
     image:String,
-    mouse:{default:'zoom-in', type: String}
+    mouse:{default:'pointer', type: String}
   }
 }
 </script>

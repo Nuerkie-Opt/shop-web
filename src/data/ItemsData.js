@@ -9,7 +9,7 @@ const rowData = {
             liked:false,
             price:100,
             images:[
-                '/images/3.jpg',
+                '/images/10.jpg',
                 '/images/1.jpg',
             ],
             tags:[
@@ -27,7 +27,7 @@ const rowData = {
             liked:false,
             price:100,
             images:[
-                '/images/7.jpg',
+                '/images/11.jpg',
                 '/images/1.jpg',
                 '/images/6.jpg',
                 '/images/2.jpg',
@@ -51,7 +51,7 @@ const rowData = {
             liked:false,
             price:100,
             images:[
-                '/images/6.jpg',
+                '/images/12.jpg',
                 '/images/2.jpg',
             ],
             tags:[
@@ -69,7 +69,7 @@ const rowData = {
             liked:false,
             price:100,
             images:[
-                '/images/5.jpg',
+                '/images/13.jpg',
             ],
             tags:[
                 'tree','twig','node','decomposition'
@@ -86,7 +86,7 @@ const rowData = {
             liked:false,
             price:100,
             images:[
-                '/images/4.jpg',
+                '/images/14.jpg',
             ],
             tags:[
                 'tree','greedy','node'
