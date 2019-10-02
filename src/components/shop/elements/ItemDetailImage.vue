@@ -3,7 +3,7 @@
     <el-image
       :src="image"
       :style="{cursor: mouse}"
-      :preview-src-list="[image]"
+      :preview-src-list="slist"
     >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
@@ -19,7 +19,13 @@
 export default {
   props:{
     image:String,
+    prev:{default:true, type:Boolean},
     mouse:{default:'pointer', type: String}
+  },
+  computed:{
+    slist(){
+      return this.prev ? [this.image]: [] ;
+    }
   }
 }
 </script>

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ItemRow from "../elements/ItemRow.vue";
+import ItemRow from "./elements/ItemRow.vue";
 import { mapState } from 'vuex';
 
 export default {

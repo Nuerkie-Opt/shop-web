@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import optionsData from "../../data/optionsData.js";
+import optionsData from "../../../data/optionsData.js";
 
 export default {
   props: ["item"],

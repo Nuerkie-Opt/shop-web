@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import MoneySign from "../elements/MoneySign.vue";
+import MoneySign from "./MoneySign.vue";
 
 export default {
   props: ["item", "quantity", "options"],

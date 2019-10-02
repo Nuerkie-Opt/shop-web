@@ -37,10 +37,10 @@
 
 
 <script>
-import CartItem from "../elements/CartItem.vue";
-import LocationDetails from "../elements/LocationDetials.vue";
-import PaymentDetails from "../elements/PaymentDetails.vue";
-import OrderSummary from "../elements/OrderSummary.vue";
+import CartItem from "./elements/CartItem.vue";
+import LocationDetails from "./elements/LocationDetials.vue";
+import PaymentDetails from "./elements/PaymentDetails.vue";
+import OrderSummary from "./elements/OrderSummary.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      active: 1,
+      active: 0,
       infos: ["locationDetails", "paymentDetails"],
       orderDetails: {
         locationDetails: {},

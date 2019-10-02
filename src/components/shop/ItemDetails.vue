@@ -19,10 +19,10 @@
 
 <script>
 import { mapState } from "vuex";
-import ItemDetailCarousel from "../elements/ItemDetailCarousel.vue";
-import ItemDetailInfo from "../elements/ItemDetailInfo.vue";
-import ItemTabInfo from "../elements/ItemTabInfo.vue";
-import ItemDetailThumbs from "../elements/ItemDetailThumbs.vue";
+import ItemDetailCarousel from "./elements/ItemDetailCarousel.vue";
+import ItemDetailInfo from "./elements/ItemDetailInfo.vue";
+import ItemTabInfo from "./elements/ItemTabInfo.vue";
+import ItemDetailThumbs from "./elements/ItemDetailThumbs.vue";
 
 export default {
   components: {

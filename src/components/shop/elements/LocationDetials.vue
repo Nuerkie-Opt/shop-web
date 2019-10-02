@@ -74,8 +74,8 @@
   </el-form>
 </template>
 <script>
-import countries from "../../data/countries.js";
-import dialCode from "../../data/dialCode.js";
+import countries from "../../../data/countries.js";
+import dialCode from "../../../data/dialCode.js";
 
 export default {
   data() {

@@ -142,7 +142,7 @@
   </el-form>
 </template>
 <script>
-import expiryDates from "../../data/expiryDates.js";
+import expiryDates from "../../../data/expiryDates.js";
 export default {
   data() {
     return {

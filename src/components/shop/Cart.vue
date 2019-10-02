@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import CartItem from "../elements/CartItem.vue";
-import MoneySign from "../elements/MoneySign.vue";
-import OrderSummary from "../elements/OrderSummary.vue";
+import CartItem from "./elements/CartItem.vue";
+import MoneySign from "./elements/MoneySign.vue";
+import OrderSummary from "./elements/OrderSummary.vue";
 import { mapState } from "vuex";
 
 export default {
