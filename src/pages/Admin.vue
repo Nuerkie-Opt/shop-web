@@ -5,7 +5,9 @@
     </el-aside>
 
     <el-container>
-      <HeaderBar />
+      <el-header>
+        <HeaderBar />
+      </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -14,11 +16,11 @@
 </template>
 
 <script>
-import SideBar from '../components/admin/elements/SideBar.vue';
-import HeaderBar from '../components/admin/elements/HeaderBar.vue';
+import SideBar from "../components/admin/elements/SideBar.vue";
+import HeaderBar from "../components/admin/elements/HeaderBar.vue";
 
 export default {
-  components:{
+  components: {
     HeaderBar,
     SideBar
   }
@@ -26,9 +28,10 @@ export default {
 </script>
 
 <style scoped>
-
-.el-main {
-  margin-top: 60px;
+.el-header {
+  background-color: #b3c0d1;
+  color: #333;
+  line-height: 60px;
 }
 .el-aside {
   color: #333;

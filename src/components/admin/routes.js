@@ -24,46 +24,40 @@ const adminRoutes = [
     },
     {
         path:'items',
-        component:ItemsList,
-        children:[
-            {
-                path:'plus',
-                component:ItemsPlus,
+        component:ItemsList
+    },
+    {
+        path:'items/plus',
+        component:ItemsPlus,
 
-            }
-        ]
     },
     {
         path:'orders',
-        component:OrdersList,
-        children:[
-            {
-                path:'items',
-                component:OrdersItems,
+        component:OrdersList
+    },
+    {
+        path:'orders/items',
+        component:OrdersItems,
 
-            },
-            {
-                path:'money',
-                component:OrdersMoney,
+    },
+    {
+        path:'orders/money',
+        component:OrdersMoney,
 
-            }
-        ]
     },
     {
         path:'analytics',
+        component:DescriptiveAnalytics
+    },
+    {
+        path:'analytics/desc',
         component:DescriptiveAnalytics,
-        children:[
-            {
-                path:'desc',
-                component:DescriptiveAnalytics,
 
-            },
-            {
-                path:'pred',
-                component:PredictiveAnalytics,
+    },
+    {
+        path:'analytics/pred',
+        component:PredictiveAnalytics,
 
-            }
-        ]
     }
 ];
 

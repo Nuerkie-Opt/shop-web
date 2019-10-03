@@ -8,6 +8,8 @@ export default {
     computed:{
         moneySign(){
             switch (this.currency) {
+                case 'NGN':
+                    return '&#8358;';
                 case 'USD':
                     return '&#36;';
                     break;

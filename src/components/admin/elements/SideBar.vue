@@ -1,5 +1,5 @@
 <template>
-  <el-menu :collapse="collapsed" :default-openeds="['items', 'orders', 'analytics']" :router="true">
+  <el-menu :default-openeds="['items', 'orders', 'analytics']" :router="true">
     <el-menu-item index="/admin/dashboard">
       <i class="el-icon-s-management"></i>Dashboard
     </el-menu-item>
@@ -49,13 +49,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      collapsed: false
-    };
-  },
-  mounted() {
-    this.$eventBus.$on("collapsed", state => (this.collapsed = state));
-  }
+  
 };
 </script>

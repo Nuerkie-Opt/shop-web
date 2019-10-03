@@ -5,9 +5,9 @@ import Cart from './Cart.vue';
 import Auth from './Auth.vue';
 
 
-import Login from '../elements/Login.vue';
-import Register from '../elements/Register.vue';
-import Reset from '../elements/Reset.vue';
+import Login from './elements/Login.vue';
+import Register from './elements/Register.vue';
+import Reset from './elements/Reset.vue';
 
 const shopRoutes = [
     {
