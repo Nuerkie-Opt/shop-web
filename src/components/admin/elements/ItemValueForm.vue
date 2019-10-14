@@ -16,10 +16,21 @@ export default {
     },
   methods: {
     getData() {
-        return this.$refs["itemValueBasicForm"].getData();
-    },
-    uploadImages(){
-        console.log('uploading Images');
+      return this.$refs.imageUploader.getData().then(images => {
+        return this.$refs.itemValueBasicForm
+          .getData()
+          .then(form => {
+            form.images = images;
+            console.log('itemValueForm');
+            console.log(form);
+            
+            
+            return Promise.resolve(form);
+          })
+          .catch(error => {
+            return Promise.reject(error);
+          });
+      });
     }
   }
 };

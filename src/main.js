@@ -5,6 +5,7 @@ import ElementUI from 'element-ui';
 import App from './App.vue';
 import './theme/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
+import axios from 'axios';
 import data from './data';
 import routes from './routes.js';
 import eventBus from './eventBus.js';
@@ -21,6 +22,12 @@ const router = new VueRouter({
 });
 
 Vue.prototype.$eventBus = eventBus;
+
+Vue.prototype.$actions = axios.create({
+  url: '/action',
+  baseURL: Vue.config.devtools ? 'http://localhost:8002' : 'http://localhost:8002',
+  method: 'post'
+});
 
 new Vue({
   router,

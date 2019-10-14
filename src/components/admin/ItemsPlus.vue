@@ -36,6 +36,7 @@ export default {
   },
   data() {
     return {
+      options: [],
       editableTabsValue: "0",
       editableTabs: [],
       tabIndex: 0
@@ -53,9 +54,79 @@ export default {
         }
       )
         .then(_ => {
-          console.log("submitting");
+          this.upload();
         })
         .catch(_ => {});
+    },
+    async collectProperties() {
+      this.options = [];
+      if (!this.$refs.itemPropertyForm) {
+        console.log("collectPropertiesRejected");
+
+        return Promise.resolve();
+      }
+
+      await this.$refs.itemPropertyForm.forEach(property => {
+        property
+          .getData()
+          .then(value => {
+            this.options.push(value);
+            console.log("collectProperties");
+
+            console.log(value);
+          })
+          .catch(error => {
+            this.$notify.error({
+              title: "Error",
+              message: error
+            });
+          });
+      });
+    },
+    async upload() {
+      let formData;
+      await this.$refs.itemForm
+        .getData()
+        .then(form => {
+          formData = form;
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message: error
+          });
+        });
+      await this.collectProperties().then(() => {
+        formData.options = this.options;
+        console.log("itemPlus");
+        console.log(formData);
+      });
+
+      const payload = {
+        '111':{
+          'upload_item':formData,
+          '000':['upload_item']
+        },
+        '000':['111']
+      }
+      // show loader
+      this.$actions
+        .request({
+          data: payload,
+          headers: { Authorization: "Bearer token" }
+        })
+        .then(function(response) {
+          // handle success
+          console.log(response);
+        })
+        .catch(function(error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function() {
+          // always executed
+          // remove loader
+        });
     },
     addTab(targetName) {
       this.$prompt("Property title", "Item Property", {

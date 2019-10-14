@@ -28,7 +28,7 @@
         <i class="el-icon-minus"></i>
       </el-button>
     </div>
-    
+
     <el-button @click="values += 1" size="mini" type="primary" style="margin-top:40px">
       Add Property Value
       <i class="el-icon-plus"></i>
@@ -45,6 +45,7 @@ export default {
   },
   data() {
     return {
+      options: [],
       itemPropertyForm: {
         name: ""
       },
@@ -52,11 +53,37 @@ export default {
     };
   },
   methods: {
-    getData() {
-      console.log('getting data');
+    async collectValues() {
+      this.options = [];
+      if (!this.$refs.itemValueForm) {
+        return Promise.resolve();
+      }
+
+        await this.$refs.itemValueForm.forEach(value => {
+          value.getData().then(form => {
+            this.options.push(form);
+            console.log('collectValues');
+            
+          });
+        });
     },
-    uploadImages(){
-      
+    getData() {
+      return new Promise((resolve, reject) =>
+        this.$refs["itemPropertyForm"].validate(valid => {
+          if (valid) {
+            let property = { name: this.itemPropertyForm.name };
+            this.collectValues().then(() => {
+              property.values = this.options;
+              console.log("itemPropertyForm");
+
+              console.log(property);
+              resolve(property);
+            });
+          } else {
+            reject("Please provide all the required info.");
+          }
+        })
+      );
     }
   }
 };

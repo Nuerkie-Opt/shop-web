@@ -20,7 +20,6 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="Description" prop="description">
-       
         <vue-editor
           :editor-toolbar="toolbar"
           v-model="itemValueBasicForm.description"
@@ -28,7 +27,10 @@
         ></vue-editor>
       </el-form-item>
 
-      <el-form-item label="You can provide extra Tags for this variant of your product." prop="tags">
+      <el-form-item
+        label="You can provide extra Tags for this variant of your product."
+        prop="tags"
+      >
         <el-select
           v-model="itemValueBasicForm.tags"
           placeholder="Extra Tags for this variant of your product."
@@ -80,7 +82,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 export default {
-   components: {
+  components: {
     VueEditor
   },
   data() {
@@ -89,10 +91,10 @@ export default {
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
         [{ font: [] }],
         ["bold", "italic", "underline", "strike"], // toggled buttons
-        [{align:[]},"blockquote"],
+        [{ align: [] }, "blockquote"],
         [{ color: [] }, { background: [] }], // dropdown with defaults from theme
         [{ list: "ordered" }, { list: "bullet" }],
-        [{ script: "sub" }, { script: "super" }], // superscript/subscript
+        [{ script: "sub" }, { script: "super" }] // superscript/subscript
       ],
       options: [
         {
@@ -111,9 +113,10 @@ export default {
         }
       ],
       itemValueBasicForm: {
-        name: "",
-        description: "",
-        tags: "",
+        name: "qwertyuiop",
+        description:"qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopvafricaniz",
+        tags: ["okay"],
+        currency: "GHS",
         price: "",
         chours: ""
       }

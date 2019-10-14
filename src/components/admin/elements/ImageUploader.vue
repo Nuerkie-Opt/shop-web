@@ -5,11 +5,10 @@
       list-type="picture-card"
       accept="image/*"
       ref="imageUploader"
+      :http-request="upload"
       :file-list="fileList"
       :limit="10"
       :auto-upload="false"
-      :data="uploadData"
-      :headers="uploadHeaders"
     >
       <i slot="default" class="el-icon-plus"></i>
       <div slot="file" slot-scope="{file}">
@@ -34,9 +33,9 @@
 </template>
 <script>
 export default {
-    props:['uploadData','uploadHeaders'],
   data() {
     return {
+      baseList:[],
       fileList: [
         {
           name: "flower",
@@ -46,7 +45,7 @@ export default {
       ],
       dialogImageUrl: "",
       dialogVisible: false,
-      disabled: false,
+      disabled: false
     };
   },
   methods: {
@@ -60,8 +59,22 @@ export default {
     handleDownload(file) {
       console.log(file);
     },
-    submit(){
-        this.$refs.imageUploader.submit();
+    reader(file) {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.readAsDataURL(file);
+      });
+    },
+    upload(options) {
+      this.reader(options.file).then(result => this.baseList.push(result));
+    },
+    getData() {
+      this.baseList = []
+      this.$refs.imageUploader.submit();
+      return new Promise((resolve, reject) => {
+        resolve(this.baseList)
+      });
     }
   }
 };
