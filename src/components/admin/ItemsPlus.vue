@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { awaitObjectWithPromise } from "../../utils.js";
 import ItemPropertyForm from "./elements/ItemPropertyForm.vue";
 import ItemForm from "./elements/ItemForm.vue";
 
@@ -36,7 +37,7 @@ export default {
   },
   data() {
     return {
-      options: [],
+      errors: 0,
       editableTabsValue: "0",
       editableTabs: [],
       tabIndex: 0
@@ -58,62 +59,57 @@ export default {
         })
         .catch(_ => {});
     },
-    async collectProperties() {
-      this.options = [];
-      if (!this.$refs.itemPropertyForm) {
-        console.log("collectPropertiesRejected");
+    collectProperties() {
+      let options = [];
+      if (this.$refs.itemPropertyForm) {
+        for (const property of this.$refs.itemPropertyForm) {
+          const data = property.getData();
 
-        return Promise.resolve();
+          if (data) {
+            options.push(data);
+          } else {
+            return false;
+          }
+        }
       }
-
-      await this.$refs.itemPropertyForm.forEach(property => {
-        property
-          .getData()
-          .then(value => {
-            this.options.push(value);
-            console.log("collectProperties");
-
-            console.log(value);
-          })
-          .catch(error => {
-            this.$notify.error({
-              title: "Error",
-              message: error
-            });
-          });
-      });
+      return options;
     },
     async upload() {
-      let formData;
-      await this.$refs.itemForm
-        .getData()
-        .then(form => {
-          formData = form;
-        })
-        .catch(error => {
-          this.$notify.error({
-            title: "Error",
-            message: error
-          });
-        });
-      await this.collectProperties().then(() => {
-        formData.options = this.options;
-        console.log("itemPlus");
-        console.log(formData);
+      const loading = this.$loading({
+        lock: true,
+        text: "Uploading Item.",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
       });
+      let formData = this.$refs.itemForm.getData();
+
+      if (!formData) {
+        loading.close();
+        return false;
+      }
+
+      let properties = this.collectProperties();
+
+      if (!properties) {
+        loading.close();
+        return false;
+      }
+
+      formData.options = properties;
+
+      const itemData = await awaitObjectWithPromise(formData);
 
       const payload = {
-        '111':{
-          'upload_item':formData,
-          '000':['upload_item']
+        "111": {
+          upload_item: { item_details: itemData, seller_id: 1 },
+          "000": ["upload_item"]
         },
-        '000':['111']
-      }
+        "000": ["111"]
+      };
       // show loader
       this.$actions
-        .request({
-          data: payload,
-          headers: { Authorization: "Bearer token" }
+        .post("/action", payload, {
+          headers: { Authorization: "d28b2bea5bd4e6f9d64f7ba5b39b9c0cea7ad7fd" }
         })
         .then(function(response) {
           // handle success
@@ -124,6 +120,7 @@ export default {
           console.log(error);
         })
         .finally(function() {
+          loading.close();
           // always executed
           // remove loader
         });
@@ -167,6 +164,9 @@ export default {
         })
         .catch(_ => {});
     }
+  },
+  created() {
+    this.options = [];
   }
 };
 </script>

@@ -17,17 +17,17 @@ export default {
   },
   methods: {
     getData() {
-      return this.$refs.imageUploader.getData().then(images => {
-        return this.$refs.itemFormBasic
-          .getData()
-          .then(form => {
-            form.images = images;
-            return Promise.resolve(form);
-          })
-          .catch(error => {
-            return Promise.reject(error);
-          });
-      });
+      let imgs = this.$refs.imageUploader.getData();
+
+      let formData = this.$refs.itemFormBasic.getData();
+
+      if(!formData){
+        return false;
+      }
+      
+      formData.images = imgs;
+      
+      return formData;
     }
   }
 };

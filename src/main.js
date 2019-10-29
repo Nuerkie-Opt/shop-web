@@ -24,9 +24,7 @@ const router = new VueRouter({
 Vue.prototype.$eventBus = eventBus;
 
 Vue.prototype.$actions = axios.create({
-  url: '/action',
   baseURL: Vue.config.devtools ? 'http://localhost:8002' : 'http://localhost:8002',
-  method: 'post'
 });
 
 new Vue({

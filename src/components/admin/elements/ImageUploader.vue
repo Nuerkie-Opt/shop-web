@@ -35,7 +35,6 @@
 export default {
   data() {
     return {
-      baseList:[],
       fileList: [
         {
           name: "flower",
@@ -66,16 +65,17 @@ export default {
         fileReader.readAsDataURL(file);
       });
     },
-    upload(options) {
-      this.reader(options.file).then(result => this.baseList.push(result));
+     upload(options) {
+      this.baseList.push(this.reader(options.file));
     },
     getData() {
-      this.baseList = []
-      this.$refs.imageUploader.submit();
-      return new Promise((resolve, reject) => {
-        resolve(this.baseList)
-      });
+        this.baseList = [];
+        this.$refs.imageUploader.submit();
+        return Promise.all(this.baseList);
     }
+  },
+  created(){
+    this.baseList= [];
   }
 };
 </script>

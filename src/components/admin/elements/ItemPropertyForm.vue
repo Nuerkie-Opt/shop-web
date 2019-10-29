@@ -19,6 +19,9 @@
           clearable
         ></el-input>
       </el-form-item>
+      <el-form-item label="Required" prop="required">
+        <el-switch v-model="itemPropertyForm.required" placeholder="eg. Color, Size, Designs, ..."></el-switch>
+      </el-form-item>
     </el-form>
 
     <div v-for="i in values" :key="i" style="padding:20px">
@@ -45,45 +48,41 @@ export default {
   },
   data() {
     return {
-      options: [],
       itemPropertyForm: {
-        name: ""
+        name: "",
+        required: false
       },
       values: 0
     };
   },
   methods: {
-    async collectValues() {
-      this.options = [];
-      if (!this.$refs.itemValueForm) {
-        return Promise.resolve();
+    collectValues() {
+      let options = [];
+      if (this.$refs.itemValueForm) {
+        this.$refs.itemValueForm.forEach(value => {
+          const data = value.getData();
+          options.push(data);
+        });
       }
 
-        await this.$refs.itemValueForm.forEach(value => {
-          value.getData().then(form => {
-            this.options.push(form);
-            console.log('collectValues');
-            
-          });
-        });
+      return options;
     },
     getData() {
-      return new Promise((resolve, reject) =>
-        this.$refs["itemPropertyForm"].validate(valid => {
-          if (valid) {
-            let property = { name: this.itemPropertyForm.name };
-            this.collectValues().then(() => {
-              property.values = this.options;
-              console.log("itemPropertyForm");
+      let isValid;
+      this.$refs["itemPropertyForm"].validate(valid => isValid = valid);
 
-              console.log(property);
-              resolve(property);
-            });
-          } else {
-            reject("Please provide all the required info.");
-          }
-        })
-      );
+      if (isValid) {
+        let property = this.itemPropertyForm;
+        property.values = this.collectValues();
+        return property;
+      } else {
+        const error = "Please provide all the required info.";
+        this.$notify.error({
+          title: "Error",
+          message: error
+        });
+        return false;
+      }
     }
   }
 };
