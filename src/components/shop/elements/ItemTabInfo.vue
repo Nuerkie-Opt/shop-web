@@ -56,4 +56,7 @@
 .clearfix:after {
   clear: both;
 }
+.el-tabs__nav {
+    z-index: none;
+}
 </style>

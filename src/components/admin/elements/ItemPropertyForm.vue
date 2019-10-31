@@ -5,6 +5,7 @@
       ref="itemPropertyForm"
       label-position="top"
       :model="itemPropertyForm"
+      @submit.native.prevent
     >
       <el-form-item
         label="Property Name"
@@ -61,7 +62,12 @@ export default {
       if (this.$refs.itemValueForm) {
         this.$refs.itemValueForm.forEach(value => {
           const data = value.getData();
-          options.push(data);
+          if(data){
+            options.push(data);
+          }else{
+            return false;
+          }
+          
         });
       }
 
@@ -73,8 +79,14 @@ export default {
 
       if (isValid) {
         let property = this.itemPropertyForm;
-        property.values = this.collectValues();
-        return property;
+        let values = this.collectValues();
+        if(values){
+          property.values = values;
+          return property;
+        }else{
+          return false;
+        }
+        
       } else {
         const error = "Please provide all the required info.";
         this.$notify.error({

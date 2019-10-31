@@ -35,8 +35,8 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-divider></el-divider>
-    <el-row :gutter="10" type="flex" align="middle" justify="center">
+    <el-divider v-if="hide"></el-divider>
+    <el-row :gutter="10" type="flex" align="middle" justify="center" v-if="hide">
       <el-col :xs="24" :sm="15" :md="16" :lg="17" :xl="17">
         <MenuBar />
       </el-col>
@@ -62,6 +62,12 @@ export default {
       circleUrl:
         "/images/4.jpg"
     };
+  },
+  computed: {
+    hide(){
+      return this.$route.name !== "item"
+    }
+    
   }
 };
 </script>

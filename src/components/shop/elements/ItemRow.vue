@@ -2,7 +2,7 @@
   <el-row :gutter="20">
     <el-col 
     :xs="24" :sm="smUp" :md="mdUp" :lg="lgUp" :xl="lgUp" 
-    v-for="(col, i) in rowData.ncols" 
+    v-for="col in rowData.length" 
     :key="col">
 
       <ItemCard 
@@ -10,21 +10,21 @@
       :mode="getMode(col)" 
       :item="getItem(col)" 
       :row="row"
-      :col="i"/>
+      :col="getCol(col)"/>
 
       <ItemJumbo 
       v-if="isCanvasType('jumbo', col)" 
       :mode="getMode(col)" 
       :item="getItem(col)"
       :row="row"
-      :col="i"/>
+      :col="getCol(col)"/>
 
       <ItemCollage 
       v-if="isCanvasType('collage', col)" 
       :mode="getMode(col)" 
       :item="getItem(col)"
       :row="row"
-      :col="i"/>
+      :col="getCol(col)"/>
       
     </el-col>
   </el-row>
@@ -44,32 +44,32 @@ export default {
   props: ["rowData", "row"],
   computed: {
     lgUp() {
-      return 24 / this.rowData.ncols;
+      return 24 / 4;
     },
     mdUp() {
-      return 24 / (this.rowData.ncols-1)
+      return 24 / (4-1)
     },
     smUp() {
-      return 24 / (this.rowData.ncols-2)
+      return 24 / (4-2)
     }
   },
   methods: {
     getCol(col) {
       // Rotates through columns in case canvas.len != modes.len
-      return (col-1) % this.rowData.ncols;
+      return (col-1) % this.rowData.length;
     },
     getMode(col) {
-      // get mode at current col from appearance.modes props
-      return this.getItem(col).mode;
+      // get mode | image | carousel | 
+      return 'image';
     },
     getItem(col) {
       // get item at current col from items prop
       col = this.getCol(col);
-      return this.rowData.items[col];
+      return this.rowData[col];
     },
     isCanvasType(canvasType, col) {
       // Whether current item has canvas of canvasType
-      const canvas = this.getItem(col).canvas;
+      const canvas = 'card';
       return canvas === canvasType;
     }
   }

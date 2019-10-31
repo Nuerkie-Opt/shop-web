@@ -1,12 +1,16 @@
-import ItemsData from './ItemsData.js';
 import MenusData from './MenusData.js';
 import cartData from './cartData.js';
 
 const data = {
     state : {
-        productMatrix: [ItemsData],
+        productMatrix: [],
         menus: MenusData,
         cartItems: cartData
+    },
+    mutations : {
+        append_products(state, productRows){
+            state.productMatrix = [...state.productMatrix, ...productRows]
+        }
     }
 };
 

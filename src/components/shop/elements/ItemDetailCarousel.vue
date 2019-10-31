@@ -9,7 +9,7 @@
     :height="height"
   >
     <el-carousel-item v-for="(image, i) in images" :key="i">
-      <ItemDetailImage :image="image" ref="im" />
+      <ItemDetailImage :image="$urlTo(image.url,'f')" ref="im" />
     </el-carousel-item>
   </el-carousel>
 </template>

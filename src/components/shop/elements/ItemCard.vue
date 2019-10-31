@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover">
     <el-image
-      :src="item.images[0]"
+      :src="$urlTo(item.item.images[0].url,'g')"
       @click="itemDetails"
       lazy
     >
@@ -15,13 +15,13 @@
     <el-divider></el-divider>
     <div>
       <div class="bottom">
-        <span>{{item.name}}</span>
+        <span>{{item.item.name}}</span>
       </div>
 
       <el-divider></el-divider>
 
       <div class="sbottom clearfix">
-          <ActionBtns :item="item" />
+          <ActionBtns :item="item.item" />
       </div>
     </div>
   </el-card>
@@ -37,7 +37,7 @@ export default {
   props: ["mode", "item", "row", "col"],
   methods: {
     itemDetails(){
-      this.$router.push({ path:`items/${this.item.link}`,query:{ r: this.row, c:this.col } });
+      this.$router.push({ path:`items/${this.item.id}`,query:{ r: this.row, c:this.col } });
     }
   }
 };

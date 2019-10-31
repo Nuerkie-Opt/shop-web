@@ -2,10 +2,14 @@
   <el-card>
     <div slot="header">
       <h3>{{item.name}}</h3>
+      <i>
+        <MoneySign :price="item.price" />
+      </i>
     </div>
+
     <el-divider content-position="left">Preferences</el-divider>
     <div class="item">
-      <OptionsIterator :item="item" ref="opts" />
+      <OptionsIterator :options="options" ref="opts" />
     </div>
     <el-divider content-position="left">Shipping Info</el-divider>
     <el-divider></el-divider>
@@ -21,12 +25,15 @@
           ref="quantity"
           placeholder="Order Quantity"
         >
-          <el-option v-for="item in 100" :key="item" :label="item" :value="item"></el-option>
+          <el-option v-for="i in 100" :key="i" :label="i" :value="i"></el-option>
         </el-select>
       </el-col>
       <el-col :xs="12" :sm="12">
         <el-button style="width:100%" size="medium" type="primary" @click="addToCart">
-          <i style="font-weight:900">Add to Cart <i class="el-icon-sold-out"></i></i>
+          <i style="font-weight:900">
+            Add to Cart
+            <i class="el-icon-sold-out"></i>
+          </i>
         </el-button>
       </el-col>
     </el-row>
@@ -40,8 +47,9 @@
 <script>
 import ActionBtns from "./ActionBtns.vue";
 import OptionsIterator from "./OptionsIterator.vue";
+import MoneySign from "./MoneySign.vue";
 export default {
-  props: ["item"],
+  props: ["item", "options"],
   data() {
     return {
       quantity: ""
@@ -61,14 +69,15 @@ export default {
             this.$message.error(error);
           });
       } else {
-        this.$refs['quantity'].focus();
+        this.$refs["quantity"].focus();
         this.$message.warning("Please specify order quantity.");
       }
     }
   },
   components: {
     OptionsIterator,
-    ActionBtns
+    ActionBtns,
+    MoneySign
   }
 };
 </script>

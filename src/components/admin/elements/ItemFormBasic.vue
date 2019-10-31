@@ -8,6 +8,7 @@
     {required:true, message:'Name is required', trigger:'blur'},
     {min:10, max:128, message:'Name must be between 10 and 128 characters.', trigger:'blur'}
       ]"
+      @submit.native.prevent
       >
         <el-input
           v-model="itemFormBasic.name"

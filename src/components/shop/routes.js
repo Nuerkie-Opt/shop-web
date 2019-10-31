@@ -35,6 +35,7 @@ const shopRoutes = [
     },
     {
         path:'items/:item',
+        name:'item',
         component:ItemDetails
     },
     {

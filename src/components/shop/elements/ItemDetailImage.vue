@@ -1,9 +1,10 @@
 <template>
   <el-card :body-style="{ padding: '0px' }">
     <el-image
-      :src="image"
+      :src="$urlTo(image,'f')"
       :style="{cursor: mouse}"
       :preview-src-list="slist"
+      :z-index="9999"
     >
       <div slot="placeholder" class="image-slot block">
         <i class="el-icon-loading"></i>
@@ -24,7 +25,7 @@ export default {
   },
   computed:{
     slist(){
-      return this.prev ? [this.image]: [] ;
+      return this.prev ? [this.$urlTo(this.image, 'f')]: [] ;
     }
   }
 }
@@ -32,7 +33,7 @@ export default {
 
 <style scoped>
 .el-card {
-  z-index: 1;
+  z-index: none;
   margin-bottom: 10px;
   border-radius: 7px;
   cursor: pointer;

@@ -111,15 +111,23 @@ export default {
         .post("/action", payload, {
           headers: { Authorization: "d28b2bea5bd4e6f9d64f7ba5b39b9c0cea7ad7fd" }
         })
-        .then(function(response) {
+        .then((response) =>{
           // handle success
           console.log(response);
+          this.$notify.success({
+            title: "Success",
+            message: "Item Uploaded."
+          });
         })
-        .catch(function(error) {
+        .catch((error) =>{
           // handle error
           console.log(error);
+          this.$notify.error({
+            title: "Error",
+            message: "Upload Error."
+          });
         })
-        .finally(function() {
+        .finally(()=> {
           loading.close();
           // always executed
           // remove loader

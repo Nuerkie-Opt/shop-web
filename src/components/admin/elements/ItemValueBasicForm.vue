@@ -5,6 +5,7 @@
       ref="itemValueBasicForm"
       label-position="top"
       :model="itemValueBasicForm"
+      @submit.native.prevent
     >
       <el-form-item
         label="Value Name"
