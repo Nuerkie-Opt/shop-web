@@ -33,10 +33,9 @@ export default {
     getData() {
       return new Promise((resolve, reject) =>
         this.$refs["itemForm"].validate(valid => {
-          console.log(valid);
 
           if (valid) {
-            resolve(this.itemForm);
+            resolve();
           } else {
             reject("Please specify your preferences.");
           }

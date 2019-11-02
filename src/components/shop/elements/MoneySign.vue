@@ -1,5 +1,5 @@
 <template>
-    <span><span v-html="moneySign"></span>{{convertedPrice}}</span>
+    <span><span v-html="moneySign"></span> {{convertedPrice}}</span>
 </template>
 
 <script>

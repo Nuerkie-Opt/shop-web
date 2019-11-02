@@ -2,30 +2,44 @@
   <el-card>
     <el-row :gutter="20">
       <el-col :xs="24" :sm="12" :md="8">
-        <el-image :src="item.images[0]" :preview-src-list="item.images"></el-image>
+        <el-image :src="$urlTo(item.item.images[0].url,'g')"></el-image>
       </el-col>
       <el-col :xs="24" :sm="12" :md="8">
-        <h3>{{item.name}}</h3>
-        <ul style="font-size:18px;color:#909399">
-          <li>size</li>
-          <li>color</li>
-          <li>message</li>
-          <li>something</li>
-        </ul>
+        <span>{{item.item.name}}</span>
       </el-col>
       <el-col :xs="24" :sm="12" :md="8">
-        <p style="font-size:18px"><i><MoneySign :price="item.price" /> / unit</i></p>
-        <p style="font-size:18px"><i>@ {{quantity}} units, & total</i></p>
         <p style="font-size:18px">
           <i>
-          <el-tag type="info" round>
-            <MoneySign :price="item.price * quantity" />
-          </el-tag>
+            <b>
+              <el-tag type="primary" round>
+                <MoneySign :price="item.item.price" /> / unit
+              </el-tag>
+            </b>
+          </i>
+        </p>
+        <p style="font-size:18px">
+          <i>
+            <b>
+              <el-tag type="primary" round>@ {{quantity}} units</el-tag>
+            </b>
+          </i>
+        </p>
+        <p style="font-size:18px">
+          <i>
+            <b>
+              <el-tag type="primary" round>
+                <MoneySign :price="item.item.price * quantity" />
+              </el-tag>
+            </b>
           </i>
         </p>
         <el-button-group>
-          <el-button type="success" icon="el-icon-edit" @click.native="edit" circle></el-button>
-          <el-button type="danger" icon="el-icon-delete" @click.native="remove" circle></el-button>
+          <el-tooltip content="Edit" placement="left">
+            <el-button type="text" icon="el-icon-edit" @click.native="edit" circle></el-button>
+          </el-tooltip>
+          <el-tooltip content="Remove" placement="right">
+            <el-button type="text" icon="el-icon-delete" @click.native="remove(item.id)" circle></el-button>
+          </el-tooltip>
         </el-button-group>
       </el-col>
     </el-row>
@@ -33,21 +47,24 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import MoneySign from "./MoneySign.vue";
 
 export default {
-  props: ["item", "quantity", "options"],
+  props: ["item", "quantity", "amount"],
   methods: {
-    remove() {
+    ...mapActions(['remove_order']),
+    remove(id) {
       this.$message.error("removing ...");
+      this.remove_order(id)
     },
     edit() {
       this.$message.success("editing ...");
     }
   },
-  components:{
+  components: {
     MoneySign
-  },
+  }
 };
 </script>
 

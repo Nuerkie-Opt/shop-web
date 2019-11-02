@@ -1,17 +1,13 @@
-import MenusData from './MenusData.js';
-import cartData from './cartData.js';
+import state from './state.js';
+import getters from './getters.js';
+import mutations from './mutations.js';
+import actions from './actions.js';
 
 const data = {
-    state : {
-        productMatrix: [],
-        menus: MenusData,
-        cartItems: cartData
-    },
-    mutations : {
-        append_products(state, productRows){
-            state.productMatrix = [...state.productMatrix, ...productRows]
-        }
-    }
+    state : state,
+    getters : getters,
+    mutations : mutations,
+    actions : actions
 };
 
 export default data;

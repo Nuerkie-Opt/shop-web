@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import ItemDetailImage from "./elements/ItemDetailImage.vue";
 import ItemDetailInfo from "./elements/ItemDetailInfo.vue";
 import ItemTabInfo from "./elements/ItemTabInfo.vue";
@@ -39,9 +40,21 @@ export default {
     };
   },
   computed: {
-    ...mapState(["productMatrix"])
+    ...mapGetters(["productMatrix"])
   },
   methods: {
+    ...mapActions(['append_order']),
+    handleCarter(q){
+      const product = JSON.parse(JSON.stringify(this.item));
+      const order = {
+        item:product,
+        quantity:q,
+        amount:q*this.item.item.price
+      };
+      
+      this.append_order({[this.item.id]:order})
+      
+    },
     handleChopt(val) {
       let changes = {
         images: [],
@@ -51,14 +64,12 @@ export default {
 
       Object.values(val).forEach(value => {
         if (value) {
-          console.log(value);
           changes.images = [...changes.images, ...value.images];
           changes.price = value.price > changes.price ? changes.price : value.price;
           changes.name = `${changes.name}; ${value.name}`;
         }
       });
 
-      console.log(changes);
 
       this.item.item.images = [
         ...this.constItem.item.images,
@@ -74,6 +85,7 @@ export default {
   mounted() {
     this.$eventBus.$on("thumbed", i => (this.currentIndex = i));
     this.$eventBus.$on("chopt", val => this.handleChopt(val));
+    this.$eventBus.$on("carter", q => this.handleCarter(q));
   },
   beforeMount() {
     this.item = JSON.parse(
@@ -86,6 +98,9 @@ export default {
         this.productMatrix[this.$route.query.r][this.$route.query.c]
       )
     );
+  },
+  destroyed(){
+    this.$eventBus.$off();
   }
 };
 </script>

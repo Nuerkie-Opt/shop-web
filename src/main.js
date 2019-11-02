@@ -29,7 +29,7 @@ Vue.prototype.$actions = axios.create({
 
 Vue.prototype.$urlTo = (url, to) => {
     const trans = {
-      'g':'t_af_gallery_350',
+      'g':'t_af_gallery_400',
       't':'t_af_thumb_150',
       'f':'t_af_eco_1024'
     };

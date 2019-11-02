@@ -2,7 +2,7 @@
   <el-row :gutter="20">
     <el-col :xs="24" :sm="16">
       <template v-for="(cart,i) in cartItems">
-        <CartItem :item="cart.item" :quantity="cart.quantity" :options="cart.options" :key="i"></CartItem>
+        <CartItem :item="cart.item" :quantity="cart.quantity" :amount="cart.amount" :key="i"></CartItem>
       </template>
     </el-col>
     <el-col :xs="24" :sm="8">
@@ -15,7 +15,7 @@
 import CartItem from "./elements/CartItem.vue";
 import MoneySign from "./elements/MoneySign.vue";
 import OrderSummary from "./elements/OrderSummary.vue";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
     CartItem
   },
   computed: {
-    ...mapState(["cartItems"])
+    ...mapGetters(["cartItems"])
   }
 };
 </script>

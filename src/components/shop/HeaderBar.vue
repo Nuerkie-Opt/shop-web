@@ -25,7 +25,7 @@
             <el-button type="info" icon="el-icon-goods" size="small" plain circle></el-button>
           </el-col>
           <el-col>
-            <el-badge :value="0" :max="99" class="counter">
+            <el-badge :value="cartCount" :max="99" class="counter">
               <el-button type="danger" size="small" @click="$router.push('/cart')" icon="el-icon-goods" plain circle></el-button>
             </el-badge>
           </el-col>
@@ -49,6 +49,7 @@
   </el-card>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import SearchBar from "./elements/SearchBar.vue";
 import MenuBar from "./elements/MenuBar.vue";
 
@@ -66,8 +67,13 @@ export default {
   computed: {
     hide(){
       return this.$route.name !== "item"
+    },
+    ...mapGetters(['cartCount'])
+  },
+  beforeMount(){
+    if(!this.cartCount){
+      // try to load cart from server
     }
-    
   }
 };
 </script>

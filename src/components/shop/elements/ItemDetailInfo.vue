@@ -61,11 +61,10 @@ export default {
         this.$refs.opts
           .getData()
           .then(value => {
-            console.log(value);
-            this.$message.success(`${this.quantity}`);
+            this.$eventBus.$emit("carter", this.quantity);
+            this.$message.success("Added to your cart...");
           })
           .catch(error => {
-            console.log(error);
             this.$message.error(error);
           });
       } else {
