@@ -2,7 +2,7 @@
   <el-row :gutter="20">
     <el-col :xs="24" :sm="16">
       <template v-for="(cart,i) in cartItems">
-        <CartItem :item="cart.item" :quantity="cart.quantity" :amount="cart.amount" :key="i"></CartItem>
+        <CartItem :item="cart.item" :quantity="cart.quantity" :amount="cart.amount" :r="cart.r" :c="cart.c" :key="i"></CartItem>
       </template>
     </el-col>
     <el-col :xs="24" :sm="8">

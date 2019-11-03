@@ -49,7 +49,9 @@ export default {
       const order = {
         item:product,
         quantity:q,
-        amount:q*this.item.item.price
+        amount:q*this.item.item.price,
+        r:this.$route.query.r,
+        c:this.$route.query.c
       };
       
       this.append_order({[this.item.id]:order})

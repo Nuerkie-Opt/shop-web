@@ -1,36 +1,30 @@
 <template>
   <el-card class="box-card">
     <el-row :gutter="10" type="flex" align="middle" justify="center">
-      <el-col :xs="7" :sm="4" :md="4" :lg="3" :xl="3">
-        <span style="font-size:18px">AFRICANIZ</span>
+      <el-col :xs="4" :sm="4">
+        <span style="font-size:18px">LSHOP</span>
       </el-col>
-      <el-col :xs="9" :sm="11" :md="12" :lg="14" :xl="14">
+      <el-col :xs="10" :sm="15">
         <SearchBar />
       </el-col>
-      <el-col :xs="8" :sm="9" :md="8" :lg="7" :xl="7">
+      <el-col :xs="10" :sm="4">
         <el-row :gutter="10" type="flex" align="middle" justify="end">
-          <el-col class="hidden-xs-only">
-            <el-button type="primary" icon="el-icon-goods" size="small" plain circle></el-button>
-          </el-col>
-          <el-col class="hidden-xs-only">
-            <el-button type="primary" icon="el-icon-goods" size="small" plain circle></el-button>
-          </el-col>
-          <el-col class="hidden-xs-only">
-            <el-button type="primary" icon="el-icon-goods" size="small" plain circle></el-button>
-          </el-col>
-          <el-col class="hidden-xs-only">
-            <el-button type="primary" icon="el-icon-goods" size="small" plain circle></el-button>
+          <el-col>
+            <el-tooltip content="Combination" placement="bottom" effect="light">
+              <el-button type="primary" size="small" icon="el-icon-loading" plain circle></el-button>
+            </el-tooltip>
           </el-col>
           <el-col>
-            <el-button type="info" icon="el-icon-goods" size="small" plain circle></el-button>
-          </el-col>
-          <el-col>
+            <el-tooltip content="Cart" placement="bottom" effect="light">
             <el-badge :value="cartCount" :max="99" class="counter">
               <el-button type="danger" size="small" @click="$router.push('/cart')" icon="el-icon-goods" plain circle></el-button>
             </el-badge>
+            </el-tooltip>
           </el-col>
           <el-col>
-            <el-button type="info" icon="el-icon-goods" size="small" plain circle></el-button>
+            <el-tooltip content="Account" placement="bottom" effect="light">
+            <el-button type="primary" icon="el-icon-user" size="small" plain circle></el-button>
+            </el-tooltip>
           </el-col>
         </el-row>
       </el-col>

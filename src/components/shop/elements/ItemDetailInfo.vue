@@ -1,10 +1,12 @@
 <template>
   <el-card>
     <div slot="header">
-      <h3>{{item.name}}</h3>
-      <i>
+      <h3 style="color:#606266">{{item.name}}</h3>
+      <i style="color:#606266"><b>
+        <el-tag type="info" size="medium" effect="dark">
         <MoneySign :price="item.price" />
-      </i>
+        </el-tag>
+      </b></i>
     </div>
 
     <el-divider content-position="left">Preferences</el-divider>
@@ -12,6 +14,12 @@
       <OptionsIterator :options="options" ref="opts" />
     </div>
     <el-divider content-position="left">Shipping Info</el-divider>
+    <div>
+        <p class="lig"> - This item ships to your location.</p>
+        <p class="lig"> - It takes n days for seller to complete order.</p>
+        <p class="lig"> - It takes m days to ship to your locations.</p>
+        <p class="lig"> - Expect to get your order in n+m days.</p>
+    </div>
     <el-divider></el-divider>
     <el-row :gutter="10">
       <el-col :xs="12" :sm="12">
@@ -96,5 +104,10 @@ export default {
 }
 .clearfix:after {
   clear: both;
+}
+.lig {
+  font-style:italic;
+  margin: 8px;
+  color: #606266;
 }
 </style>
