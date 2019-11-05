@@ -3,7 +3,8 @@ import MenusData from './MenusData.js';
 let state = {
     products: [],
     menus: MenusData,
-    cart: {}
+    cart: {},
+    delivery: {}
 };
 
 export default state;

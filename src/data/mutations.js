@@ -7,7 +7,17 @@ const mutations = {
         
         state.cart = orders;
         
-        sessionStorage.cart = JSON.stringify(state.cart);
+        if (Object.keys(orders).length !== 0) {
+            sessionStorage.cart = JSON.stringify(state.cart);
+        }else{
+            sessionStorage.removeItem('cart')
+        }
+        
+    },
+    new_delivery(state, delivery){
+        state.delivery = delivery;
+
+        sessionStorage.delivery = JSON.stringify(delivery);
     }
 };
 

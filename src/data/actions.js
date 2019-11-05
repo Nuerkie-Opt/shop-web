@@ -61,6 +61,9 @@ const actions = {
             );
 
         commit('append_orders', orders);
+    },
+    change_delivery({commit}, delivery){
+        commit('new_delivery', delivery);
     }
 };
 

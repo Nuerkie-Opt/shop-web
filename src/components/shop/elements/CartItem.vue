@@ -12,7 +12,7 @@
           <i>
             <b>
               <el-tag type="primary" round>
-                <MoneySign :price="item.item.price" /> / unit
+                <MoneySign :price="item.item.price" />/ unit
               </el-tag>
             </b>
           </i>
@@ -53,14 +53,21 @@ import MoneySign from "./MoneySign.vue";
 export default {
   props: ["item", "quantity", "amount", "r", "c"],
   methods: {
-    ...mapActions(['remove_order']),
+    ...mapActions(["remove_order"]),
     remove(id) {
-      this.$message.error("removing ...");
-      this.remove_order(id);
+      this.$confirm("Are you sure you want to remove this item from your cart?")
+        .then(() => {
+          this.$message.error("removing ...");
+          this.remove_order(id);
+        })
+        .catch(() => {});
     },
     edit(id) {
       this.$message.success("editing ...");
-      this.$router.push({ path:`items/${id}`,query:{ r: this.r, c:this.c } });
+      this.$router.push({
+        path: `items/${id}`,
+        query: { r: this.r, c: this.c }
+      });
     }
   },
   components: {

@@ -23,6 +23,17 @@ const getters = {
     },
     cartCount(state, getters){
         return Object.keys(getters.cartItems).length;
+    },
+    getDelivery(state){
+        if (Object.keys(state.delivery).length !== 0) {
+            return state.delivery;
+        }
+
+        if(sessionStorage.delivery){
+            return JSON.parse(sessionStorage.delivery);
+        }
+        
+        return false;
     }
 };
 

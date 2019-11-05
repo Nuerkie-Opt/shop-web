@@ -17,7 +17,7 @@ export default {
                     return '&#163;';
                     break;
                 default:
-                    return '&#8373;';
+                    return 'GH&#8373;';
             }
         },
         convertedPrice(){

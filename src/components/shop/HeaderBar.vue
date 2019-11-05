@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <el-row :gutter="10" type="flex" align="middle" justify="center">
       <el-col :xs="4" :sm="4">
-        <span style="font-size:18px">LSHOP</span>
+        <span style="font-size:18px">AFRICANIZ</span>
       </el-col>
       <el-col :xs="10" :sm="15">
         <SearchBar />
