@@ -49,7 +49,7 @@ export default {
   .el-row {
     padding-left: 8%;
     padding-right: 8%;
-    
+    margin-top: 90px;
   }
 }
 </style>

@@ -1,25 +1,56 @@
 const menusData = [
     {
-        name:'',
-        link:'',
+        name:'Category A',
+        link:'a',
         subs:[
             {
-                name:'',
-                link:'',
+                name:'Sub AA',
+                link:'aa',
             },
             {
-                name:'',
-                link:'',
+                name:'Sub AB',
+                link:'ab',
             },
             {
-                name:'',
-                link:'',
+                name:'Sub AC',
+                link:'ac',
             },
             {
-                name:'',
-                link:'',
+                name:'Sub AD',
+                link:'ad',
             }
         ]
     },
-    
+    {
+        name:'Category B',
+        link:'b',
+        subs:[
+            {
+                name:'Sub BA',
+                link:'ba',
+            },
+            {
+                name:'Sub BB',
+                link:'bb',
+            },
+            {
+                name:'Sub BC',
+                link:'bc',
+            },
+            {
+                name:'Sub BD',
+                link:'bd',
+            }
+        ]
+    },
+    {
+        name:'Category C',
+        link:'c',
+    },
+    {
+        name:'Category D',
+        link:'d',
+    }
 ]
+
+export default menusData;

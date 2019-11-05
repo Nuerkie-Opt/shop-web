@@ -18,6 +18,11 @@ const mutations = {
         state.delivery = delivery;
 
         sessionStorage.delivery = JSON.stringify(delivery);
+    },
+    set_menus(state, menus){
+        state.menus = menus;
+
+        sessionStorage.menus = JSON.stringify(menus);
     }
 };
 

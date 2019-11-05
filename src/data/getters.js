@@ -34,6 +34,17 @@ const getters = {
         }
         
         return false;
+    },
+    getMenus(state){
+        if (state.menus.length !== 0) {
+            return state.menus;
+        }
+
+        if(sessionStorage.menus){
+            return JSON.parse(sessionStorage.menus);
+        }
+        
+        return false;
     }
 };
 

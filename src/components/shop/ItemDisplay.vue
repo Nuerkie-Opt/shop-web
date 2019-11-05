@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="display">
     <ItemRow v-for="(row, i) in productMatrix" :key="i" :row="i" :rowData="row" />
     <div style="margin:0px;padding:0px; height:200px" v-loading="loading"></div>
+      <el-backtop target=".el-main"></el-backtop>
   </div>
 </template>
 
@@ -51,6 +52,10 @@ export default {
     },
   },
   beforeMount() {
+    if(this.productMatrix){
+      this.$message("Keep on scrolling for new stuff 😋.")
+      return;
+    }
     this.load();
   },
   created() {
@@ -61,3 +66,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.display{
+  margin-top: 90px;
+}
+</style>

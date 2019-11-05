@@ -30,15 +30,8 @@
       </el-col>
     </el-row>
     <el-divider v-if="hide"></el-divider>
-    <el-row :gutter="10" type="flex" align="middle" justify="center" v-if="hide">
-      <el-col :xs="24" :sm="15" :md="16" :lg="17" :xl="17">
+    <el-row v-if="hide">
         <MenuBar />
-      </el-col>
-      <el-col class="hidden-xs-only" :sm="9" :md="8" :lg="7" :xl="7">
-        <el-button class="extra-btn" type="text">Extra</el-button>
-        <el-button class="extra-btn" type="text">Menu</el-button>
-        <el-button class="extra-btn" type="text">Items</el-button>
-      </el-col>
     </el-row>
   </el-card>
 </template>

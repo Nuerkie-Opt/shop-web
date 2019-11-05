@@ -1,20 +1,22 @@
 <template>
-  <el-row :gutter="30">
-    <el-col :xs="24" :sm="12" :md="12" :lg="12">
-      <el-row>
-        <ItemDetailImage :image="item.item.images[currentIndex].url" />
-      </el-row>
-      <el-row style="margin-top:10px;margin-bottom:10px">
-        <ItemDetailThumbs :images="item.item.images" />
-      </el-row>
-    </el-col>
-    <el-col :xs="24" :sm="12" :md="12" :lg="12">
-      <ItemDetailInfo :item="item.item" :options="item.item.options" />
-    </el-col>
-    <el-col style="margin-top:10px;margin-bottom:100px">
-      <ItemTabInfo :item="item" />
-    </el-col>
-  </el-row>
+  <div class="details">
+    <el-row :gutter="30">
+      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+        <el-row>
+          <ItemDetailImage :image="item.item.images[currentIndex].url" />
+        </el-row>
+        <el-row style="margin-top:10px;margin-bottom:10px">
+          <ItemDetailThumbs :images="item.item.images" />
+        </el-row>
+      </el-col>
+      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+        <ItemDetailInfo :item="item.item" :options="item.item.options" />
+      </el-col>
+      <el-col style="margin-top:10px;margin-bottom:100px">
+        <ItemTabInfo :item="item" />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -43,19 +45,18 @@ export default {
     ...mapGetters(["productMatrix"])
   },
   methods: {
-    ...mapActions(['append_order']),
-    handleCarter(q){
+    ...mapActions(["append_order"]),
+    handleCarter(q) {
       const product = JSON.parse(JSON.stringify(this.item));
       const order = {
-        item:product,
-        quantity:q,
-        amount:q*this.item.item.price,
-        r:this.$route.query.r,
-        c:this.$route.query.c
+        item: product,
+        quantity: q,
+        amount: q * this.item.item.price,
+        r: this.$route.query.r,
+        c: this.$route.query.c
       };
-      
-      this.append_order({[this.item.id]:order})
-      
+
+      this.append_order({ [this.item.id]: order });
     },
     handleChopt(val) {
       let changes = {
@@ -67,11 +68,11 @@ export default {
       Object.values(val).forEach(value => {
         if (value) {
           changes.images = [...changes.images, ...value.images];
-          changes.price = value.price > changes.price ? changes.price : value.price;
+          changes.price =
+            value.price > changes.price ? changes.price : value.price;
           changes.name = `${changes.name}; ${value.name}`;
         }
       });
-
 
       this.item.item.images = [
         ...this.constItem.item.images,
@@ -82,6 +83,9 @@ export default {
           ? changes.price
           : this.item.item.price;
       this.item.item.name = `${this.constItem.item.name} ${changes.name}`;
+    },
+    goBack(){
+      this.$route.push("/");
     }
   },
   mounted() {
@@ -101,7 +105,7 @@ export default {
       )
     );
   },
-  destroyed(){
+  destroyed() {
     this.$eventBus.$off();
   }
 };
@@ -114,5 +118,8 @@ export default {
 
 .transmodal .el-dialog__body {
   padding: 0px;
+}
+.details {
+  margin-top: 50px;
 }
 </style>

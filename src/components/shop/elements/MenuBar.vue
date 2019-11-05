@@ -1,42 +1,75 @@
 <template>
-<el-row type="flex" align="middle" justify="start">
-<el-col v-for="menu in menus" :key="menu">
-<el-dropdown size="medium">
-  <span class="el-dropdown-link">
-    Category
-  </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>Action 1</el-dropdown-item>
-    <el-dropdown-item>Action 2</el-dropdown-item>
-    <el-dropdown-item>Action 3</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-</el-col>
-</el-row>
+  <el-menu mode="horizontal" :default-active="activeIndex" :unique-opened="true" :router="true">
+    <el-menu-item index="/about">About us</el-menu-item>
+    <el-submenu index="c">
+      <template slot="title">Categories</template>
+      <template v-for="(menu, i) in getMenus">
+        <div :key="i">
+          <el-menu-item :index="`/c/${menu.link}`">{{menu.name}}</el-menu-item>
+          <template v-if="menu.subs">
+            <el-submenu :index="`${i}`">
+              <template v-for="(sub, j) in menu.subs">
+                <el-menu-item :index="`/c/s/${sub.link}`" :key="j">{{sub.name}}</el-menu-item>
+              </template>
+            </el-submenu>
+          </template>
+        </div>
+      </template>
+    </el-submenu>
+    <el-submenu index="t">
+      <template slot="title">Tags</template>
+      <el-menu-item index="/t">All Tags</el-menu-item>
+      <el-menu-item index="/t/popular">Popular Tags</el-menu-item>
+      <el-menu-item index="/t/new">New Tags</el-menu-item>
+    </el-submenu>
+    <el-submenu index="v">
+      <template slot="title">Vendors</template>
+      <el-menu-item index="/vendors">List of Vendors</el-menu-item>
+      <el-menu-item index="/sell">Become a Vendor</el-menu-item>
+    </el-submenu>
+  </el-menu>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-    data(){
-        return {
-            menus:[1,2,3,4,5,6,7]
-        }
+  computed: {
+    ...mapGetters(["getMenus"]),
+    activeIndex() {
+      return this.$route.path;
     }
-}
+  }
+};
 </script>
 
 <style>
-  .el-dropdown-link {
-    cursor: pointer;
-    font-size: 16px
-    
-  }
-  .el-dropdown-link:hover{
-      color: #E6A23C;
-      border-bottom:1px
-  }
-  .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
-    background-color: #fff7ea;
-    color: #E6A23C;
+.el-dropdown-link {
+  cursor: pointer;
+  font-size: 16px;
+}
+.el-dropdown-link:hover {
+  color: #e6a23c;
+  border-bottom: 1px;
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: #fff7ea;
+  color: #e6a23c;
+}
+.el-menu--horizontal > .el-menu-item {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 0px solid transparent;
+  color: #909399;
+}
+.el-menu--horizontal > .el-submenu .el-submenu__title {
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 0px solid transparent;
+  color: #909399;
+}
+.el-menu.el-menu--horizontal {
+  border-bottom: none;
 }
 </style>

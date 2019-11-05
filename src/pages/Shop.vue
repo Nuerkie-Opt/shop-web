@@ -42,7 +42,7 @@ export default {
 }
 
 .el-main {
-  margin-top: 100px;
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   padding-top: 5px;
