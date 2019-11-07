@@ -29,6 +29,10 @@
           <i class="el-icon-setting"></i>
           Settings
         </el-menu-item>
+        <el-menu-item :index="`/a/${user}/`" class="hidden-xs-only">
+          <i class="el-icon-unlock"></i>
+          Admin
+        </el-menu-item>
         <el-menu-item index="/" class="hidden-xs-only">
           <i class="el-icon-shopping-cart-1"></i>
           Shop

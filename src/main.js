@@ -9,10 +9,11 @@ import axios from 'axios';
 import data from './data';
 import routes from './routes.js';
 import eventBus from './eventBus.js';
+import locale from 'element-ui/lib/locale/lang/en'
 
+Vue.use(ElementUI, { locale })
 Vue.use(Vuex);
 Vue.use(VueRouter);
-Vue.use(ElementUI);
 
 const store = new Vuex.Store(data);
 
