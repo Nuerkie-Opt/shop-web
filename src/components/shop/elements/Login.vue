@@ -32,8 +32,7 @@
       <el-input size="small" type="password" v-model="formModel.pass" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button size="small" type="primary" @click="resetForm('formModel')">Reset</el-button>
-      <el-button size="small" type="success" @click="submitForm('formModel')">Submit</el-button>
+      <el-button size="small" type="primary" @click="submitForm('formModel')">Login</el-button>
     </el-form-item>
   </el-form>
   </div>

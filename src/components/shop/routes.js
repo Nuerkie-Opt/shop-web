@@ -15,7 +15,7 @@ const shopRoutes = [
         component:ItemDisplay
     },
     {
-        path:'auth',
+        path:'auth/',
         component:Auth,
         children:[
             {
@@ -34,7 +34,7 @@ const shopRoutes = [
         ]
     },
     {
-        path:'items/:item',
+        path:'items/:item/',
         name:'item',
         component:ItemDetails
     },

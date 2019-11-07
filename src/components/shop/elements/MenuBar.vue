@@ -1,5 +1,5 @@
 <template>
-  <el-menu mode="horizontal" :default-active="activeIndex" :unique-opened="true" :router="true">
+  <el-menu mode="horizontal" :default-active="activeIndex" :unique-opened="true" :router="true" class="menubar">
     <el-menu-item index="/about">About us</el-menu-item>
     <el-submenu index="c">
       <template slot="title">Categories</template>
@@ -42,20 +42,7 @@ export default {
 };
 </script>
 
-<style>
-.el-dropdown-link {
-  cursor: pointer;
-  font-size: 16px;
-}
-.el-dropdown-link:hover {
-  color: #e6a23c;
-  border-bottom: 1px;
-}
-.el-dropdown-menu__item:focus,
-.el-dropdown-menu__item:not(.is-disabled):hover {
-  background-color: #fff7ea;
-  color: #e6a23c;
-}
+<style scoped>
 .el-menu--horizontal > .el-menu-item {
   float: left;
   height: 30px;
@@ -63,7 +50,7 @@ export default {
   border-bottom: 0px solid transparent;
   color: #909399;
 }
-.el-menu--horizontal > .el-submenu .el-submenu__title {
+.el-menu--horizontal >>> .el-submenu .el-submenu__title {
   height: 30px;
   line-height: 30px;
   border-bottom: 0px solid transparent;

@@ -1,5 +1,5 @@
 <template>
-  <el-container style="border: 1px solid #eee">
+  <el-container :style="{height: hh+'px',border: '1px solid #eee'}">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <SideBar />
     </el-aside>
@@ -23,6 +23,11 @@ export default {
   components: {
     HeaderBar,
     SideBar
+  },
+  data(){
+    return {
+      hh:window.innerHeight
+    }
   }
 };
 </script>

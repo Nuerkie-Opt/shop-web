@@ -23,7 +23,7 @@
           </el-col>
           <el-col>
             <el-tooltip content="Account" placement="bottom" effect="light">
-            <el-button type="primary" icon="el-icon-user" size="small" plain circle></el-button>
+            <el-button type="primary" icon="el-icon-user" size="small" @click="$router.push({ path:'/p/0/'})" plain circle></el-button>
             </el-tooltip>
           </el-col>
         </el-row>
@@ -31,7 +31,7 @@
     </el-row>
     <el-divider v-if="hide"></el-divider>
     <el-row v-if="hide">
-        <MenuBar />
+        <MenuBar v-if="hide"/>
     </el-row>
   </el-card>
 </template>

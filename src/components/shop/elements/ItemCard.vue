@@ -37,7 +37,7 @@ export default {
   props: ["mode", "item", "row", "col"],
   methods: {
     itemDetails(){
-      this.$router.push({ path:`items/${this.item.id}`,query:{ r: this.row, c:this.col } });
+      this.$router.push({ path:`/items/${this.item.id}`,query:{ r: this.row, c:this.col } });
     }
   }
 };

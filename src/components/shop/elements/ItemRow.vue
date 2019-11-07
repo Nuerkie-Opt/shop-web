@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="20">
     <el-col 
-    :xs="24" :sm="smUp" :md="mdUp" :lg="lgUp" :xl="lgUp" 
+    :xs="24" :sm="smUp" :md="mdUp" :lg="lgUp" 
     v-for="col in rowData.length" 
     :key="col">
 
@@ -44,13 +44,13 @@ export default {
   props: ["rowData", "row"],
   computed: {
     lgUp() {
-      return 24 / 4;
+      return 24 / this.rowData.length;
     },
     mdUp() {
-      return 24 / (4-1)
+      return 24 / (this.rowData.length-1)
     },
     smUp() {
-      return 24 / (4-2)
+      return 24 / (this.rowData.length-2)
     }
   },
   methods: {

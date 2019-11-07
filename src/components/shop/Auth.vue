@@ -11,6 +11,7 @@
   .el-card{
     position: relative;
     border: 1px solid #acc2f4;
+    margin-top: 90px
   }
 @media only screen and (max-width: 768px) {
   .el-card{
