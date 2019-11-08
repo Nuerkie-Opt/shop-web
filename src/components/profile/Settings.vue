@@ -1,11 +1,15 @@
 <template>
   <div>
     <el-tabs :stretch="true">
-      <el-tab-pane label="Account"></el-tab-pane>
+      <el-tab-pane label="Account">
+        <AccountInfo />
+      </el-tab-pane>
       <el-tab-pane label="Profile Info">
         <ProfileInfo />
       </el-tab-pane>
-      <el-tab-pane label="Product Preferences"></el-tab-pane>
+      <el-tab-pane label="Social Media">
+        <SocialMedia />
+      </el-tab-pane>
       <el-tab-pane label="Personal Info">
         <PersonalInfo />
       </el-tab-pane>
@@ -16,11 +20,15 @@
 <script>
 import PersonalInfo from "./elements/PersonalInfo.vue";
 import ProfileInfo from "./elements/ProfileInfo.vue";
+import AccountInfo from "./elements/AccountInfo.vue";
+import SocialMedia from "./elements/SocialMedia.vue";
 
 export default {
   components: {
     PersonalInfo,
-    ProfileInfo
+    ProfileInfo,
+    AccountInfo,
+    SocialMedia
   },
   methods: {
     saveProfile(params) {
