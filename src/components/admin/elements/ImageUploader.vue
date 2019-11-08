@@ -7,7 +7,7 @@
       ref="imageUploader"
       :http-request="upload"
       :file-list="fileList"
-      :limit="10"
+      :limit="lim"
       :auto-upload="false"
     >
       <i slot="default" class="el-icon-plus"></i>
@@ -16,9 +16,6 @@
         <span class="el-upload-list__item-actions">
           <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
             <i class="el-icon-zoom-in"></i>
-          </span>
-          <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleDownload(file)">
-            <i class="el-icon-download"></i>
           </span>
           <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
             <i class="el-icon-delete"></i>
@@ -33,13 +30,18 @@
 </template>
 <script>
 export default {
+  props:{
+    lim:{
+      type:Number,
+      default:5
+    }
+  },
   data() {
     return {
       fileList: [
         {
-          name: "flower",
-          url:
-            "https://res.cloudinary.com/neaonnim/image/upload/v1570006705/sample.jpg"
+          id: "test/gllmbw9bbnktvfvekote.jpg",
+          url: "https://res.cloudinary.com/neaonnim/image/upload/v1572525089/test/gllmbw9bbnktvfvekote.jpg"
         }
       ],
       dialogImageUrl: "",
@@ -48,8 +50,17 @@ export default {
     };
   },
   methods: {
+    reList(){
+      return this.fileList.map((f)=>{ return {id: f.id, url: f.url} });
+    },
     handleRemove(file) {
-      console.log(file);
+      let fileList;
+      if(file.hasOwnProperty('raw')){
+        this.$refs.imageUploader.uploadFiles = this.$refs.imageUploader.uploadFiles.filter((f)=> f.url !== file.url);
+      }else{
+        this.fileList = this.fileList.filter((f)=> f.url !== file.url);
+      }
+      
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -71,7 +82,7 @@ export default {
     getData() {
         this.baseList = [];
         this.$refs.imageUploader.submit();
-        return Promise.all(this.baseList);
+        return Promise.all([...this.reList(), ...this.baseList]);
     }
   },
   created(){

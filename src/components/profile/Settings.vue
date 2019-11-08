@@ -2,6 +2,9 @@
   <div>
     <el-tabs :stretch="true">
       <el-tab-pane label="Account"></el-tab-pane>
+      <el-tab-pane label="Profile Info">
+        <ProfileInfo />
+      </el-tab-pane>
       <el-tab-pane label="Product Preferences"></el-tab-pane>
       <el-tab-pane label="Personal Info">
         <PersonalInfo />
@@ -12,16 +15,18 @@
 
 <script>
 import PersonalInfo from "./elements/PersonalInfo.vue";
+import ProfileInfo from "./elements/ProfileInfo.vue";
 
 export default {
   components: {
-    PersonalInfo
+    PersonalInfo,
+    ProfileInfo
   },
   methods: {
     saveProfile(params) {
       const payload = {
         "111": {
-          set_info: { info: "personal", data: params },
+          set_info: params,
           "000": ["set_info"]
         },
         "000": ["111"]
