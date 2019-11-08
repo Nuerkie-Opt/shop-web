@@ -18,7 +18,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             const payload = {
                 "111": {
-                    get_items: { limit: 10 },
+                    get_items: { page: 1 },
                     "000": ["get_items"]
                 },
                 "000": ["111"]

@@ -30,6 +30,10 @@ const profileRoutes = [
         path:'settings',
         component: Settings
     },
+    {
+        path: '*',
+        component: Products
+    },
 ];
 
 export default profileRoutes;

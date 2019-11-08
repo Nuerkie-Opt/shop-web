@@ -38,12 +38,7 @@ export default {
   },
   data() {
     return {
-      fileList: [
-        {
-          id: "test/gllmbw9bbnktvfvekote.jpg",
-          url: "https://res.cloudinary.com/neaonnim/image/upload/v1572525089/test/gllmbw9bbnktvfvekote.jpg"
-        }
-      ],
+      fileList: [],
       dialogImageUrl: "",
       dialogVisible: false,
       disabled: false

@@ -157,19 +157,17 @@
         </el-col>
         <el-col :xs="24" :sm="8">
           <el-form-item
-            label="Hours to Complete Order (Single Order)"
-            prop="chours"
+            label="Days to Complete Order (Single Order)"
+            prop="days"
             :rules="[
     {required:true, message:'Hours to Complete Order is required', trigger:'blur'},
         {type:'number', min:0.1, message:'0.1 hours is minimum.', trigger:'blur'}
       ]"
           >
             <el-input-number
-              v-model="itemFormBasic.chours"
+              v-model="itemFormBasic.days"
               style="width:100%"
-              :min="0.1"
-              :precision="1"
-              :step="0.1"
+              :min="1"
             ></el-input-number>
           </el-form-item>
         </el-col>
@@ -221,7 +219,7 @@ export default {
         tags: ["okay"],
         currency: "GHS",
         price: "",
-        chours: ""
+        days: ""
       }
     };
   },

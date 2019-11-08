@@ -20,13 +20,6 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item label="Description" prop="description">
-        <vue-editor
-          :editor-toolbar="toolbar"
-          v-model="itemValueBasicForm.description"
-          placeholder="You can add a short Description for this variant of your product."
-        ></vue-editor>
-      </el-form-item>
 
       <el-row :gutter="20">
         <el-col :xs="24" :sm="12">
@@ -39,15 +32,13 @@
         </el-col>
         <el-col :xs="24" :sm="12">
           <el-form-item
-            label="Hours to Complete Order (Single Order) for this variant of your product."
-            prop="chours"
+            label="Days to Complete Order (Single Order) for this variant of your product."
+            prop="days"
           >
             <el-input-number
-              v-model="itemValueBasicForm.chours"
+              v-model="itemValueBasicForm.days"
               style="width:100%"
-              :min="0.1"
-              :precision="1"
-              :step="0.1"
+              :min="1"
             ></el-input-number>
           </el-form-item>
         </el-col>
@@ -75,10 +66,8 @@ export default {
       ],
       itemValueBasicForm: {
         name: "qwertyuiop",
-        description:
-          "qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopvafricaniz",
         price: "",
-        chours: ""
+        days: ""
       }
     };
   },

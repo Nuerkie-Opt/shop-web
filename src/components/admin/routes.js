@@ -58,6 +58,10 @@ const adminRoutes = [
         path:'analytics/pred',
         component:PredictiveAnalytics,
 
+    },
+    {
+        path:'*',
+        component:AdminDashboard
     }
 ];
 
