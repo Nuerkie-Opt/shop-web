@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <el-row :gutter="30">
+    <el-row :gutter="30" v-if="!loading">
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <el-row>
           <ItemDetailImage :image="item.item.images[currentIndex].url" />
@@ -10,18 +10,18 @@
         </el-row>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
-        <ItemDetailInfo :item="item.item" :options="item.item.options" />
+        <ItemDetailInfo :buyable="buyable" :editable="editable" :item="item.item" :options="item.item.options" />
       </el-col>
       <el-col style="margin-top:10px;margin-bottom:100px">
         <ItemTabInfo :item="item" />
       </el-col>
     </el-row>
+    <div style="height:200px" v-loading="loading"></div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import ItemDetailImage from "./elements/ItemDetailImage.vue";
 import ItemDetailInfo from "./elements/ItemDetailInfo.vue";
 import ItemTabInfo from "./elements/ItemTabInfo.vue";
@@ -33,6 +33,16 @@ export default {
     ItemDetailThumbs,
     ItemDetailInfo,
     ItemTabInfo
+  },
+  props:{
+    buyable:{
+      type:Boolean,
+      default:true
+    },
+    editable:{
+      type:Boolean,
+      default:false
+    }
   },
   data() {
     return {
@@ -53,8 +63,6 @@ export default {
         item: product,
         quantity: q,
         amount: q * this.item.item.price,
-        r: this.$route.query.r,
-        c: this.$route.query.c
       };
 
       this.append_order({ [this.item.id]: order });
@@ -85,17 +93,16 @@ export default {
           : this.item.item.price;
       this.item.item.name = `${this.constItem.item.name} ${changes.name}`;
     },
-    goBack() {
-      this.$route.push("/");
-    },
     load() {
       this.loading = true;
       if (this.itemsD) {
         if (this.itemsD.hasOwnProperty(this.$route.params.item)) {
           this.item = this.itemsD[this.$route.params.item];
+          this.constItem = this.itemsD[this.$route.params.item];
           this.loading = false;
           return;
         }
+
       }
       const params = {item:this.$route.params.item};
       const args = {actions: this.$actions, params:params};
@@ -104,6 +111,7 @@ export default {
           this.$message.error('Item Does Not Exist 😕.')
         }
         this.item = this.itemsD[this.$route.params.item];
+        this.constItem = this.itemsD[this.$route.params.item];
         this.loading = false
       });
     }
@@ -131,6 +139,6 @@ export default {
   padding: 0px;
 }
 .details {
-  margin-top: 50px;
+  margin-top: 90px;
 }
 </style>

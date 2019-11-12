@@ -64,10 +64,7 @@ export default {
     },
     edit(id) {
       this.$message.success("editing ...");
-      this.$router.push({
-        path: `items/${id}`,
-        query: { r: this.r, c: this.c }
-      });
+      this.$router.push({path: `items/${id}`});
     }
   },
   components: {

@@ -66,7 +66,7 @@
       </el-table-column>
       <el-table-column label="Tags" width="256">
         <template slot-scope="scope">
-          <el-tag size="mini" v-for="(tag, t) in scope.row.item.tags" :key="t">{{tag}}</el-tag>
+          <el-tag style="margin-left:5px;cursor:pointer" size="mini" v-for="(tag, t) in scope.row.item.tags" :key="t">{{tag}}</el-tag>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Operations" width="120">
@@ -140,6 +140,10 @@ export default {
     },
     searchMe() {
       if (this.xt === "Search") {
+        if(this.search.length < 3){
+          this.$message.error('At least 3 letters 🌝');
+          return;
+        }
         this.xt = "Clear";
         return;
       }

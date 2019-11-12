@@ -32,15 +32,22 @@
           size="medium"
           ref="quantity"
           placeholder="Order Quantity"
+          v-if="buyable"
         >
           <el-option v-for="i in 100" :key="i" :label="i" :value="i"></el-option>
         </el-select>
       </el-col>
       <el-col :xs="12" :sm="12">
-        <el-button style="width:100%" size="medium" type="primary" @click="addToCart">
+        <el-button style="width:100%" size="medium" type="primary" @click="addToCart" v-if="buyable">
           <i style="font-weight:900">
             Add to Cart
             <i class="el-icon-sold-out"></i>
+          </i>
+        </el-button>
+        <el-button style="width:100%" size="medium" type="primary" @click="mkChange" v-if="editable">
+          <i style="font-weight:900">
+            Make Changes
+            <i class="el-icon-edit"></i>
           </i>
         </el-button>
       </el-col>
@@ -57,7 +64,18 @@ import ActionBtns from "./ActionBtns.vue";
 import OptionsIterator from "./OptionsIterator.vue";
 import MoneySign from "./MoneySign.vue";
 export default {
-  props: ["item", "options"],
+  props:{
+    item:Object,
+    options:Array,
+    buyable:{
+      type:Boolean,
+      defualt:true
+    },
+    editable:{
+      type:Boolean,
+      defualt:false,
+    }
+  },
   data() {
     return {
       quantity: ""
@@ -79,6 +97,9 @@ export default {
         this.$refs["quantity"].focus();
         this.$message.warning("Please specify order quantity.");
       }
+    },
+    mkChange(){
+      this.$router.push(`/a/item/edit/${this.$route.params.item}`);
     }
   },
   components: {

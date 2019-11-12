@@ -253,7 +253,18 @@ export default {
   },
   mounted() {
     if(this.mode !== 'create'){
-      this.itemValueBasicForm =this.dat;
+      const form = {
+        name: this.dat.name,
+        description: this.dat.description,
+        department: this.dat.department,
+        category: this.dat.category,
+        tags: this.dat.tags,
+        currency: this.dat.currency,
+        price: this.dat.price,
+        days: this.dat.days
+      };
+
+      this.itemFormBasic = form;
     }
   }
 };

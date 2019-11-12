@@ -40,7 +40,7 @@ export default {
       type:String,
       default:'create'
     },
-    dat: Object
+    dat: Array
   },
   data() {
     return {

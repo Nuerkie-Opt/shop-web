@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ItemValueBasicForm ref="itemValueBasicForm" :mode="mode"/>
+    <ItemValueBasicForm ref="itemValueBasicForm" :dat="dat" :mode="mode"/>
     <p style="font-size:14px;color:#606266">Upload at most 5 Images for item</p>
-    <ImageUploader ref="imageUploader" :mode="mode"/>
+    <ImageUploader ref="imageUploader" :dat="dat.images" :mode="mode"/>
   </div>
 </template>
 
@@ -19,7 +19,10 @@ export default {
       type:String,
       default:'create'
     },
-    dat: Object
+    dat: {
+      type:Object,
+      default: () => {return {images:[]}}
+    }
   },
   methods: {
     getData() {

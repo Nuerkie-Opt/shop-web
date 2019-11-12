@@ -25,16 +25,19 @@
         <el-switch v-model="itemPropertyForm.required" placeholder="eg. Color, Size, Designs, ..." :disabled="mode === 'show'"></el-switch>
       </el-form-item>
     </el-form>
-
+    <template >
     <div v-for="i in values" :key="i" style="padding:20px">
-      <ItemValueForm ref="itemValueForm" />
-      <el-button v-if="i==values" @click="values -= 1" size="mini" type="danger" :disabled="mode === 'show'">
+      <ItemValueForm ref="itemValueForm" v-if="added"/>
+      <ItemValueForm ref="itemValueForm" v-else :dat="getVal(i)" :mode="mode"/>
+      
+      <el-button style="margin-top:10px" v-if="i==values" @click="values -= 1" size="mini" type="danger" :disabled="mode === 'show'">
         Remove Property Value
         <i class="el-icon-minus"></i>
       </el-button>
     </div>
+    </template>
 
-    <el-button @click="values += 1" size="mini" type="primary" style="margin-top:40px" :disabled="mode === 'show'">
+    <el-button @click="add" size="mini" type="primary" style="margin-top:20px" :disabled="mode === 'show'">
       Add Property Value
       <i class="el-icon-plus"></i>
     </el-button>
@@ -57,6 +60,7 @@ export default {
   },
   data() {
     return {
+      added:false,
       itemPropertyForm: {
         name: "",
         required: false
@@ -65,6 +69,16 @@ export default {
     };
   },
   methods: {
+    add(){
+      this.added = true;
+      this.values++;
+    },
+    getVal(i){
+      if(this.mode === 'create'){
+        return {};
+      }
+      return this.dat.values[i];
+    },
     collectValues() {
       let options = [];
       if (this.$refs.itemValueForm) {
@@ -107,7 +121,11 @@ export default {
   },
   mounted() {
     if(this.mode !== 'create'){
-      this.itemValueBasicForm = this.dat;
+      this.itemValueBasicForm = {
+        name:this.dat.name,
+        required: this.dat.required
+      };
+      this.values = this.dat.values.length;
     }
   }
 };

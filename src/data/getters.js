@@ -33,7 +33,7 @@ const getters = {
         return false;
     },
     itemsD(state){
-        if (state.itemsD.length !== 0) {
+        if (Object.keys(state.itemsD).length !== 0) {
             return state.itemsD;
         }
 

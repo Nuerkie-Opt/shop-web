@@ -4,8 +4,8 @@
       <span slot="label">
         <i class="el-icon-s-grid"></i> Product Details
       </span>
-      Product Details
-    </el-tab-pane>
+      <div v-html="item.item.description"></div>
+      </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-video-camera-solid"></i> Product Videos
@@ -44,6 +44,11 @@
     </el-tab-pane>
   </el-tabs>
 </template>
+<script>
+export default {
+  props:['item']
+}
+</script>
 <style scoped>
 .item {
   margin-bottom: 18px;

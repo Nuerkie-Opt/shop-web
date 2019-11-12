@@ -78,7 +78,7 @@ const actions = {
                     // console.log(response);
                     const data = response.data["111"].fetch_item['data'];
                                       
-                    commit('append_items', Object.assign({}, getters.itemsD, data));
+                    commit('set_item_d', Object.assign({}, getters.itemsD, data));
                     resolve(Object.values(data).length===0);
                 })
                 .catch(error => reject());
