@@ -2,36 +2,25 @@
   <el-card>
     <el-row style="margin-bottom: 20px;">
       <el-col :span="12">
-        <el-button
-          size="small"
-          @click="addTab(editableTabsValue)"
-        >Add Item Variants</el-button>
+        <el-button size="small" @click="addTab(editableTabsValue)">Add Item Variants</el-button>
       </el-col>
       <el-col :span="12">
-        <el-button
-          size="small"
-          type="primary"
-          @click="submit()"
-        >Complete and Submit</el-button>
+        <el-button size="small" type="primary" @click="submit()">Complete and Submit</el-button>
       </el-col>
     </el-row>
-    <el-tabs
-      v-model="editableTabsValue"
-      type="card"
-      @tab-remove="removeTab"
-      v-if="!loading"
-    >
+    <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" v-if="!loading">
       <el-tab-pane label="New Item Form" name="0">
         <ItemForm ref="itemForm" :dat="item.item" :mode="mode" />
       </el-tab-pane>
       <el-tab-pane
-        v-for="opt in item.item.options"
-        :key="opt.name"
-        :label="opt.name"
-        :name="opt.name"
+        v-for="(tab,i) in editableTabs"
+        :key="tab.name"
+        :label="tab.title"
+        :name="tab.name"
         closable
       >
-        <ItemPropertyForm ref="itemPropertyForm" :dat="opt" :mode="mode" />
+        <ItemPropertyForm ref="itemPropertyForm" v-if="added" />
+        <ItemPropertyForm ref="itemPropertyForm" :dat="getOpt(i)" :mode="mode" v-else />
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -46,7 +35,7 @@ import ItemForm from "./elements/ItemForm.vue";
 export default {
   components: {
     ItemPropertyForm,
-    ItemForm,
+    ItemForm
   },
   props: {
     mode: {
@@ -62,7 +51,8 @@ export default {
       errors: 0,
       editableTabsValue: "0",
       editableTabs: [],
-      tabIndex: 0
+      tabIndex: 0,
+      added: false
     };
   },
   computed: {
@@ -70,11 +60,22 @@ export default {
   },
   methods: {
     ...mapActions(["loadItemsD"]),
+    getOpt(i){
+      const opt = this.item.item.options[i];
+      return opt;
+    },
     load() {
       this.loading = true;
       if (this.itemsD) {
         if (this.itemsD.hasOwnProperty(this.$route.params.item)) {
           this.item = this.itemsD[this.$route.params.item];
+          this.editableTabs = this.item.item.options.map((opt, i) => {
+            return {
+              name: "" + (i + 1),
+              title: opt.name
+            };
+          });
+          this.tabIndex = this.editableTabs.length;
           this.loading = false;
           return;
         }
@@ -86,6 +87,13 @@ export default {
           this.$message.error("Item Does Not Exist 😕.");
         }
         this.item = this.itemsD[this.$route.params.item];
+        this.editableTabs = this.item.item.options.map((opt, i) => {
+          return {
+            name: "" + (i + 1),
+            title: opt.name
+          };
+        });
+        this.tabIndex = this.editableTabs.length;
         this.loading = false;
       });
     },
@@ -146,7 +154,12 @@ export default {
 
       const payload = {
         "111": {
-          upload_item: { item_details: itemData, seller_id: 1 },
+          upload_item: {
+            item_details: itemData,
+            seller_id: 1,
+            update: true,
+            id: item.id
+          },
           "000": ["upload_item"]
         },
         "000": ["111"]
@@ -185,6 +198,7 @@ export default {
       })
         .then(({ value }) => {
           if (value) {
+            this.added = true;
             let newTabName = ++this.tabIndex + "";
             this.editableTabs.push({
               title: value,

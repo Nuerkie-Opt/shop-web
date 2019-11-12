@@ -253,7 +253,7 @@ export default {
   },
   mounted() {
     if(this.mode !== 'create'){
-      const form = {
+      this.itemFormBasic = {
         name: this.dat.name,
         description: this.dat.description,
         department: this.dat.department,
@@ -263,8 +263,6 @@ export default {
         price: this.dat.price,
         days: this.dat.days
       };
-
-      this.itemFormBasic = form;
     }
   }
 };

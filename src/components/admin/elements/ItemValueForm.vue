@@ -1,7 +1,7 @@
 <template>
   <div>
     <ItemValueBasicForm ref="itemValueBasicForm" :dat="cdat" :mode="mode"/>
-    <p style="font-size:14px;color:#606266">Upload at most 5 Images for item</p>
+    <p style="font-size:14px;color:#606266">Upload at most 5 Images for this varaint of your product.</p>
     <ImageUploader ref="imageUploader" :dat="cdat.images" :mode="mode"/>
   </div>
 </template>

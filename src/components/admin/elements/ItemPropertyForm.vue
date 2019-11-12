@@ -121,7 +121,7 @@ export default {
   },
   mounted() {
     if(this.mode !== 'create'){
-      this.itemValueBasicForm = {
+      this.itemPropertyForm = {
         name:this.dat.name,
         required: this.dat.required
       };
