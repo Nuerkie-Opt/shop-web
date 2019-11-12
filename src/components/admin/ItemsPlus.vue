@@ -2,15 +2,15 @@
   <el-card>
     <el-row style="margin-bottom: 20px;">
       <el-col :span="12">
-        <el-button size="small" @click="addTab(editableTabsValue)">Add Item Variants</el-button>
+        <el-button size="small" @click="addTab(editableTabsValue)" :disabled="mode === 'show'">Add Item Variants</el-button>
       </el-col>
       <el-col :span="12">
-        <el-button size="small" type="primary" @click="submit()">Complete and Submit</el-button>
+        <el-button size="small" type="primary" @click="submit()" :disabled="mode === 'show'">Complete and Submit</el-button>
       </el-col>
     </el-row>
-    <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab">
+    <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" v-if="mode === 'create'">
       <el-tab-pane label="New Item Form" name="0">
-        <ItemForm ref="itemForm" />
+        <ItemForm ref="itemForm" :mode="mode"/>
       </el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
@@ -19,7 +19,7 @@
         :name="item.name"
         closable
       >
-        <ItemPropertyForm ref="itemPropertyForm" />
+        <ItemPropertyForm ref="itemPropertyForm" :mode="mode"/>
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -34,6 +34,13 @@ export default {
   components: {
     ItemPropertyForm,
     ItemForm
+  },
+  props: {
+    mode: {
+      type: String,
+      default: "create"
+    },
+    dat: Object
   },
   data() {
     return {
@@ -111,7 +118,7 @@ export default {
         .post("/action", payload, {
           headers: { Authorization: "d28b2bea5bd4e6f9d64f7ba5b39b9c0cea7ad7fd" }
         })
-        .then((response) =>{
+        .then(response => {
           // handle success
           console.log(response);
           this.$notify.success({
@@ -119,7 +126,7 @@ export default {
             message: "Item Uploaded."
           });
         })
-        .catch((error) =>{
+        .catch(error => {
           // handle error
           console.log(error);
           this.$notify.error({
@@ -127,7 +134,7 @@ export default {
             message: "Upload Error."
           });
         })
-        .finally(()=> {
+        .finally(() => {
           loading.close();
           // always executed
           // remove loader
@@ -172,9 +179,6 @@ export default {
         })
         .catch(_ => {});
     }
-  },
-  created() {
-    this.options = [];
   }
-};
+  };
 </script>

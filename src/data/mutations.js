@@ -3,6 +3,10 @@ const mutations = {
         state.products = products;
         sessionStorage.products = JSON.stringify(state.products);
     },
+    append_items(state, items){
+        state.items = items;
+        sessionStorage.items = JSON.stringify(state.items);
+    },
     append_orders(state, orders ){
         
         state.cart = orders;
@@ -23,6 +27,11 @@ const mutations = {
         state.menus = menus;
 
         sessionStorage.menus = JSON.stringify(menus);
+    },
+    set_item_d(state, itemsD){
+        state.itemsD = itemsD;
+
+        sessionStorage.itemsD = JSON.stringify(itemsD);
     }
 };
 

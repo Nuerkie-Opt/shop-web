@@ -21,6 +21,28 @@ const getters = {
         
         return false;
     },
+    itemMatrix(state){
+        if (state.items.length !== 0) {
+            return state.items;
+        }
+
+        if(sessionStorage.items){
+            return JSON.parse(sessionStorage.items);
+        }
+        
+        return false;
+    },
+    itemsD(state){
+        if (state.itemsD.length !== 0) {
+            return state.itemsD;
+        }
+
+        if(sessionStorage.itemsD){
+            return JSON.parse(sessionStorage.itemsD);
+        }
+        
+        return false;
+    },
     cartCount(state, getters){
         return Object.keys(getters.cartItems).length;
     },

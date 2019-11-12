@@ -4,14 +4,13 @@
       <el-form-item label="Your Handle" prop="name" required>
         <el-input v-model="accountInfo.name"></el-input>
       </el-form-item>
-      <el-row>
+      <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="Phone" prop="phone" required>
             <el-input v-model="accountInfo.phone">
               <el-form-item class="code" prop="code" slot="prepend" required>
                 <el-select
                   v-model="accountInfo.code"
-                  placeholder="Call Code"
                   style="width:120px"
                   filterable
                 >
@@ -27,37 +26,41 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-button
+          
+          <el-form-item label="Activation Code" >
+            <el-button
             @click="activatePhone"
             type="info"
             :disabled="phone_verified"
           >{{ activeTextPhone }}</el-button>
-          <el-form-item label="Activation Code" v-if="activePhone">
             <el-input
               v-model="pcode"
               placeholder="Enter pin sent to your phone."
               :disabled="phone_verified"
+              v-if="activePhone"
             ></el-input>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="Your Email" prop="email" required>
             <el-input v-model="accountInfo.email"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-button
+          
+          <el-form-item label="Activation Code" >
+            <el-button
             @click="activateEmail"
             type="info"
             :disabled="email_verified"
           >{{ activeTextEmail }}</el-button>
-          <el-form-item label="Activation Code" v-if="activeEmail">
             <el-input
               v-model="ecode"
               placeholder="Enter pin sent to your email."
               :disabled="email_verified"
+              v-if="activeEmail"
             ></el-input>
           </el-form-item>
         </el-col>

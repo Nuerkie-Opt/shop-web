@@ -29,7 +29,7 @@
           <i class="el-icon-setting"></i>
           Settings
         </el-menu-item>
-        <el-menu-item :index="`/a/${user}/`" class="hidden-xs-only">
+        <el-menu-item :index="`/a/`" class="hidden-xs-only">
           <i class="el-icon-unlock"></i>
           Admin
         </el-menu-item>

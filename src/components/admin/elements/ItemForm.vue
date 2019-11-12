@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ItemFormBasic ref="itemFormBasic" />
+    <ItemFormBasic ref="itemFormBasic" :mode="mode"/>
     <p style="font-size:14px;color:#606266">Upload at most 5 Images for item</p>
-    <ImageUploader ref="imageUploader" />
+    <ImageUploader ref="imageUploader" :mode="mode"/>
   </div>
 </template>
 
@@ -14,6 +14,13 @@ export default {
   components: {
     ItemFormBasic,
     ImageUploader
+  },
+  props:{
+    mode:{
+      type:String,
+      default:'create'
+    },
+    dat: Object
   },
   methods: {
     getData() {

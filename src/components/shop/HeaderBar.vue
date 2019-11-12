@@ -29,9 +29,9 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-divider v-if="hide"></el-divider>
-    <el-row v-if="hide">
-        <MenuBar v-if="hide"/>
+    <el-divider></el-divider>
+    <el-row>
+        <MenuBar/>
     </el-row>
   </el-card>
 </template>
@@ -52,9 +52,6 @@ export default {
     };
   },
   computed: {
-    hide(){
-      return this.$route.name !== "item"
-    },
     ...mapGetters(['cartCount'])
   },
   beforeMount(){

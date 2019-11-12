@@ -17,6 +17,7 @@
           minlength="10"
           show-word-limit
           clearable
+          :disabled="mode === 'show'"
         ></el-input>
       </el-form-item>
       <el-form-item
@@ -31,6 +32,7 @@
           :editor-toolbar="toolbar"
           v-model="itemFormBasic.description"
           placeholder="Describe your product and it's usage. It can be as long as possible but not too long since you might bore readers. Try to go straigt to the point."
+          :disabled="mode === 'show'"
         ></vue-editor>
       </el-form-item>
       <el-row :gutter="20">
@@ -49,6 +51,7 @@
               filterable
               default-first-option
               clearable
+              :disabled="mode === 'show'"
             >
               <el-option
                 v-for="item in options"
@@ -74,6 +77,7 @@
               filterable
               default-first-option
               clearable
+              :disabled="mode === 'show'"
             >
               <el-option
                 v-for="item in options"
@@ -102,6 +106,7 @@
           allow-create
           default-first-option
           clearable
+          :disabled="mode === 'show'"
         >
           <el-option
             v-for="item in options"
@@ -125,6 +130,7 @@
               style="width:100%"
               placeholder="Currency"
               clearable
+              :disabled="mode === 'show'"
             >
               <el-option
                 v-for="item in currencies"
@@ -152,6 +158,7 @@
               style="width:100%"
               :min="1"
               :precision="2"
+              :disabled="mode === 'show'"
             ></el-input-number>
           </el-form-item>
         </el-col>
@@ -168,6 +175,7 @@
               v-model="itemFormBasic.days"
               style="width:100%"
               :min="1"
+              :disabled="mode === 'show'"
             ></el-input-number>
           </el-form-item>
         </el-col>
@@ -182,6 +190,13 @@ import { VueEditor } from "vue2-editor";
 export default {
   components: {
     VueEditor
+  },
+  props:{
+    mode:{
+      type:String,
+      default:'create'
+    },
+    dat: Object
   },
   data() {
     return {
@@ -204,10 +219,6 @@ export default {
         {
           label: "GHS",
           symbol: "&#8373;"
-        },
-        {
-          label: "NGN",
-          symbol: "&#8358;"
         }
       ],
       itemFormBasic: {
@@ -238,6 +249,11 @@ export default {
         });
         return false;
       }
+    }
+  },
+  mounted() {
+    if(this.mode !== 'create'){
+      this.itemValueBasicForm =this.dat;
     }
   }
 };

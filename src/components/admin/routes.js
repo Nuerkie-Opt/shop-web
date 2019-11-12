@@ -7,6 +7,8 @@ import OrdersMoney from './OrdersMoney.vue';
 import OrdersList from './OrdersList.vue';
 import ItemsList from './ItemsList.vue';
 import ItemsPlus from './ItemsPlus.vue';
+import ItemDetail from './ItemDetail.vue';
+import ItemEdit from './ItemEdit.vue';
 
 
 const adminRoutes = [
@@ -30,6 +32,14 @@ const adminRoutes = [
         path:'items/plus',
         component:ItemsPlus,
 
+    },
+    {
+        path:'item/edit/:item',
+        component:ItemEdit
+    },
+    {
+        path:'item/view/:item',
+        component:ItemDetail
     },
     {
         path:'orders',

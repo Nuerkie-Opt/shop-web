@@ -18,22 +18,23 @@
           v-model="itemPropertyForm.name"
           placeholder="eg. Color, Size, Designs, ..."
           clearable
+          :disabled="mode === 'show'"
         ></el-input>
       </el-form-item>
       <el-form-item label="Required" prop="required">
-        <el-switch v-model="itemPropertyForm.required" placeholder="eg. Color, Size, Designs, ..."></el-switch>
+        <el-switch v-model="itemPropertyForm.required" placeholder="eg. Color, Size, Designs, ..." :disabled="mode === 'show'"></el-switch>
       </el-form-item>
     </el-form>
 
     <div v-for="i in values" :key="i" style="padding:20px">
       <ItemValueForm ref="itemValueForm" />
-      <el-button v-if="i==values" @click="values -= 1" size="mini" type="danger">
+      <el-button v-if="i==values" @click="values -= 1" size="mini" type="danger" :disabled="mode === 'show'">
         Remove Property Value
         <i class="el-icon-minus"></i>
       </el-button>
     </div>
 
-    <el-button @click="values += 1" size="mini" type="primary" style="margin-top:40px">
+    <el-button @click="values += 1" size="mini" type="primary" style="margin-top:40px" :disabled="mode === 'show'">
       Add Property Value
       <i class="el-icon-plus"></i>
     </el-button>
@@ -46,6 +47,13 @@ import ItemValueForm from "./ItemValueForm.vue";
 export default {
   components: {
     ItemValueForm
+  },
+  props:{
+    mode:{
+      type:String,
+      default:'create'
+    },
+    dat: Object
   },
   data() {
     return {
@@ -95,6 +103,11 @@ export default {
         });
         return false;
       }
+    }
+  },
+  mounted() {
+    if(this.mode !== 'create'){
+      this.itemValueBasicForm = this.dat;
     }
   }
 };

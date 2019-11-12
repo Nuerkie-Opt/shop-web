@@ -14,39 +14,74 @@ const actions = {
             resolve(productRows);
         });
     },
-    loadItems({ commit, dispatch, getters }, actions) {
+    loadProducts({ commit, dispatch, getters }, args) {
         return new Promise((resolve, reject) => {
             const payload = {
                 "111": {
-                    get_items: { page: 1 },
+                    get_items: args.params,
                     "000": ["get_items"]
                 },
                 "000": ["111"]
             };
             // show loader
-            actions
+            args.actions
                 .post("/action", payload)
                 .then(response => {
                     // handle success
                     // console.log(response);
-                    const data = response.data["111"].get_items;
+                    const data = response.data["111"].get_items['data'];
                     dispatch('makeRows', data).then(rows => {
                         commit('append_products', [...getters.productMatrix, ...rows]);
                     });
-
-
-                    resolve();
+                    resolve(data.length===0);
                 })
-                .catch(error => {
-                    reject();
-                    // handle error
-                    // console.log(error);
+                .catch(error => reject());
+        });
+    },
+    loadItems({ commit, getters }, args) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                "111": {
+                    get_items: args.params,
+                    "000": ["get_items"]
+                },
+                "000": ["111"]
+            };
+            // show loader
+            args.actions
+                .post("/action", payload)
+                .then(response => {
+                    // handle success
+                    // console.log(response);
+                    const data = response.data["111"].get_items['data'];
+                                      
+                    commit('append_items', [...getters.itemMatrix, ...data]);
+                    resolve(data.length===0);
                 })
-                .finally(() => {
-                    resolve();
-                    // always executed
-                    // remove loader
-                });
+                .catch(error => reject());
+        });
+    },
+    loadItemsD({ commit, getters }, args) {
+        return new Promise((resolve, reject) => {
+            const payload = {
+                "111": {
+                    fetch_item: args.params,
+                    "000": ["fetch_item"]
+                },
+                "000": ["111"]
+            };
+            // show loader
+            args.actions
+                .post("/action", payload)
+                .then(response => {
+                    // handle success
+                    // console.log(response);
+                    const data = response.data["111"].fetch_item['data'];
+                                      
+                    commit('append_items', Object.assign({}, getters.itemsD, data));
+                    resolve(Object.values(data).length===0);
+                })
+                .catch(error => reject());
         });
     },
     append_order({ commit, getters }, order) {

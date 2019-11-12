@@ -38,14 +38,15 @@ export default {
     return {
       currentIndex: 0,
       item: {},
-      constItem: {}
+      constItem: {},
+      loading:false,
     };
   },
   computed: {
-    ...mapGetters(["productMatrix"])
+    ...mapGetters(["itemsD"])
   },
   methods: {
-    ...mapActions(["append_order"]),
+    ...mapActions(["append_order", "loadItemsD"]),
     handleCarter(q) {
       const product = JSON.parse(JSON.stringify(this.item));
       const order = {
@@ -84,8 +85,27 @@ export default {
           : this.item.item.price;
       this.item.item.name = `${this.constItem.item.name} ${changes.name}`;
     },
-    goBack(){
+    goBack() {
       this.$route.push("/");
+    },
+    load() {
+      this.loading = true;
+      if (this.itemsD) {
+        if (this.itemsD.hasOwnProperty(this.$route.params.item)) {
+          this.item = this.itemsD[this.$route.params.item];
+          this.loading = false;
+          return;
+        }
+      }
+      const params = {item:this.$route.params.item};
+      const args = {actions: this.$actions, params:params};
+      this.loadItemsD(args).then((missing)=>{
+        if(missing){
+          this.$message.error('Item Does Not Exist 😕.')
+        }
+        this.item = this.itemsD[this.$route.params.item];
+        this.loading = false
+      });
     }
   },
   mounted() {
@@ -94,16 +114,7 @@ export default {
     this.$eventBus.$on("carter", q => this.handleCarter(q));
   },
   beforeMount() {
-    this.item = JSON.parse(
-      JSON.stringify(
-        this.productMatrix[this.$route.query.r][this.$route.query.c]
-      )
-    );
-    this.constItem = JSON.parse(
-      JSON.stringify(
-        this.productMatrix[this.$route.query.r][this.$route.query.c]
-      )
-    );
+    this.load();
   },
   destroyed() {
     this.$eventBus.$off();

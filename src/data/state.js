@@ -2,9 +2,11 @@ import MenusData from './MenusData.js';
 
 let state = {
     products: [],
+    items: [],
     menus: MenusData,
     cart: {},
-    delivery: {}
+    delivery: {},
+    itemsD: {}
 };
 
 export default state;

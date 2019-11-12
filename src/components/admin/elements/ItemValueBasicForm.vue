@@ -18,6 +18,7 @@
           v-model="itemValueBasicForm.name"
           placeholder="eg. Red, Blue, Green ..."
           clearable
+          :disabled="mode === 'show'"
         ></el-input>
       </el-form-item>
 
@@ -27,7 +28,7 @@
             label="You can provide a separate price for this variant of your product."
             prop="price"
           >
-            <el-input-number v-model="itemValueBasicForm.price" style="width:100%" :precision="2"></el-input-number>
+            <el-input-number v-model="itemValueBasicForm.price" style="width:100%" :precision="2" :disabled="mode === 'show'"></el-input-number>
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="12">
@@ -39,6 +40,7 @@
               v-model="itemValueBasicForm.days"
               style="width:100%"
               :min="1"
+              :disabled="mode === 'show'"
             ></el-input-number>
           </el-form-item>
         </el-col>
@@ -52,6 +54,13 @@ import { VueEditor } from "vue2-editor";
 export default {
   components: {
     VueEditor
+  },
+  props:{
+    mode:{
+      type:String,
+      default:'create'
+    },
+    dat: Object
   },
   data() {
     return {
@@ -86,6 +95,11 @@ export default {
         });
         return false;
       }
+    }
+  },
+  mounted() {
+    if(this.mode !== 'create'){
+      this.itemValueBasicForm = this.dat;
     }
   }
 };

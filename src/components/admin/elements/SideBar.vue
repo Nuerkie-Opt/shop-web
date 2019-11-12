@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-openeds="['items', 'orders', 'analytics']" :router="true">
+  <el-menu  :router="true">
     <el-menu-item index="/a/dashboard">
       <i class="el-icon-s-management"></i>Dashboard
     </el-menu-item>

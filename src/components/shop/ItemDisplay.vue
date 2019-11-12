@@ -28,7 +28,9 @@ export default {
     load() {
       // append rows to product matrix
       this.loading = true;
-      this.$store.dispatch('loadItems', this.$actions).then(()=>{
+      const params = {limit:12, page: 1}
+      const args = {actions: this.$actions, params:params}
+      this.$store.dispatch('loadProducts', args).then(()=>{
         this.loading = false;
       });
       

@@ -9,6 +9,7 @@
       :file-list="fileList"
       :limit="lim"
       :auto-upload="false"
+      :disabled="mode === 'show'"
     >
       <i slot="default" class="el-icon-plus"></i>
       <div slot="file" slot-scope="{file}">
@@ -34,7 +35,12 @@ export default {
     lim:{
       type:Number,
       default:5
-    }
+    },
+    mode:{
+      type:String,
+      default:'create'
+    },
+    dat: Object
   },
   data() {
     return {
@@ -82,6 +88,11 @@ export default {
   },
   created(){
     this.baseList= [];
+  },
+  mounted() {
+    if(this.mode !== 'create'){
+      this.fileList = this.dat;
+    }
   }
 };
 </script>
