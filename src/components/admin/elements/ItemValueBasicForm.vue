@@ -99,7 +99,11 @@ export default {
   },
   mounted() {
     if(this.mode !== 'create'){
-      this.itemValueBasicForm = this.dat;
+      this.itemValueBasicForm = {
+        name:this.dat.name,
+        price:this.dat.price,
+        days:this.dat.days
+      };
     }
   }
 };

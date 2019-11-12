@@ -77,7 +77,7 @@ export default {
       if(this.mode === 'create'){
         return {};
       }
-      return this.dat.values[i];
+      return this.dat.values[i-1];
     },
     collectValues() {
       let options = [];
