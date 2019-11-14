@@ -167,7 +167,7 @@
             label="Days to Complete Order (Single Order)"
             prop="days"
             :rules="[
-    {required:true, message:'Hours to Complete Order is required', trigger:'blur'},
+    {required:true, message:'Days to Complete Order is required', trigger:'blur'},
         {type:'number', min:0.1, message:'0.1 hours is minimum.', trigger:'blur'}
       ]"
           >

@@ -116,7 +116,7 @@ export default {
       // show loader
       this.$actions
         .post("/action", payload, {
-          headers: { Authorization: "d28b2bea5bd4e6f9d64f7ba5b39b9c0cea7ad7fd" }
+          headers: { Authorization: "a8cd3aa542c5b1c9f6f92d663e32bc0fe682238a" }
         })
         .then(response => {
           // handle success
