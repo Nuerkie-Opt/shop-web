@@ -34,7 +34,7 @@ export default {
   components: {
     ActionBtns
   },
-  props: ["mode", "item", "row", "col"],
+  props: ["mode", "item"],
   methods: {
     itemDetails(){
       this.$router.push({ path:`/items/${this.item.id}`});

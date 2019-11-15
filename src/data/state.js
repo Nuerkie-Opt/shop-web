@@ -6,7 +6,8 @@ let state = {
     menus: MenusData,
     cart: {},
     delivery: {},
-    itemsD: {}
+    itemsD: {},
+    profile: {}
 };
 
 export default state;

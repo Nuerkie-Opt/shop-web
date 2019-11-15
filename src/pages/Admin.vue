@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { isLoggedIn } from "../utils.js";
 import SideBar from "../components/admin/elements/SideBar.vue";
 import HeaderBar from "../components/admin/elements/HeaderBar.vue";
 
@@ -24,9 +25,21 @@ export default {
     HeaderBar,
     SideBar
   },
-  data(){
+  data() {
     return {
-      hh:window.innerHeight
+      hh: window.innerHeight,
+      loggedIn: false
+    };
+  },
+  async beforeRouteEnter(to, from, next) {
+    const logged_in = await isLoggedIn();
+
+    if (logged_in) {
+      next(vm => {
+        vm.loggedIn = logged_in;
+      });
+    } else {
+      next(vm=>vm.$router.push('/auth/login'));
     }
   }
 };

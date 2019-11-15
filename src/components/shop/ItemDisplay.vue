@@ -1,6 +1,6 @@
 <template>
   <div class="display">
-    <ItemRow v-for="(row, i) in productMatrix" :key="i" :row="i" :rowData="row" />
+    <ItemRow :row="4" :rowData="productMatrix" />
     <div style="margin:0px;padding:0px; height:200px" v-loading="loading"></div>
       <el-backtop target=".el-main"></el-backtop>
   </div>

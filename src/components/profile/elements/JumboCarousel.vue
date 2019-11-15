@@ -1,8 +1,8 @@
 <template>
   <div class="block">
     <el-carousel trigger="click" height="400px">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <JumboImage />
+      <el-carousel-item v-for="(img,i) in images" :key="i">
+        <JumboImage :image="img.url"/>
       </el-carousel-item>
     </el-carousel>
   </div>

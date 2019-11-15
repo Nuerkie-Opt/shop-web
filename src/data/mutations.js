@@ -3,6 +3,9 @@ const mutations = {
         state.products = products;
         sessionStorage.products = JSON.stringify(state.products);
     },
+    set_profile(state, profile){
+        state.profile = profile;
+    },
     append_items(state, items){
         state.items = items;
         sessionStorage.items = JSON.stringify(state.items);

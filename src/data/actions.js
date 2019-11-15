@@ -30,9 +30,7 @@ const actions = {
                     // handle success
                     // console.log(response);
                     const data = response.data["111"].get_items['data'];
-                    dispatch('makeRows', data).then(rows => {
-                        commit('append_products', [...getters.productMatrix, ...rows]);
-                    });
+                    commit('append_products', [...getters.productMatrix, ...data]);
                     resolve(data.length===0);
                 })
                 .catch(error => reject());

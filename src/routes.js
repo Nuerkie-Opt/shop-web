@@ -12,7 +12,7 @@ import adminRoutes from './components/admin/routes.js';
 const routes = [
     { path:'', component: Shop, children: shopRoutes },
     { path:'/p/:user', component: Profile, children: profileRoutes },
-    { path:'/a/', component: Admin, children: adminRoutes },
+    { path:'/a', component: Admin, children: adminRoutes },
     { path:'*', component: Shop, children: shopRoutes }
 ];
 

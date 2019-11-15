@@ -1,3 +1,4 @@
+import axios from "axios";
 
 export const awaitObjectWithPromise = async (obj) => {
     for (let prop in obj) {
@@ -17,3 +18,47 @@ export const awaitObjectWithPromise = async (obj) => {
     return obj;
 }
 
+export const getAuthInfo = () => {
+
+    return {
+        user: JSON.parse(localStorage.getItem('user')),
+        seller: JSON.parse(localStorage.getItem('seller'))
+    }
+}
+
+export const isLoggedIn = async () => {
+    const is_logged_in = localStorage.getItem('isLoggedIn');
+
+    if (!is_logged_in) {
+        return false;
+    }
+    const user = getAuthInfo().user;
+    const payload = {
+        "111": {
+            auth: {},
+            "000": ["auth"]
+        },
+        "000": ["111"]
+    };
+    let status;
+    await axios.post("/action", payload, {
+        headers: {
+            Authorization: user.token,
+            'Account-ID': user.id
+        }
+        })
+        .then( (response) =>{
+            console.log(response);
+            if(response.data['111'].auth.status){
+                status = user;
+            }else{
+                status = false;
+            }
+        })
+        .catch( (error) =>{
+            console.log(error);
+            status = false;
+        });
+
+        return status;
+}
