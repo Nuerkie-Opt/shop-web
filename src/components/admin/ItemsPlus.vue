@@ -2,15 +2,29 @@
   <el-card>
     <el-row style="margin-bottom: 20px;">
       <el-col :span="12">
-        <el-button size="small" @click="addTab(editableTabsValue)" :disabled="mode === 'show'">Add Item Variants</el-button>
+        <el-button
+          size="small"
+          @click="addTab(editableTabsValue)"
+          :disabled="mode === 'show'"
+        >Add Item Variants</el-button>
       </el-col>
       <el-col :span="12">
-        <el-button size="small" type="primary" @click="submit()" :disabled="mode === 'show'">Complete and Submit</el-button>
+        <el-button
+          size="small"
+          type="primary"
+          @click="submit()"
+          :disabled="mode === 'show'"
+        >Complete and Submit</el-button>
       </el-col>
     </el-row>
-    <el-tabs v-model="editableTabsValue" type="card" @tab-remove="removeTab" v-if="mode === 'create'">
+    <el-tabs
+      v-model="editableTabsValue"
+      type="card"
+      @tab-remove="removeTab"
+      v-if="mode === 'create'"
+    >
       <el-tab-pane label="New Item Form" name="0">
-        <ItemForm ref="itemForm" :mode="mode"/>
+        <ItemForm ref="itemForm" :mode="mode" />
       </el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
@@ -19,7 +33,7 @@
         :name="item.name"
         closable
       >
-        <ItemPropertyForm ref="itemPropertyForm" :mode="mode"/>
+        <ItemPropertyForm ref="itemPropertyForm" :mode="mode" />
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -120,11 +134,17 @@ export default {
         })
         .then(response => {
           // handle success
-          console.log(response);
+          const resp = response.data["111"].upload_item;
+
           this.$notify.success({
-            title: "Success",
-            message: "Item Uploaded."
+            title: resp.status ? "Success" : "Error",
+            message: resp.msg
           });
+
+          if (resp.status) {
+            sessionStorage.removeItem("itemsD");
+            this.$router.push(`/a/item/view/${resp.data.item_id}`);
+          }
         })
         .catch(error => {
           // handle error
@@ -180,5 +200,5 @@ export default {
         .catch(_ => {});
     }
   }
-  };
+};
 </script>

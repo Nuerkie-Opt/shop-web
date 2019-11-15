@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     ...mapActions(["loadItemsD"]),
-    getOpt(i){
+    getOpt(i) {
       const opt = this.item.item.options[i];
       return opt;
     },
@@ -164,18 +164,24 @@ export default {
         },
         "000": ["111"]
       };
-      
+
       this.$actions
         .post("/action", payload, {
           headers: { Authorization: "a8cd3aa542c5b1c9f6f92d663e32bc0fe682238a" }
         })
         .then(response => {
           // handle success
-          console.log(response);
+          const resp = response.data["111"].upload_item;
+
           this.$notify.success({
-            title: "Success",
-            message: "Item Uploaded."
+            title: resp.status ? "Success" : "Error",
+            message: resp.msg
           });
+
+          if (resp.status) {
+            sessionStorage.removeItem('itemsD');
+            this.$router.push(`/a/item/view/${this.item.id}`)
+          }
         })
         .catch(error => {
           // handle error

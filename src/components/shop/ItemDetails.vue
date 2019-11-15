@@ -3,10 +3,10 @@
     <el-row :gutter="30" v-if="!loading">
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <el-row>
-          <ItemDetailImage :image="item.item.images[currentIndex].url" />
+          <ItemDetailImage :image="currentImage" />
         </el-row>
         <el-row style="margin-top:10px;margin-bottom:10px">
-          <ItemDetailThumbs :images="item.item.images" />
+          <ItemDetailThumbs :images="images" />
         </el-row>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
@@ -46,14 +46,30 @@ export default {
   },
   data() {
     return {
-      currentIndex: 0,
+      currentIndex: [0,0],
       item: {},
       constItem: {},
       loading:false,
+      properties:['default'],
+      imgs:[]
     };
   },
   computed: {
-    ...mapGetters(["itemsD"])
+    ...mapGetters(["itemsD"]),
+    photos(){
+      return [this.item.item.images, ...this.imgs]
+    },
+    images(){
+      // return this.item.item.images;
+
+      return this.properties.map((prop,i)=>{
+        return {'name':prop,'images':this.photos[i]};
+      });
+    },
+    currentImage(){
+      const images = this.images[this.currentIndex[0]].images;
+      return images[this.currentIndex[1]].url
+    }
   },
   methods: {
     ...mapActions(["append_order", "loadItemsD"]),
@@ -71,34 +87,35 @@ export default {
       let changes = {
         images: [],
         name: "",
-        price: 0
+        price: this.constItem.item.price
       };
-
+      let properties = [];
+      let photos = [];
       Object.values(val).forEach(value => {
         if (value) {
-          changes.images = [...changes.images, ...value.images];
+          // changes.images = [...changes.images, ...value.images];
+          photos.push(value.images);
           changes.price =
-            value.price > changes.price ? changes.price : value.price;
-          changes.name = `${changes.name}; ${value.name}`;
+            value.price >= changes.price ? value.price : changes.price;
+          changes.name = `${changes.name} #${value.name}`;
+          properties.push(value.name);
         }
       });
-
-      this.item.item.images = [
-        ...this.constItem.item.images,
-        ...changes.images
-      ];
-      this.item.item.price =
-        changes.price > this.item.item.price
-          ? changes.price
-          : this.item.item.price;
+      this.imgs = photos;
+      this.properties = ['default', ...properties];
+      // this.item.item.images = [
+      //   ...this.constItem.item.images,
+      //   ...changes.images
+      // ];
+      this.item.item.price = changes.price;
       this.item.item.name = `${this.constItem.item.name} ${changes.name}`;
     },
     load() {
       this.loading = true;
       if (this.itemsD) {
         if (this.itemsD.hasOwnProperty(this.$route.params.item)) {
-          this.item = this.itemsD[this.$route.params.item];
-          this.constItem = this.itemsD[this.$route.params.item];
+          this.item = JSON.parse(JSON.stringify(this.itemsD[this.$route.params.item]));
+          this.constItem = JSON.parse(JSON.stringify(this.itemsD[this.$route.params.item]));
           this.loading = false;
           return;
         }
@@ -110,8 +127,8 @@ export default {
         if(missing){
           this.$message.error('Item Does Not Exist 😕.')
         }
-        this.item = this.itemsD[this.$route.params.item];
-        this.constItem = this.itemsD[this.$route.params.item];
+        this.item = JSON.parse(JSON.stringify(this.itemsD[this.$route.params.item]));
+        this.constItem = JSON.parse(JSON.stringify(this.itemsD[this.$route.params.item]));
         this.loading = false
       });
     }
