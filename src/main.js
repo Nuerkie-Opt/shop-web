@@ -10,6 +10,7 @@ import data from './data';
 import routes from './routes.js';
 import eventBus from './eventBus.js';
 import locale from 'element-ui/lib/locale/lang/en'
+import { browserFingerPrint } from "./utils.js";
 
 Vue.use(ElementUI, { locale })
 Vue.use(Vuex);
@@ -23,6 +24,8 @@ const router = new VueRouter({
 });
 
 Vue.prototype.$eventBus = eventBus;
+
+Vue.prototype.$browser = async () => await browserFingerPrint();
 
 Vue.prototype.$actions = axios.create({
   baseURL: Vue.config.devtools ? 'http://localhost:8002' : 'http://localhost:8002',

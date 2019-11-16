@@ -1,4 +1,5 @@
 import axios from "axios";
+import Fingerprint2 from "fingerprintjs2";
 
 export const awaitObjectWithPromise = async (obj) => {
     for (let prop in obj) {
@@ -61,4 +62,18 @@ export const isLoggedIn = async () => {
         });
 
         return status;
+}
+
+export const browserFingerPrint = async () => {
+    let data;
+    let hash;
+    await Fingerprint2.getPromise().then(components => {
+        data = components;
+        hash = Fingerprint2.x64hash128(components.map(component => component.value).join(""), 31);
+    });
+
+    return {
+        deviceData:data,
+        deviceHash:hash
+    }
 }

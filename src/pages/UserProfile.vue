@@ -3,22 +3,35 @@
     <el-header>
       <el-row>
         <el-menu :default-active="$route.path" mode="horizontal" router>
-          <el-menu-item :index="`/p/${user}/`">
+          <el-menu-item :index="`/profile`">
             <i class="el-icon-takeaway-box"></i>
             Products
             <el-badge :value="200" :max="99" class="item"></el-badge>
           </el-menu-item>
-          <el-menu-item :index="`/p/${user}/combos`">
+          <el-menu-item :index="`/profile/combos`">
             <i class="el-icon-loading"></i>
             Combos
           </el-menu-item>
-          <el-menu-item :index="`/p/${user}/posts`" class="hidden-xs-only">
+          <el-menu-item :index="`/profile/posts`" class="hidden-xs-only">
             <i class="el-icon-postcard"></i>
             Posts
           </el-menu-item>
-          <el-menu-item :index="`/p/${user}/activity`" class="hidden-xs-only">
+          <el-menu-item :index="`/profile/activity`" class="hidden-xs-only">
             <i class="el-icon-magic-stick"></i>
             Activities
+          </el-menu-item>
+          <el-menu-item :index="`/profile/messages`" class="hidden-xs-only">
+            <i class="el-icon-chat-square"></i>
+            Messages
+            <el-badge is-dot class="item"></el-badge>
+          </el-menu-item>
+          <el-menu-item :index="`/profile/settings`" class="hidden-xs-only">
+            <i class="el-icon-setting"></i>
+            Settings
+          </el-menu-item>
+          <el-menu-item :index="`/a/`" class="hidden-xs-only">
+            <i class="el-icon-unlock"></i>
+            Admin
           </el-menu-item>
           <el-menu-item index="/" class="hidden-xs-only">
             <i class="el-icon-shopping-cart-1"></i>
@@ -45,6 +58,7 @@
 </template>
 
 <script>
+import { isLoggedIn } from "../utils.js";
 import ProfileDetails from "../components/profile/elements/ProfileDetails.vue";
 import { mapState, mapMutations } from "vuex";
 export default {
@@ -89,8 +103,16 @@ export default {
         });
     }
   },
-  created() {
-    this.load();
+  async beforeRouteEnter(to, from, next) {
+    const logged_in = await isLoggedIn();
+
+    if (logged_in) {
+      next(vm => {
+        vm.load();
+      });
+    } else {
+      next(vm=>vm.$router.push('/auth/login'));
+    }
   }
 };
 </script>

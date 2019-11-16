@@ -5,7 +5,30 @@ import Products from "./Products.vue";
 import Settings from "./Settings.vue";
 import Messages from "./Messages.vue";
 
-const profileRoutes = [
+export const profileRoutes = [
+    {
+        path: '',
+        component: Products
+    },
+    {
+        path: 'combos',
+        component: Combos
+    },
+    {
+        path: 'posts',
+        component: Posts
+    },
+    {
+        path: 'activity', // likes, follows, followers, reviews, orders
+        component: Activity
+    },
+    {
+        path: '*',
+        component: Products
+    },
+];
+
+export const userProfileRoutes = [
     {
         path: '',
         component: Products
@@ -35,5 +58,3 @@ const profileRoutes = [
         component: Products
     },
 ];
-
-export default profileRoutes;
