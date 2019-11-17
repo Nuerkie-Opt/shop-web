@@ -46,7 +46,7 @@
 
 <script>
 import ProfileDetails from "../components/profile/elements/ProfileDetails.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     ProfileDetails
@@ -59,7 +59,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["profile"])
+    ...mapGetters(["profile"])
   },
   methods: {
     ...mapMutations(["set_profile"]),

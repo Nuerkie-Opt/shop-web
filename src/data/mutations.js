@@ -4,7 +4,8 @@ const mutations = {
         sessionStorage.products = JSON.stringify(state.products);
     },
     set_profile(state, profile){
-        state.profile = profile;
+        sessionStorage.profile = JSON.stringify(profile);
+        state.userprofile = profile;
     },
     append_items(state, items){
         state.items = items;

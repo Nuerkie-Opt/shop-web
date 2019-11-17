@@ -2,22 +2,23 @@
   <div>
     <el-tabs :stretch="true">
       <el-tab-pane label="Account">
-        <AccountInfo />
+        <AccountInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
       <el-tab-pane label="Profile Info">
-        <ProfileInfo />
+        <ProfileInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
       <el-tab-pane label="Social Media">
-        <SocialMedia />
+        <SocialMedia :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
       <el-tab-pane label="Personal Info">
-        <PersonalInfo />
+        <PersonalInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
 import PersonalInfo from "./elements/PersonalInfo.vue";
 import ProfileInfo from "./elements/ProfileInfo.vue";
 import AccountInfo from "./elements/AccountInfo.vue";
@@ -30,8 +31,12 @@ export default {
     AccountInfo,
     SocialMedia
   },
+  computed: {
+    ...mapState(["profile"]),
+    ...mapGetters(["hasProfile","isSeller"])
+  },
   methods: {
-    saveProfile(params) {
+    async saveProfile(params) {
       const payload = {
         "111": {
           set_info: params,
@@ -39,19 +44,31 @@ export default {
         },
         "000": ["111"]
       };
-      console.log(payload);
-
+      
+      const fp = await this.$browser();
       this.$actions
         .post("/action", payload, {
-          headers: { Authorization: "a8cd3aa542c5b1c9f6f92d663e32bc0fe682238a" }
+          headers: { 
+            Authorization: this.profile.token, 
+            'Account-ID':this.profile.user.email, 
+            'Device-ID': fp.deviceHash
+            }
         })
         .then(response => {
           // handle success
-          console.log(response);
-          this.$notify.success({
+          const resp = response.data['111'].set_info;
+          if(resp.status){
+            this.$notify.success({
             title: "Success",
-            message: "Update Success."
+            message: resp.msg
           });
+          }else{
+              this.$notify.error({
+            title: "Error",
+            message: resp.msg
+          });
+          }
+          
         })
         .catch(error => {
           // handle error

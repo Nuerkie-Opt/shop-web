@@ -7,7 +7,7 @@ let state = {
     cart: {},
     delivery: {},
     itemsD: {},
-    profile: {}
+    userprofile: {}
 };
 
 export default state;

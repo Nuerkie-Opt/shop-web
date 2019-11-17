@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card v-if="hasProfile">
     <el-form :model="socialInfo" ref="socialInfo" label-position="top">
       <el-form-item label="Facebook Handle" prop="facebook" required>
         <el-input v-model="socialInfo.facebook"></el-input>
@@ -16,6 +16,7 @@
 </template>
 <script>
 export default {
+  props:["profile","hasProfile","isSeller"],
   data() {
     return {
       socialInfo: {
@@ -42,7 +43,18 @@ export default {
         return false;
       }
     }
-  }
+  },
+  created() {
+      if (this.hasProfile) {
+        if (this.profile.user.social) {
+          this.personalInfo = {
+            facebook: this.profile.user.social.facebook,
+            instagram: this.profile.user.social.instagram,
+            twitter: this.profile.user.social.twitter       
+          };
+        }
+      }
+    }
 };
 </script>
 

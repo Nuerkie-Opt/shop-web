@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card v-if="hasProfile">
     <el-form :model="profileInfo" ref="profileInfo" label-position="top">
       <el-form-item label="Title" prop="title" required>
         <el-input v-model="profileInfo.title" placeholder="Your Brand Name."></el-input>
@@ -11,9 +11,9 @@
         <el-input type="textarea" placeholder="Make it informative." v-model="profileInfo.details"></el-input>
       </el-form-item>
       <p style="color:#a7a7a7">Upload 5 images that sell your brand.</p>
-      <ImageUploader ref="brandUploader" />
+      <ImageUploader ref="brandUploader" mode="edit" :dat="brandImages"/>
       <p style="color:#a7a7a7">Upload your logo.</p>
-      <ImageUploader ref="logoUploader" :lim="1" />
+      <ImageUploader ref="logoUploader" :lim="1" mode="edit" :dat="logoImage" />
     </el-form>
     <el-button type="primary" @click="save" size="small" style="width:100%">Save</el-button>
   </el-card>
@@ -26,6 +26,7 @@ import countries from "../../../data/countries.js";
 import dialCode from "../../../data/dialCode.js";
 
 export default {
+  props:["profile","hasProfile","isSeller"],
   components: {
     ImageUploader,
     MoneySign
@@ -45,6 +46,26 @@ export default {
     },
     dialCode() {
       return dialCode;
+    },
+    brandImages(){
+      if (this.hasProfile) {
+        if (this.profile.user.profile) {
+          if (this.profile.user.profile.brand) {
+            return this.profile.user.profile.brand;
+          }
+        }
+      }
+      return [];
+    },
+    logoImage(){
+      if (this.hasProfile) {
+        if (this.profile.user.profile) {
+          if (this.profile.user.profile.logo) {
+            return this.profile.user.profile.logo;
+          }
+        }
+      }
+      return [];
     }
   },
   methods: {
@@ -76,7 +97,18 @@ export default {
         return false;
       }
     }
-  }
+  },  
+  created() {
+      if (this.hasProfile) {
+        if (this.profile.user.profile) {
+          this.profileInfo = {
+            title: this.profile.user.profile,
+            caption: this.profile.user.caption,
+            details: this.profile.user.details
+          };
+        }
+      }
+    }
 };
 </script>
 

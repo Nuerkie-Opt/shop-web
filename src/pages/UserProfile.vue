@@ -3,7 +3,7 @@
     <el-header>
       <el-row>
         <el-menu :default-active="$route.path" mode="horizontal" router>
-          <el-menu-item :index="`/profile`">
+          <el-menu-item :index="`/profile`" v-if="hasProfile&&isSeller">
             <i class="el-icon-takeaway-box"></i>
             Products
             <el-badge :value="200" :max="99" class="item"></el-badge>
@@ -60,7 +60,7 @@
 <script>
 import { isLoggedIn } from "../utils.js";
 import ProfileDetails from "../components/profile/elements/ProfileDetails.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 export default {
   components: {
     ProfileDetails
@@ -73,45 +73,26 @@ export default {
     };
   },
   computed: {
-    ...mapState(["profile"])
+    ...mapGetters(["profile","hasProfile","isSeller"])
   },
   methods: {
-    ...mapMutations(["set_profile"]),
-    load() {
-      this.loading = true;
-      const payload = {
-        "111": {
-          get_user: { id: this.$route.params.user },
-          "000": ["get_user"]
-        },
-        "000": ["111"]
-      };
-      this.$actions
-        .post("/action", payload)
-        .then(response => {
-          console.log(response);
-          const resp = response.data["111"].get_user;
-          if (resp.status) {
-            this.set_profile(resp.data);
-            this.loading = false;
-          } else {
-            console.log(resp);
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+    ...mapMutations(["set_profile"])
   },
   async beforeRouteEnter(to, from, next) {
-    const logged_in = await isLoggedIn();
+    const user = await isLoggedIn();
 
-    if (logged_in) {
+    if (user) {
       next(vm => {
-        vm.load();
+        vm.set_profile(user);
+        if (user.user.level !== 'seller') {
+          if(vm.$route.path === '/profile'){
+            vm.$router.push('/profile/combos');
+          }
+          
+        }
       });
     } else {
-      next(vm=>vm.$router.push('/auth/login'));
+      next(vm=>vm.$router.push('/auth/login?next=/profile'));
     }
   }
 };

@@ -62,8 +62,8 @@ export default {
           login: {
             email: this.formModel.email.trim(),
             password: this.formModel.pass.trim(),
-            device_hash: fp.deviceData,
-            device_data: fp.deviceHash
+            device_hash: fp.deviceHash,
+            device_data: fp.deviceData
           },
           "000": ["login"]
         },
@@ -75,14 +75,18 @@ export default {
         .then(response => {
           // console.log(response);
           const resp = response.data["111"].login;
-          this.$notify.error(resp.msg);
+
           if (resp.status) {
+            this.$notify.success(resp.msg);
             localStorage.user = JSON.stringify(resp.data);
-            if (this.$route.params.next) {
-              this.$router.push(this.$route.params.next);
+            localStorage.isLoggedIn = true;
+            if (this.$route.query.next) {
+              this.$router.push(this.$route.query.next);
             } else {
               this.$router.push("/");
             }
+          } else {
+            this.$notify.error(resp.msg);
           }
         })
         .catch(error => {

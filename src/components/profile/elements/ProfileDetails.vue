@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <JumboImage :image="profile.info.profile.logo[0].url" scale="g" :prev="true"/>
+  <div v-if="hasProfile&&isSeller">
+    <JumboImage :image="profile.user.info.profile.logo[0].url" scale="g" :prev="true"/>
     <h2>{{ title }}</h2>
     <p style="color:#4d4d4d;font-size:18px">{{ cap }}</p>
     <p style="color:#313131;font-size:16px">{{ desc }}</p>
@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["profile"])
+    ...mapState(["profile","hasProfile","isSeller"])
   }
 };
 </script>

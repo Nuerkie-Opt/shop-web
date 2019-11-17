@@ -1,5 +1,8 @@
+import Vue from "vue";
 import axios from "axios";
 import Fingerprint2 from "fingerprintjs2";
+
+export const baseURL = Vue.config.devtools ? 'http://localhost:8002' : 'http://localhost:8002';
 
 export const awaitObjectWithPromise = async (obj) => {
     for (let prop in obj) {
@@ -42,14 +45,16 @@ export const isLoggedIn = async () => {
         "000": ["111"]
     };
     let status;
-    await axios.post("/action", payload, {
+    const fp = await browserFingerPrint();
+    await axios.post(`${baseURL}/action`, payload, {
         headers: {
             Authorization: user.token,
-            'Account-ID': user.id
+            'Account-ID': user.user.email,
+            'Device-ID': fp.deviceHash
         }
         })
         .then( (response) =>{
-            console.log(response);
+            
             if(response.data['111'].auth.status){
                 status = user;
             }else{

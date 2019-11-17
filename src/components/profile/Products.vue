@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <JumboCarousel :images="profile.info.profile.brand" style="margin-bottom:20px" />
+  <div v-if="hasProfile&&isSeller">
+    <JumboCarousel :images="profile.user.info.profile.brand" style="margin-bottom:20px" />
     <ItemRow :rowData="items" :row="3" />
     <el-button type="primary" v-if="!finished" @click="load">Load More.</el-button>
     <div style="height:200px" v-loading="loading"></div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import ItemRow from "../shop/elements/ItemRow.vue";
 import JumboCarousel from "./elements/JumboCarousel.vue";
 export default {
@@ -26,7 +26,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["profile"])
+    ...mapState(["profile"]),
+    ...mapGetters(["hasProfile","isSeller"])
   },
   methods: {
     load() {
@@ -37,7 +38,7 @@ export default {
             page: this.page,
             limit: this.limit,
             fetch: true,
-            seller: this.profile.id
+            seller: this.profile.user.id
           },
           "000": ["get_items"]
         },
@@ -68,7 +69,10 @@ export default {
     }
   },
   created() {
-    this.load();
+    if (this.isSeller) {
+        this.load();
+    }
+    
   }
 };
 </script>

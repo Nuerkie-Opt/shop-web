@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card v-if="hasProfile">
     <el-form :model="personalInfo" :rules="rules" ref="personalInfo" label-position="top">
       <el-row :gutter="10">
         <el-col :xs="24" :sm="12">
@@ -71,19 +71,20 @@ import countries from "../../../data/countries.js";
 import dialCode from "../../../data/dialCode.js";
 
 export default {
+  props: ["profile", "hasProfile", "isSeller"],
   components: {
     MoneySign
   },
   data() {
     return {
       personalInfo: {
-        name: "sbk",
-        address: "sbk",
-        phone: "553339728",
+        name: "",
+        address: "",
+        phone: "",
         birth: "",
-        country: ["Ghana", "Ashanti"],
-        city: "Kumasi",
-        code: "+233"
+        country: [],
+        city: "",
+        code: ""
       },
       rules: {
         name: [
@@ -118,7 +119,7 @@ export default {
     save() {
       let isValid;
       this.$refs.personalInfo.validate(valid => (isValid = valid));
-      if(!(this.personalInfo.phone && this.personalInfo.code)){
+      if (!(this.personalInfo.phone && this.personalInfo.code)) {
         const error = "You need to provide both phone number and country code.";
         this.$notify.error({
           title: "Error",
@@ -137,6 +138,21 @@ export default {
           message: error
         });
         return false;
+      }
+    },
+    created() {
+      if (this.hasProfile) {
+        if (this.profile.user.personal) {
+          this.personalInfo = {
+            name: this.profile.user.personal.name,
+            address: this.profile.user.personal.address,
+            phone: this.profile.user.personal.phone,
+            birth: this.profile.user.personal.birth,
+            country: this.profile.user.personal.country,
+            city: this.profile.user.personal.city,
+            code: this.profile.user.personal.code
+          };
+        }
       }
     }
   }
