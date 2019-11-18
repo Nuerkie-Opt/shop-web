@@ -68,12 +68,12 @@ const getters = {
 
         return false;
     },
-    profile(state){
-        if(Object.keys(state.userprofile).length !== 0){
+    profile(state) {
+        if (Object.keys(state.userprofile).length !== 0) {
             return state.userprofile
         }
 
-        if(sessionStorage.profile){
+        if (sessionStorage.profile) {
             return JSON.parse(sessionStorage.profile)
         }
 
@@ -84,6 +84,15 @@ const getters = {
     },
     isSeller(state, getters) {
         return getters.profile.user.level === 'seller';
+    },
+    loggedIn(state) {
+        const is_logged_in = localStorage.getItem('isLoggedIn');
+        let logged_in = true;
+        if (!is_logged_in) {
+            logged_in = false;
+        }
+            return state.isLoggedIn||logged_in;
+
     }
 };
 

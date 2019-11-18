@@ -139,20 +139,20 @@ export default {
         });
         return false;
       }
-    },
-    created() {
-      if (this.hasProfile) {
-        if (this.profile.user.personal) {
-          this.personalInfo = {
-            name: this.profile.user.personal.name,
-            address: this.profile.user.personal.address,
-            phone: this.profile.user.personal.phone,
-            birth: this.profile.user.personal.birth,
-            country: this.profile.user.personal.country,
-            city: this.profile.user.personal.city,
-            code: this.profile.user.personal.code
-          };
-        }
+    }
+  },
+  created() {
+    if (this.hasProfile) {
+      if (this.profile.user.info.personal) {
+        this.personalInfo = {
+          name: this.profile.user.info.personal.name,
+          address: this.profile.user.info.personal.address,
+          phone: this.profile.user.info.personal.phone,
+          birth: this.profile.user.info.personal.birth,
+          country: this.profile.user.info.personal.country,
+          city: this.profile.user.info.personal.city,
+          code: this.profile.user.info.personal.code
+        };
       }
     }
   }

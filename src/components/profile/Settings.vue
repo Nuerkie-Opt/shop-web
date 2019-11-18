@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import PersonalInfo from "./elements/PersonalInfo.vue";
 import ProfileInfo from "./elements/ProfileInfo.vue";
 import AccountInfo from "./elements/AccountInfo.vue";
@@ -32,8 +32,7 @@ export default {
     SocialMedia
   },
   computed: {
-    ...mapState(["profile"]),
-    ...mapGetters(["hasProfile","isSeller"])
+    ...mapGetters(["profile","hasProfile","isSeller"])
   },
   methods: {
     async saveProfile(params) {

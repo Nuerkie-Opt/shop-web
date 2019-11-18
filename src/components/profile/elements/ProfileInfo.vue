@@ -10,8 +10,8 @@
       <el-form-item label="Description" prop="details" required>
         <el-input type="textarea" placeholder="Make it informative." v-model="profileInfo.details"></el-input>
       </el-form-item>
-      <p style="color:#a7a7a7">Upload 5 images that sell your brand.</p>
-      <ImageUploader ref="brandUploader" mode="edit" :dat="brandImages"/>
+      <p style="color:#a7a7a7" v-if="isSeller">Upload 5 images that sell your brand.</p>
+      <ImageUploader ref="brandUploader" mode="edit" :dat="brandImages" v-if="isSeller"/>
       <p style="color:#a7a7a7">Upload your logo.</p>
       <ImageUploader ref="logoUploader" :lim="1" mode="edit" :dat="logoImage" />
     </el-form>
@@ -49,9 +49,9 @@ export default {
     },
     brandImages(){
       if (this.hasProfile) {
-        if (this.profile.user.profile) {
-          if (this.profile.user.profile.brand) {
-            return this.profile.user.profile.brand;
+        if (this.profile.user.info.profile) {
+          if (this.profile.user.info.profile.brand) {
+            return this.profile.user.info.profile.brand;
           }
         }
       }
@@ -59,9 +59,9 @@ export default {
     },
     logoImage(){
       if (this.hasProfile) {
-        if (this.profile.user.profile) {
-          if (this.profile.user.profile.logo) {
-            return this.profile.user.profile.logo;
+        if (this.profile.user.info.profile) {
+          if (this.profile.user.info.profile.logo) {
+            return this.profile.user.info.profile.logo;
           }
         }
       }
@@ -100,11 +100,11 @@ export default {
   },  
   created() {
       if (this.hasProfile) {
-        if (this.profile.user.profile) {
+        if (this.profile.user.info.profile) {
           this.profileInfo = {
-            title: this.profile.user.profile,
-            caption: this.profile.user.caption,
-            details: this.profile.user.details
+            title: this.profile.user.info.profile.title,
+            caption: this.profile.user.info.profile.caption,
+            details: this.profile.user.info.profile.details
           };
         }
       }

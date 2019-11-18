@@ -46,11 +46,11 @@ export default {
   },
   created() {
       if (this.hasProfile) {
-        if (this.profile.user.social) {
-          this.personalInfo = {
-            facebook: this.profile.user.social.facebook,
-            instagram: this.profile.user.social.instagram,
-            twitter: this.profile.user.social.twitter       
+        if (this.profile.user.info.social) {
+          this.socialInfo = {
+            facebook: this.profile.user.info.social.facebook,
+            instagram: this.profile.user.info.social.instagram,
+            twitter: this.profile.user.info.social.twitter       
           };
         }
       }

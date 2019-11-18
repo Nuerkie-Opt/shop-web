@@ -3,10 +3,10 @@
     <el-header>
       <el-row>
         <el-menu :default-active="$route.path" mode="horizontal" router>
-          <el-menu-item :index="`/p/${user}/`">
+          <el-menu-item :index="`/p/${user}/`" v-if="hasProfile&&isSeller">
             <i class="el-icon-takeaway-box"></i>
             Products
-            <el-badge :value="200" :max="99" class="item"></el-badge>
+            <el-badge :value="profile.user.products" :max="99" class="item"></el-badge>
           </el-menu-item>
           <el-menu-item :index="`/p/${user}/combos`">
             <i class="el-icon-loading"></i>
@@ -38,9 +38,9 @@
         <el-col :sm="6" class="hidden-xs-only">
           <ProfileDetails />
         </el-col>
+        <div style="height:200px" v-loading="loading"></div>
       </el-row>
     </el-main>
-    <div style="height:200px" v-loading="loading"></div>
   </el-container>
 </template>
 
@@ -59,7 +59,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["profile"])
+    ...mapGetters(["profile","hasProfile","isSeller"])
   },
   methods: {
     ...mapMutations(["set_profile"]),
@@ -75,17 +75,20 @@ export default {
       this.$actions
         .post("/action", payload)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           const resp = response.data["111"].get_user;
           if (resp.status) {
             this.set_profile(resp.data);
             this.loading = false;
+            if (!this.isSeller) {
+                this.$router.push(`/p/${this.user}/combos`).catch(err=>{});
+            }
           } else {
-            console.log(resp);
+            // console.log(resp);
           }
         })
         .catch(error => {
-          console.log(error);
+          // console.log(error);
         });
     }
   },

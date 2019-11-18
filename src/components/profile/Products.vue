@@ -1,8 +1,8 @@
 <template>
   <div v-if="hasProfile&&isSeller">
-    <JumboCarousel :images="profile.user.info.profile.brand" style="margin-bottom:20px" />
+    <JumboCarousel :images="brandImages" style="margin-bottom:20px" />
     <ItemRow :rowData="items" :row="3" />
-    <el-button type="primary" v-if="!finished" @click="load">Load More.</el-button>
+    <el-button :type="btn" @click="more">{{btnTxt}}</el-button>
     <div style="height:200px" v-loading="loading"></div>
   </div>
 </template>
@@ -19,17 +19,37 @@ export default {
   data() {
     return {
       page: 1,
-      limit: 8,
+      limit: 9,
       items: [],
       loading: false,
-      finished: false
+      finished: false,
+      btn:'primary',
+      btnTxt:'Load More.'
     };
   },
   computed: {
-    ...mapState(["profile"]),
-    ...mapGetters(["hasProfile","isSeller"])
+    ...mapGetters(["profile","hasProfile","isSeller"]),
+    brandImages(){
+      if (this.hasProfile) {
+        if (this.profile.user.info.profile) {
+          if (this.profile.user.info.profile.brand) {
+            return this.profile.user.info.profile.brand;
+          }
+        }
+      }
+      return [];
+    }
   },
   methods: {
+    more(){
+      if(this.finished){
+        this.btn = 'primary';
+        this.btnTxt = 'Load More.';
+        this.finished = false;
+        this.page = 1;
+      }
+      this.load();
+    },
     load() {
       this.loading = true;
       const payload = {
@@ -55,6 +75,8 @@ export default {
               this.page++;
             }else{
               this.finished = true;
+              this.btn = 'info';
+              this.btnTxt = 'Refresh.';
               this.$message.info("That's all they've got 😁");
             }
             this.loading = false;

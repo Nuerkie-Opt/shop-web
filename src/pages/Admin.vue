@@ -8,7 +8,7 @@
       <el-header>
         <HeaderBar />
       </el-header>
-      <el-main>
+      <el-main style="margin-top:20px">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { Notification } from 'element-ui';
 import { isLoggedIn } from "../utils.js";
 import SideBar from "../components/admin/elements/SideBar.vue";
 import HeaderBar from "../components/admin/elements/HeaderBar.vue";
@@ -28,16 +29,19 @@ export default {
   data() {
     return {
       hh: window.innerHeight,
-      loggedIn: false
     };
   },
   async beforeRouteEnter(to, from, next) {
-    const logged_in = await isLoggedIn();
+    const user = await isLoggedIn();
 
-    if (logged_in) {
-      next(vm => {
-        vm.loggedIn = logged_in;
-      });
+    if (user) {
+      if(user.user.level === 'customer'){
+        Notification.error('Unauthorized Access.')
+        next(vm=>vm.$router.push('/'));
+      }else{
+        next();
+      }
+      
     } else {
       next(vm=>vm.$router.push('/auth/login'));
     }

@@ -16,27 +16,42 @@
           </el-col>
           <el-col>
             <el-tooltip content="Cart" placement="bottom" effect="light">
-            <el-badge :value="cartCount" :max="99" class="counter">
-              <el-button type="danger" size="small" @click="$router.push('/cart')" icon="el-icon-goods" plain circle></el-button>
-            </el-badge>
+              <el-badge :value="cartCount" :max="99" class="counter">
+                <el-button
+                  type="danger"
+                  size="small"
+                  @click="$router.push('/cart')"
+                  icon="el-icon-goods"
+                  plain
+                  circle
+                ></el-button>
+              </el-badge>
             </el-tooltip>
           </el-col>
           <el-col>
-            <el-tooltip content="Account" placement="bottom" effect="light">
-            <el-button type="primary" icon="el-icon-user" size="small" @click="$router.push({ path:'/p/0/'})" plain circle></el-button>
-            </el-tooltip>
+            <el-dropdown>
+              <el-button type="primary" icon="el-icon-user" size="small" plain circle></el-button>
+              <el-dropdown-menu slot="dropdown" v-if="loggedIn">
+                <el-dropdown-item icon="el-icon-cold-drink" @click.native="$router.push('/profile')">Profile</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-refrigerator" @click.native="logout">Logout</el-dropdown-item>
+              </el-dropdown-menu>
+              <el-dropdown-menu slot="dropdown" v-else>
+                <el-dropdown-item icon="el-icon-unlock" @click.native="$router.push('/auth/login')">Login</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-mouse" @click.native="$router.push('/auth/register')">Register</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </el-col>
         </el-row>
       </el-col>
     </el-row>
     <el-divider></el-divider>
     <el-row>
-        <MenuBar/>
+      <MenuBar />
     </el-row>
   </el-card>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import SearchBar from "./elements/SearchBar.vue";
 import MenuBar from "./elements/MenuBar.vue";
 
@@ -47,15 +62,36 @@ export default {
   },
   data() {
     return {
-      circleUrl:
-        "/images/4.jpg"
+      circleUrl: "/images/4.jpg"
     };
   },
   computed: {
-    ...mapGetters(['cartCount'])
+    ...mapGetters(["cartCount", "loggedIn"])
   },
-  beforeMount(){
-    if(!this.cartCount){
+  methods: {
+    ...mapMutations(['set_login']),
+    logout() {
+      this.$confirm(
+        "Are you sure you want to logout?",
+        {
+          confirmButtonText: "Continue.",
+          cancelButtonText: "Abort.",
+          type: "warning",
+          center: true
+        }
+        )
+        .then(_ => {
+          localStorage.clear();
+          this.set_login(false);
+          window.location.reload();
+        })
+        .catch(_ => {
+          this.$message.warning('cancelled.')
+        });
+    }
+  },
+  beforeMount() {
+    if (!this.cartCount) {
       // try to load cart from server
     }
   }
@@ -69,7 +105,7 @@ export default {
 .el-card__body {
   padding: 10px;
 }
-.el-divider--horizontal  {
+.el-divider--horizontal {
   margin: 10px 0;
 }
 .extra-btn {

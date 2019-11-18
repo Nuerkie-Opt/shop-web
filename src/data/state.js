@@ -7,7 +7,8 @@ let state = {
     cart: {},
     delivery: {},
     itemsD: {},
-    userprofile: {}
+    userprofile: {},
+    isLoggedIn: false
 };
 
 export default state;

@@ -39,7 +39,7 @@
         <i class="el-icon-data-line"></i>Predictive
       </el-menu-item>
     </el-submenu>
-    <el-menu-item index="/p/0/settings">
+    <el-menu-item index="/profile/settings">
       <template slot="title">
         <i class="el-icon-s-tools"></i>Settings
       </template>

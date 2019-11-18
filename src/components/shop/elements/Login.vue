@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -48,6 +49,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['set_login']),
     async submit() {
       const loading = this.$loading({
         lock: true,
@@ -79,7 +81,7 @@ export default {
           if (resp.status) {
             this.$notify.success(resp.msg);
             localStorage.user = JSON.stringify(resp.data);
-            localStorage.isLoggedIn = true;
+            this.set_login(true);
             if (this.$route.query.next) {
               this.$router.push(this.$route.query.next);
             } else {

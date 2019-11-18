@@ -4,8 +4,8 @@ const mutations = {
         sessionStorage.products = JSON.stringify(state.products);
     },
     set_profile(state, profile){
-        sessionStorage.profile = JSON.stringify(profile);
         state.userprofile = profile;
+        sessionStorage.profile = JSON.stringify(profile);
     },
     append_items(state, items){
         state.items = items;
@@ -36,6 +36,13 @@ const mutations = {
         state.itemsD = itemsD;
 
         sessionStorage.itemsD = JSON.stringify(itemsD);
+    },
+    set_login(state, status){
+        state.isLoggedIn = status;
+        if(status){
+            localStorage.isLoggedIn = status;
+        }
+        
     }
 };
 

@@ -6,7 +6,7 @@
           <el-menu-item :index="`/profile`" v-if="hasProfile&&isSeller">
             <i class="el-icon-takeaway-box"></i>
             Products
-            <el-badge :value="200" :max="99" class="item"></el-badge>
+            <el-badge :value="profile.user.products" :max="99" class="item"></el-badge>
           </el-menu-item>
           <el-menu-item :index="`/profile/combos`">
             <i class="el-icon-loading"></i>
@@ -23,13 +23,13 @@
           <el-menu-item :index="`/profile/messages`" class="hidden-xs-only">
             <i class="el-icon-chat-square"></i>
             Messages
-            <el-badge is-dot class="item"></el-badge>
+            <el-badge is-dot class="item" v-if="profile.user.notes>0"></el-badge>
           </el-menu-item>
           <el-menu-item :index="`/profile/settings`" class="hidden-xs-only">
             <i class="el-icon-setting"></i>
             Settings
           </el-menu-item>
-          <el-menu-item :index="`/a/`" class="hidden-xs-only">
+          <el-menu-item :index="`/a/`" class="hidden-xs-only" v-if="hasProfile&&isSeller">
             <i class="el-icon-unlock"></i>
             Admin
           </el-menu-item>
@@ -43,17 +43,18 @@
         </el-menu>
       </el-row>
     </el-header>
-    <el-main v-if="!loading">
+    <el-main v-if="!loading" style="margin-top:90px">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="18">
           <router-view></router-view>
         </el-col>
         <el-col :sm="6" class="hidden-xs-only">
-          <ProfileDetails />
+          <ProfileDetails :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
         </el-col>
+         <div style="height:200px" v-loading="loading"></div>
       </el-row>
     </el-main>
-    <div style="height:200px" v-loading="loading"></div>
+   
   </el-container>
 </template>
 
@@ -76,25 +77,56 @@ export default {
     ...mapGetters(["profile","hasProfile","isSeller"])
   },
   methods: {
-    ...mapMutations(["set_profile"])
+    ...mapMutations(["set_profile"]),
+    load(uid) {
+      this.loading = true;
+      const payload = {
+        "111": {
+          get_user: { id: uid },
+          "000": ["get_user"]
+        },
+        "000": ["111"]
+      };
+      this.$actions
+        .post("/action", payload)
+        .then(response => {
+          // console.log(response);
+          const resp = response.data["111"].get_user;
+          if (resp.status) {
+            this.set_profile(resp.data);
+            this.loading = false;
+            if (!this.isSeller) {
+                this.$router.push(`/profile/combos`).catch(err=>{});
+            }
+          } else {
+            // console.log(resp);
+          }
+        })
+        .catch(error => {
+          // console.log(error);
+        });
+    }
   },
   async beforeRouteEnter(to, from, next) {
     const user = await isLoggedIn();
 
     if (user) {
-      next(vm => {
-        vm.set_profile(user);
-        if (user.user.level !== 'seller') {
-          if(vm.$route.path === '/profile'){
-            vm.$router.push('/profile/combos');
-          }
-          
-        }
-      });
+      next();
     } else {
       next(vm=>vm.$router.push('/auth/login?next=/profile'));
     }
-  }
+  },
+  created() {
+    let user = localStorage.getItem('user');
+
+    if(user){
+      user = JSON.parse(user);
+      this.load(user.user.id);
+    }else{
+      this.$router.push('/auth/login?next=/profile')
+    }
+
+  },
 };
 </script>
 
