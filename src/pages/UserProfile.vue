@@ -30,7 +30,7 @@
             Settings
           </el-menu-item>
           <el-menu-item :index="`/a/`" class="hidden-xs-only" v-if="hasProfile&&isSeller">
-            <i class="el-icon-unlock"></i>
+            <i class="el-icon-set-up"></i>
             Admin
           </el-menu-item>
           <el-menu-item index="/" class="hidden-xs-only">
@@ -43,7 +43,7 @@
         </el-menu>
       </el-row>
     </el-header>
-    <el-main v-if="!loading" style="margin-top:90px">
+    <el-main v-if="!loading" style="margin-top:60px">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="18">
           <router-view></router-view>
@@ -74,11 +74,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["profile","hasProfile","isSeller"])
+    ...mapGetters(["profile","hasProfile","isSeller"]),
   },
   methods: {
     ...mapMutations(["set_profile"]),
-    load(uid) {
+    load(uid,utkn) {
       this.loading = true;
       const payload = {
         "111": {
@@ -93,7 +93,9 @@ export default {
           // console.log(response);
           const resp = response.data["111"].get_user;
           if (resp.status) {
-            this.set_profile(resp.data);
+            let profile = resp.data;
+            profile.token = utkn;
+            this.set_profile(profile);
             this.loading = false;
             if (!this.isSeller) {
                 this.$router.push(`/profile/combos`).catch(err=>{});
@@ -121,12 +123,12 @@ export default {
 
     if(user){
       user = JSON.parse(user);
-      this.load(user.user.id);
+      this.load(user.user.id,user.token);
     }else{
       this.$router.push('/auth/login?next=/profile')
     }
 
-  },
+  }
 };
 </script>
 

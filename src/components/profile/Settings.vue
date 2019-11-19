@@ -61,6 +61,7 @@ export default {
             title: "Success",
             message: resp.msg
           });
+          window.location.reload();
           }else{
               this.$notify.error({
             title: "Error",

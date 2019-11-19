@@ -1,5 +1,5 @@
 <template>
-  <el-container :style="{height: hh+'px',border: '1px solid #eee'}">
+  <el-container>
     <el-header>
       <el-row>
         <el-menu :default-active="$route.path" mode="horizontal" router>
@@ -36,7 +36,7 @@
           <router-view></router-view>
         </el-col>
         <el-col :sm="6" class="hidden-xs-only">
-          <ProfileDetails />
+          <ProfileDetails :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller"/>
         </el-col>
         <div style="height:200px" v-loading="loading"></div>
       </el-row>

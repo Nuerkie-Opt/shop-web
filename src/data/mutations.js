@@ -42,7 +42,16 @@ const mutations = {
         if(status){
             localStorage.isLoggedIn = status;
         }
-        
+    },
+    set_user(state, user){
+        state.user = user;
+
+        localStorage.user = JSON.stringify(user);
+    },
+    set_seller(state, seller){
+        state.seller = seller;
+
+        sessionStorage.seller = JSON.stringify(seller);
     }
 };
 

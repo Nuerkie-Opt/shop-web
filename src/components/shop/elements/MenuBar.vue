@@ -1,6 +1,6 @@
 <template>
   <el-menu mode="horizontal" :default-active="activeIndex" :unique-opened="true" :router="true" class="menubar">
-    <el-menu-item index="/about">About us</el-menu-item>
+    <el-menu-item index="/">Shop</el-menu-item>
     <el-submenu index="c">
       <template slot="title">Categories</template>
       <template v-for="(menu, i) in getMenus">

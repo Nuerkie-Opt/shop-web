@@ -49,13 +49,13 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['set_login']),
+    ...mapMutations(['set_login','set_user']),
     async submit() {
       const loading = this.$loading({
         lock: true,
         text: "Login...",
         spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
+        background: "rgba(255, 255, 255, 0.5)"
       });
 
       const fp = await this.$browser();
@@ -80,7 +80,7 @@ export default {
 
           if (resp.status) {
             this.$notify.success(resp.msg);
-            localStorage.user = JSON.stringify(resp.data);
+            this.set_user(resp.data);
             this.set_login(true);
             if (this.$route.query.next) {
               this.$router.push(this.$route.query.next);

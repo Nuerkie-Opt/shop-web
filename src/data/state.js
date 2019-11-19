@@ -8,7 +8,9 @@ let state = {
     delivery: {},
     itemsD: {},
     userprofile: {},
-    isLoggedIn: false
+    isLoggedIn: false,
+    seller:{},
+    user:{}
 };
 
 export default state;

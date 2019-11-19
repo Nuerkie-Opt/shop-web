@@ -17,7 +17,10 @@ export default {
   data() {
     return {
       count: 10,
-      loading: false
+      loading: false,
+      finished:false,
+      page:1,
+      limit:12
     };
   },
   computed: {
@@ -28,10 +31,15 @@ export default {
     load() {
       // append rows to product matrix
       this.loading = true;
-      const params = {limit:12, page: 1}
+      const params = {limit:this.limit, page: this.page}
       const args = {actions: this.$actions, params:params}
-      this.$store.dispatch('loadProducts', args).then(()=>{
+      this.$store.dispatch('loadProducts', args).then((finished)=>{
+        if (finished) {
+          this.$message("That's all we've got for now 😁.");
+          this.finished = true;
+        }
         this.loading = false;
+        this.page++;
       });
       
     },

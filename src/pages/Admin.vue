@@ -8,7 +8,7 @@
       <el-header>
         <HeaderBar />
       </el-header>
-      <el-main style="margin-top:20px">
+      <el-main style="margin-top:50px">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import { Notification } from 'element-ui';
 import { isLoggedIn } from "../utils.js";
+import { mapMutations } from "vuex";
 import SideBar from "../components/admin/elements/SideBar.vue";
 import HeaderBar from "../components/admin/elements/HeaderBar.vue";
 
@@ -31,20 +31,35 @@ export default {
       hh: window.innerHeight,
     };
   },
+  methods: {
+    ...mapMutations(["set_seller"]),
+  },
   async beforeRouteEnter(to, from, next) {
     const user = await isLoggedIn();
 
     if (user) {
       if(user.user.level === 'customer'){
-        Notification.error('Unauthorized Access.')
         next(vm=>vm.$router.push('/'));
       }else{
         next();
       }
       
     } else {
-      next(vm=>vm.$router.push('/auth/login'));
+      next(vm=>vm.$router.push('/'));
     }
+  },
+  created() {
+    let user = localStorage.getItem('user');
+
+    if(user){
+      user = JSON.parse(user);
+      if(user.user.level === 'seller'){
+        this.set_seller({user:user.user});
+      }
+    }else{
+      this.$router.push('/')
+    }
+
   }
 };
 </script>

@@ -39,11 +39,20 @@
         <i class="el-icon-data-line"></i>Predictive
       </el-menu-item>
     </el-submenu>
-    <el-menu-item index="/profile/settings">
+    <el-submenu index="settings">
       <template slot="title">
         <i class="el-icon-s-tools"></i>Settings
       </template>
+      <el-menu-item index="/a/users">
+        <i class="el-icon-user"></i>Users
     </el-menu-item>
+    <el-menu-item index="/a/users/new">
+        <i class="el-icon-circle-plus-outline"></i>New User
+    </el-menu-item>
+    <el-menu-item index="/profile/settings">
+        <i class="el-icon-setting"></i>Profile Settings
+    </el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
