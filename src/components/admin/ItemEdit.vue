@@ -56,7 +56,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["itemsD"])
+    ...mapGetters(["itemsD",'currentSeller'])
   },
   methods: {
     ...mapActions(["loadItemsD"]),
@@ -236,6 +236,12 @@ export default {
           this.editableTabs = tabs.filter(tab => tab.name !== targetName);
         })
         .catch(_ => {});
+    }
+  },
+  created(){
+    if(!this.currentSeller){
+      this.$router.push('/a');
+      this.$notify.warning('Seller Unspecified.')
     }
   },
   beforeMount() {

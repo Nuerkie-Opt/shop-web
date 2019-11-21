@@ -3,14 +3,14 @@
     <el-menu-item index="/a/dashboard">
       <i class="el-icon-s-management"></i>Dashboard
     </el-menu-item>
-    <el-submenu index="items">
+    <el-submenu index="items" >
       <template slot="title">
         <i class="el-icon-s-shop"></i>Items
       </template>
       <el-menu-item index="/a/items">
         <i class="el-icon-shopping-bag-1"></i>Items
       </el-menu-item>
-      <el-menu-item index="/a/items/plus">
+      <el-menu-item index="/a/items/plus" v-if="currentSeller">
         <i class="el-icon-circle-plus-outline"></i>Add Item
       </el-menu-item>
     </el-submenu>
@@ -23,9 +23,6 @@
       </el-menu-item>
       <el-menu-item index="/a/orders/items">
         <i class="el-icon-present"></i>Order Items
-      </el-menu-item>
-      <el-menu-item index="/a/orders/money">
-        <i class="el-icon-money"></i>Money
       </el-menu-item>
     </el-submenu>
     <el-submenu index="analytics">
@@ -46,7 +43,7 @@
       <el-menu-item index="/a/users">
         <i class="el-icon-user"></i>Users
     </el-menu-item>
-    <el-menu-item index="/a/users/new">
+    <el-menu-item index="/a/users/new" v-if="currentUser.user.level === 'root'">
         <i class="el-icon-circle-plus-outline"></i>New User
     </el-menu-item>
     <el-menu-item index="/profile/settings">
@@ -57,7 +54,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  
+  computed: {
+    ...mapGetters(['currentUser','currentSeller']),
+
+  },  
 };
 </script>

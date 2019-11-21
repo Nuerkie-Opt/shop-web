@@ -4,13 +4,13 @@
       <el-tab-pane label="Account">
         <AccountInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
-      <el-tab-pane label="Profile Info">
+      <el-tab-pane label="Profile Info" v-if="isSeller">
         <ProfileInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
-      <el-tab-pane label="Social Media">
+      <el-tab-pane label="Social Media" v-if="isSeller">
         <SocialMedia :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
-      <el-tab-pane label="Personal Info">
+      <el-tab-pane label="Personal Info" v-if="isSeller">
         <PersonalInfo :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
       </el-tab-pane>
     </el-tabs>

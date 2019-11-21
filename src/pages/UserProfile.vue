@@ -29,7 +29,7 @@
             <i class="el-icon-setting"></i>
             Settings
           </el-menu-item>
-          <el-menu-item :index="`/a/`" class="hidden-xs-only" v-if="hasProfile&&isSeller">
+          <el-menu-item :index="`/a/`" class="hidden-xs-only" v-if="hasProfile&&isNotCustomer">
             <i class="el-icon-set-up"></i>
             Admin
           </el-menu-item>
@@ -45,10 +45,10 @@
     </el-header>
     <el-main v-if="!loading" style="margin-top:60px">
       <el-row :gutter="20">
-        <el-col :xs="24" :sm="18">
+        <el-col :xs="24" :sm="widthSeller">
           <router-view></router-view>
         </el-col>
-        <el-col :sm="6" class="hidden-xs-only">
+        <el-col :sm="6" class="hidden-xs-only" v-if="isSeller">
           <ProfileDetails :profile="profile" :hasProfile="hasProfile" :isSeller="isSeller" />
         </el-col>
          <div style="height:200px" v-loading="loading"></div>
@@ -75,6 +75,12 @@ export default {
   },
   computed: {
     ...mapGetters(["profile","hasProfile","isSeller"]),
+    isNotCustomer(){
+      return this.profile.user.level !== "customer";
+    },
+    widthSeller(){
+      return this.isSeller ? 18 : 24;
+    }
   },
   methods: {
     ...mapMutations(["set_profile"]),

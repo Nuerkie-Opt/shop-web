@@ -51,7 +51,11 @@ const mutations = {
     set_seller(state, seller){
         state.seller = seller;
 
-        sessionStorage.seller = JSON.stringify(seller);
+        if (Object.keys(seller).length !== 0) {
+            sessionStorage.seller = JSON.stringify(state.seller);
+        }else{
+            sessionStorage.removeItem('seller')
+        }
     }
 };
 

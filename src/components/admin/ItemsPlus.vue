@@ -43,6 +43,7 @@
 import { awaitObjectWithPromise } from "../../utils.js";
 import ItemPropertyForm from "./elements/ItemPropertyForm.vue";
 import ItemForm from "./elements/ItemForm.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -63,6 +64,9 @@ export default {
       editableTabs: [],
       tabIndex: 0
     };
+  },
+  computed: {
+    ...mapGetters(['currentSeller'])
   },
   methods: {
     submit() {
@@ -199,6 +203,12 @@ export default {
         })
         .catch(_ => {});
     }
-  }
+  },
+  created() {
+    if(!this.currentSeller){
+      this.$router.push('/a');
+      this.$notify.warning('Seller Unspecified.')
+    }
+  },
 };
 </script>

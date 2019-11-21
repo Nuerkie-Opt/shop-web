@@ -1,5 +1,5 @@
 <template>
     <div>
-        Orders Money
+        Customers
     </div>
 </template>

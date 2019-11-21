@@ -20,7 +20,6 @@
       style="width: 100%"
       v-loading="loading"
     >
-      {{itemMatrix[page]}}
       <el-table-column type="expand">
         <template slot-scope="props">
           <div v-html="props.row.item.description"></div>
@@ -123,7 +122,7 @@ export default {
     },
     toDate(stamp) {
       const date = new Date(stamp * 1000);
-      const m = "0" + date.getMonth();
+      const m = "0" + (date.getMonth()+1);
       const d = "0" + date.getDay();
       const y = date.getFullYear();
       const h = "0" + date.getHours();
