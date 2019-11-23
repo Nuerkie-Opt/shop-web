@@ -35,7 +35,7 @@ Vue.prototype.$urlTo = (url, to) => {
     const trans = {
       'g':'t_af_gallery_400',
       't':'t_af_thumb_150',
-      'f':'t_af_eco_1000'
+      'f':'t_af_eco_1024'
     };
     url = url.split('/');
     const index = url.indexOf('upload')+1;

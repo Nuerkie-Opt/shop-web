@@ -2,7 +2,7 @@ import Vue from "vue";
 import axios from "axios";
 import Fingerprint2 from "fingerprintjs2";
 
-export const baseURL = Vue.config.devtools ? 'http://localhost:8002' : 'http://localhost:8002';
+export const baseURL = Vue.config.devtools ? 'http://localhost:8002' : 'https://shop40.africaniz.com';
 
 export const awaitObjectWithPromise = async (obj) => {
     for (let prop in obj) {

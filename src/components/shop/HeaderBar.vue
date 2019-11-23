@@ -2,7 +2,16 @@
   <el-card class="box-card">
     <el-row :gutter="10" type="flex" align="middle" justify="center">
       <el-col :xs="4" :sm="4">
-        <span style="font-size:18px">AFRICANIZ</span>
+        <el-button
+          @click="drawer = true"
+          type="primary"
+          size="small"
+          class="hidden-sm-and-up"
+          icon="el-icon-s-unfold"
+          plain
+          circle
+        ></el-button>
+        <span style="font-size:18px" class="hidden-xs-only">AFRICANIZ</span>
       </el-col>
       <el-col :xs="10" :sm="15">
         <SearchBar />
@@ -32,12 +41,21 @@
             <el-dropdown>
               <el-button type="primary" icon="el-icon-user" size="small" plain circle></el-button>
               <el-dropdown-menu slot="dropdown" v-if="loggedIn">
-                <el-dropdown-item icon="el-icon-cold-drink" @click.native="$router.push('/profile')">Profile</el-dropdown-item>
+                <el-dropdown-item
+                  icon="el-icon-cold-drink"
+                  @click.native="$router.push('/profile')"
+                >Profile</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-refrigerator" @click.native="logout">Logout</el-dropdown-item>
               </el-dropdown-menu>
               <el-dropdown-menu slot="dropdown" v-else>
-                <el-dropdown-item icon="el-icon-unlock" @click.native="$router.push('/auth/login')">Login</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-mouse" @click.native="$router.push('/auth/register')">Register</el-dropdown-item>
+                <el-dropdown-item
+                  icon="el-icon-unlock"
+                  @click.native="$router.push('/auth/login')"
+                >Login</el-dropdown-item>
+                <el-dropdown-item
+                  icon="el-icon-mouse"
+                  @click.native="$router.push('/auth/register')"
+                >Register</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
@@ -46,8 +64,11 @@
     </el-row>
     <el-divider></el-divider>
     <el-row>
-      <MenuBar />
+      <MenuBar class="hidden-xs-only" />
     </el-row>
+    <el-drawer :visible.sync="drawer" direction="ttb">
+      <MenuBar class="hidden-sm-and-up" />
+    </el-drawer>
   </el-card>
 </template>
 <script>
@@ -62,31 +83,29 @@ export default {
   },
   data() {
     return {
-      circleUrl: "/images/4.jpg"
+      drawer: false,
+      circleUrl:""
     };
   },
   computed: {
     ...mapGetters(["cartCount", "loggedIn"])
   },
   methods: {
-    ...mapMutations(['set_login']),
+    ...mapMutations(["set_login"]),
     logout() {
-      this.$confirm(
-        "Are you sure you want to logout?",
-        {
-          confirmButtonText: "Continue.",
-          cancelButtonText: "Abort.",
-          type: "warning",
-          center: true
-        }
-        )
+      this.$confirm("Are you sure you want to logout?", {
+        confirmButtonText: "Continue.",
+        cancelButtonText: "Abort.",
+        type: "warning",
+        center: true
+      })
         .then(_ => {
           localStorage.clear();
           this.set_login(false);
           window.location.reload();
         })
         .catch(_ => {
-          this.$message.warning('cancelled.')
+          this.$message.warning("cancelled.");
         });
     }
   },

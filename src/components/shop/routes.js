@@ -15,6 +15,10 @@ const shopRoutes = [
         component:ItemDisplay
     },
     {
+        path:'s/:c/:t*',
+        component:ItemDisplay
+    },
+    {
         path:'auth/',
         component:Auth,
         children:[

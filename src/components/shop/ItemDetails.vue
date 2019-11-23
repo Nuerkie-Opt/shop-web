@@ -133,6 +133,11 @@ export default {
       });
     }
   },
+  watch: {
+    $route(to, from) {
+      // react to route changes...
+    }
+  },
   mounted() {
     this.$eventBus.$on("thumbed", i => (this.currentIndex = i));
     this.$eventBus.$on("chopt", val => this.handleChopt(val));
