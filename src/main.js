@@ -11,6 +11,7 @@ import routes from './routes.js';
 import eventBus from './eventBus.js';
 import locale from 'element-ui/lib/locale/lang/en'
 import { browserFingerPrint, baseURL } from "./utils.js";
+import VueAnalytics from 'vue-analytics';
 
 Vue.use(ElementUI, { locale })
 Vue.use(Vuex);
@@ -43,6 +44,25 @@ Vue.prototype.$urlTo = (url, to) => {
     return url.join('/');
 
 };
+
+Vue.use(VueAnalytics, {
+  id:'UA-153103867-1',
+  router,
+  autoTracking:{
+    exception:true,
+    screenview: true,
+    pageviewOnLoad: false
+
+  },
+  debug:{
+    enabled:Vue.config.devtools,
+    sendHitTask:!Vue.config.devtools
+  },
+  ecommerce: {
+    enabled: true,
+    enhanced: true
+  }
+});
 
 new Vue({
   router,

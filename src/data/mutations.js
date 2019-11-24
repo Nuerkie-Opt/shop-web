@@ -15,7 +15,7 @@ const mutations = {
         
         state.cart = orders;
         
-        if (Object.keys(orders).length !== 0) {
+        if (orders.length !== 0) {
             sessionStorage.cart = JSON.stringify(state.cart);
         }else{
             sessionStorage.removeItem('cart')

@@ -1,6 +1,7 @@
 import ItemDisplay from './ItemDisplay.vue';
 import ItemDetails from './ItemDetails.vue';
 import Checkout from './Checkout.vue';
+import Social from './Social.vue';
 import Cart from './Cart.vue';
 import Auth from './Auth.vue';
 
@@ -48,6 +49,10 @@ const shopRoutes = [
     {
         path: 'cart',
         component: Cart
+    },
+    {
+        path: 'social/:media',
+        component: Social
     },
     {
         path:'search/:query'

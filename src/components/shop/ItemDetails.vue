@@ -81,7 +81,7 @@ export default {
         amount: q * this.item.item.price,
       };
 
-      this.append_order({ [this.item.id]: order });
+      this.append_order(order);
     },
     handleChopt(val) {
       let changes = {

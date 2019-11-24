@@ -1,6 +1,6 @@
 const getters = {
     cartItems(state) {
-        if (Object.keys(state.cart).length !== 0) {
+        if (state.cart.length !== 0) {
             return state.cart;
         }
 
@@ -44,7 +44,8 @@ const getters = {
         return false;
     },
     cartCount(state, getters) {
-        return Object.keys(getters.cartItems).length;
+        
+        return getters.cartItems ? getters.cartItems.length : 0;
     },
     getDelivery(state) {
         if (Object.keys(state.delivery).length !== 0) {

@@ -15,6 +15,7 @@
         :item="cart.item"
         :quantity="cart.quantity"
         :amount="cart.amount"
+        :index="i"
         :r="cart.r"
         :c="cart.c"
         :key="i"

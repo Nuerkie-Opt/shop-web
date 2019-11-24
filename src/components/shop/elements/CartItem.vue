@@ -35,10 +35,10 @@
         </p>
         <el-button-group>
           <el-tooltip content="Edit" placement="left">
-            <el-button type="text" icon="el-icon-edit" @click.native="edit(item.id)" circle></el-button>
+            <el-button type="text" icon="el-icon-edit" @click.native="edit(item.id,index)" circle></el-button>
           </el-tooltip>
           <el-tooltip content="Remove" placement="right">
-            <el-button type="text" icon="el-icon-delete" @click.native="remove(item.id)" circle></el-button>
+            <el-button type="text" icon="el-icon-delete" @click.native="remove(index)" circle></el-button>
           </el-tooltip>
         </el-button-group>
       </el-col>
@@ -51,18 +51,19 @@ import { mapActions } from "vuex";
 import MoneySign from "./MoneySign.vue";
 
 export default {
-  props: ["item", "quantity", "amount", "r", "c"],
+  props: ["item", "quantity", "amount", "r", "c","index"],
   methods: {
     ...mapActions(["remove_order"]),
-    remove(id) {
+    remove(index) {
       this.$confirm("Are you sure you want to remove this item from your cart?")
         .then(() => {
           this.$message.error("removing ...");
-          this.remove_order(id);
+          this.remove_order(index);
         })
         .catch(() => {});
     },
-    edit(id) {
+    edit(id,index) {
+      this.remove_order(index);
       this.$message.success("editing ...");
       this.$router.push({path: `items/${id}`});
     }

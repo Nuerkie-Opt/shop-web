@@ -82,6 +82,7 @@ export default {
             this.$notify.success(resp.msg);
             this.set_user(resp.data);
             this.set_login(true);
+            this.$ga.set({ userId: resp.status.user.id });
             if (this.$route.query.next) {
               this.$router.push(this.$route.query.next);
             } else {

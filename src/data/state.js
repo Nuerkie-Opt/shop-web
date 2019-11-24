@@ -4,7 +4,7 @@ let state = {
     products: [],
     items: [],
     menus: MenusData,
-    cart: {},
+    cart: [],
     delivery: {},
     itemsD: {},
     userprofile: {},

@@ -31,7 +31,7 @@ const actions = {
                     // console.log(response);
                     const data = response.data["111"].get_items['data'];
                     commit('append_products', [...getters.productMatrix, ...data]);
-                    resolve(data.length===0);
+                    resolve(data.length === 0);
                 })
                 .catch(error => reject());
         });
@@ -52,9 +52,9 @@ const actions = {
                     // handle success
                     // console.log(response);
                     const data = response.data["111"].get_items['data'];
-                                      
+
                     commit('append_items', [...getters.itemMatrix, ...data]);
-                    resolve(data.length===0);
+                    resolve(data.length === 0);
                 })
                 .catch(error => reject());
         });
@@ -75,27 +75,23 @@ const actions = {
                     // handle success
                     // console.log(response);
                     const data = response.data["111"].fetch_item['data'];
-                                      
+
                     commit('set_item_d', Object.assign({}, getters.itemsD, data));
-                    resolve(Object.values(data).length===0);
+                    resolve(Object.values(data).length === 0);
                 })
                 .catch(error => reject());
         });
     },
     append_order({ commit, getters }, order) {
 
-        commit('append_orders', { ...getters.cartItems, ...order });
+        commit('append_orders', [...getters.cartItems, order]);
     },
-    remove_order({ commit, getters }, order_id) {
-        const orders = Object.keys(getters.cartItems)
-            .reduce((acc, key) => key == order_id ?
-                acc : ({ ...acc, [key]: getters.cartItems[key] }),
-                {}
-            );
+    remove_order({ commit, getters }, index) {
+        const orders = getters.cartItems.filter((cart, i) => i !== index );
 
         commit('append_orders', orders);
     },
-    change_delivery({commit}, delivery){
+    change_delivery({ commit }, delivery) {
         commit('new_delivery', delivery);
     }
 };
