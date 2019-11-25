@@ -66,6 +66,33 @@
         </i>
       </el-col>
     </el-row>
+
+    <el-divider content-position="left">
+      <i>Available Delivery Options.</i>
+    </el-divider>
+    <div>
+      <el-checkbox :indeterminate="true" label="1" border>
+        DHL
+        <i class="el-icon-truck"></i>
+      </el-checkbox>
+      <el-checkbox :indeterminate="true" label="2" border>
+        FedEX
+        <i class="el-icon-truck"></i>
+      </el-checkbox>
+    </div>
+    <el-divider content-position="left">
+      <i>Available Payment Options.</i>
+    </el-divider>
+    <div>
+      <el-checkbox :indeterminate="true" label="2" border>
+        Card
+        <i class="el-icon-bank-card"></i>
+      </el-checkbox>
+      <el-checkbox :indeterminate="true" label="1" border>
+        Mobile Money
+        <i class="el-icon-mobile-phone"></i>
+      </el-checkbox>
+    </div>
     <div v-if="summary">
       <el-divider></el-divider>
       <el-button style="width:100%" type="primary" @click="checkout">
@@ -74,13 +101,80 @@
         </i>
       </el-button>
     </div>
-    <el-divider content-position="left">
-      <i>Available Delivery Options.</i>
-    </el-divider>
-
-    <el-divider content-position="left">
-      <i>Available Payment Options.</i>
-    </el-divider>
+    <el-dialog :visible.sync="dialogVisible">
+      <template slot="title">
+        <div style="font-size:18px">
+          <i>Sales begins on</i>
+          <el-tag style="font-size:18px">
+            <b>
+              <i>1st January 2020.</i>
+            </b>
+          </el-tag>
+        </div>
+      </template>
+      <div style="font-size:18px">
+        <i>But before then you can:</i>
+        <el-timeline style="margin-top:20px">
+          <el-timeline-item type="danger">
+            <el-card>
+              <p>
+                <i>
+                  <b>Create</b> an
+                  <b>Account</b> with us.
+                </i>
+              </p>
+              <p style="font-size:16px">
+                <i>
+                  And gain
+                  <el-tag type="danger" style="font-size:16px">15%</el-tag>
+                  <b>Uncoditional Discount</b> on your first purchase once sales begin.
+                </i>
+              </p>
+              <el-button type="primary" @click="$router.push('/auth/register')">Create Account</el-button>
+            </el-card>
+          </el-timeline-item>
+          <el-timeline-item type="success">
+            <el-card>
+              <p>
+                <i>
+                  <b>Follow</b> us on
+                  <b>Social Media</b>.
+                </i>
+              </p>
+              <p style="font-size:16px">
+                <i>This is how we mostly keep in touch with our customers and with fun news and updates. Feel free to inbox us direclty on any issue at all.</i>
+              </p>
+              <el-button type="primary" @click="openUrl('facebook')">Facebook</el-button>
+              <el-button type="info" @click="openUrl('twitter')">Twitter</el-button>
+              <el-button type="danger" @click="openUrl('instagram')">Instagram</el-button>
+            </el-card>
+          </el-timeline-item>
+          <el-timeline-item type="warning">
+            <el-card>
+              <p>
+                <i>
+                  <b>Become</b> a
+                  <b>Seller</b>.
+                </i>
+              </p>
+              <p style="font-size:16px">
+                <i>Just fill out this form and we will contact you shortly. We are happy to work with you. Only made in Africa products only.</i>
+              </p>
+              <el-button type="primary" @click="openUrl('form')">Fill Out Seller Forms.</el-button>
+            </el-card>
+          </el-timeline-item>
+        </el-timeline>
+      </div>
+      <template slot="footer">
+        <div style="font-size:18px">
+          <el-tag type="success" style="font-size:18px">
+            <b>
+              <i>Thank you.</i>
+            </b>
+          </el-tag>
+        </div>
+      </template>
+    </el-dialog>
   </el-card>
 </template>
 
@@ -104,10 +198,34 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      dialogVisible: false
+    };
   },
   methods: {
+    openUrl(media){
+      let url='https://';
+      switch (media) {
+        case 'facebook':
+          url += 'facebook.com/shop.africaniz';
+          break;
+        case 'twitter':
+          url += 'twitter.com/shop_africaniz';
+          break;
+        case 'instagram':
+          url += 'instagram.com/shop.africaniz/'
+          break;
+        case 'form':
+          url += 'forms.gle/1H2DZfctVreiKS8Z6'
+        default:
+          break;
+      }
+
+     window.open(url,"_blank");
+    },
     checkout() {
+      this.dialogVisible = true;
+      return;
       if (this.cart) {
         if (!this.subTotal) {
           this.$message.info("Empty Cart, Enjoy Some Shopping With Us.");

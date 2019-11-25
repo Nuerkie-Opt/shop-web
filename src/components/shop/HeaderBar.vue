@@ -62,9 +62,9 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-divider></el-divider>
-    <el-row>
-      <MenuBar class="hidden-xs-only" />
+    <el-divider class="hidden-xs-only" v-if="$route.path !== '/checkout'"></el-divider>
+    <el-row class="hidden-xs-only" v-if="$route.path !== '/checkout'">
+      <MenuBar/>
     </el-row>
     <el-drawer :visible.sync="drawer" direction="ttb">
       <MenuBar class="hidden-sm-and-up" />

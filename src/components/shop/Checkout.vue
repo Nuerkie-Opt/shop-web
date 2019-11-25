@@ -1,6 +1,6 @@
 <template>
-  <el-row :gutter="10">
-    <el-col :xs="24" :sm="18">
+  <el-row :gutter="10" style="margin-top:40px">
+    <el-col :xs="24" :sm="16">
       <el-steps :space="200" :active="active" finish-status="success" simple>
         <el-step title="Where can we find you? 🤔" icon="el-icon-location"></el-step>
         <el-step title="How are you paying? 🤑" icon="el-icon-s-finance"></el-step>
@@ -29,7 +29,7 @@
         </el-button-group>
       </el-card>
     </el-col>
-    <el-col :xs="24" :sm="6">
+    <el-col :xs="24" :sm="8">
       <OrderSummary />
     </el-col>
   </el-row>
@@ -92,6 +92,9 @@ export default {
       }
     },
     ...mapState(["cartItems"])
+  },
+  created(){
+    this.$router.push('/cart');
   }
 };
 </script>

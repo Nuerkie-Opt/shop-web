@@ -10,7 +10,7 @@
             @change="chOpt"
             clearable
           >
-            <el-option v-for="(val,j) in opt.values" :key="j" :label="val.name" :value="val"></el-option>
+            <el-option v-for="(val,j) in opt.values" :key="j" :label="val.name" :value="j"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
@@ -27,8 +27,19 @@ export default {
     };
   },
   methods: {
-    chOpt(val) {
-      this.$eventBus.$emit("chopt", this.itemForm);
+    chOpt(index) {
+      let opts = {};
+      const object = this.itemForm;
+      for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+          if(object[key] !== ""){
+            const opt = this.options.filter(op=>op.name===key);
+            opts[key] = opt[0]['values'][object[key]];
+          }
+          
+        }
+      }
+      this.$eventBus.$emit("chopt", opts);
     },
     getData() {
       return new Promise((resolve, reject) =>
