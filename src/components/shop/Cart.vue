@@ -48,9 +48,7 @@ export default {
 <style scoped>
 @media only screen and (min-width: 768px) {
   .el-row {
-    padding-left: 8%;
-    padding-right: 8%;
-    margin-top: 90px;
+    margin-top: 40px;
   }
 }
 </style>

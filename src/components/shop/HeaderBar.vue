@@ -14,13 +14,18 @@
         <span style="font-size:18px" class="hidden-xs-only">AFRICANIZ</span>
       </el-col>
       <el-col :xs="10" :sm="15">
-        <SearchBar />
+        <MenuBar class="hidden-xs-only" v-if="$route.path !== '/checkout'" />
       </el-col>
       <el-col :xs="10" :sm="4">
         <el-row :gutter="10" type="flex" align="middle" justify="end">
           <el-col>
+            <el-tooltip content="Search / Filter" placement="bottom" effect="light">
+              <el-button @click="searchFilterVisible = true" type="primary" size="small" icon="el-icon-search" plain circle></el-button>
+            </el-tooltip>
+          </el-col>
+          <el-col>
             <el-tooltip content="Combination" placement="bottom" effect="light">
-              <el-button type="primary" size="small" icon="el-icon-loading" plain circle></el-button>
+              <el-button type="primary" size="small" icon="el-icon-loading" @click="$message.info('Combos coming soon 😋 ...')" plain circle></el-button>
             </el-tooltip>
           </el-col>
           <el-col>
@@ -62,13 +67,19 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-divider class="hidden-xs-only" v-if="$route.path !== '/checkout'"></el-divider>
-    <el-row class="hidden-xs-only" v-if="$route.path !== '/checkout'">
-      <MenuBar/>
-    </el-row>
     <el-drawer :visible.sync="drawer" direction="ttb">
       <MenuBar class="hidden-sm-and-up" />
     </el-drawer>
+    <el-dialog :visible.sync="searchFilterVisible" width="80%" append-to-body>
+    <template slot="title">
+        <div style="font-size:18px">
+          <el-tag type="info" style="font-size:18px">
+              <i>Search / Filter Items</i>
+          </el-tag>
+        </div>
+      </template>
+      <SearchBar />
+    </el-dialog>
   </el-card>
 </template>
 <script>
@@ -84,7 +95,8 @@ export default {
   data() {
     return {
       drawer: false,
-      circleUrl:""
+      circleUrl: "",
+      searchFilterVisible: false
     };
   },
   computed: {

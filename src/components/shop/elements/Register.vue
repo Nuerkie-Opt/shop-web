@@ -84,10 +84,12 @@ export default {
         .then(response => {
           // console.log(response);
           const resp = response.data["111"].register;
-          this.$notify.error(resp.msg);
           if (resp.status) {
+            this.$notify.success(resp.msg);
             this.$router.push(`/auth/login`);
-          } 
+          } else{
+            this.$notify.error(resp.msg);
+          }
         })
         .catch(error => {
           // console.log(error);

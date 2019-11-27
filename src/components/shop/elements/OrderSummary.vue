@@ -101,7 +101,7 @@
         </i>
       </el-button>
     </div>
-    <el-dialog :visible.sync="dialogVisible">
+    <el-dialog :visible.sync="dialogVisible" width="90%" append-to-body>
       <template slot="title">
         <div style="font-size:18px">
           <i>Sales begins on</i>
@@ -142,7 +142,7 @@
                 </i>
               </p>
               <p style="font-size:16px">
-                <i>This is how we mostly keep in touch with our customers and with fun news and updates. Feel free to inbox us direclty on any issue at all.</i>
+                <i>This is how we mostly keep in touch with our customers with fun news and product updates. Feel free to inbox us direclty on any issue at all.</i>
               </p>
               <el-button type="primary" @click="openUrl('facebook')">Facebook</el-button>
               <el-button type="info" @click="openUrl('twitter')">Twitter</el-button>
@@ -160,7 +160,7 @@
               <p style="font-size:16px">
                 <i>Just fill out this form and we will contact you shortly. We are happy to work with you. Only made in Africa products only.</i>
               </p>
-              <el-button type="primary" @click="openUrl('form')">Fill Out Seller Forms.</el-button>
+              <el-button type="primary" @click="openUrl('form')">Fill Out Seller Forms.</el-button><i> or call us</i> <el-tag type="warning" style="font-size:20px"><b>+233 55 333 97 28</b></el-tag>
             </el-card>
           </el-timeline-item>
         </el-timeline>

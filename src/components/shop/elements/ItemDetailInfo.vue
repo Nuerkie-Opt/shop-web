@@ -16,9 +16,9 @@
     <el-divider content-position="left">Shipping Info</el-divider>
     <div>
         <p class="lig"> - This item ships to your location.</p>
-        <p class="lig"> - It takes n days for seller to complete order.</p>
-        <p class="lig"> - It takes m days to ship to your locations.</p>
-        <p class="lig"> - Expect to get your order in n+m days.</p>
+        <p class="lig"> - It takes {{item.days}} days for seller to complete order.</p>
+        <p class="lig"> - It takes 3 days to ship to your locations.</p>
+        <p class="lig"> - Expect to get your order in {{ item.days + 3}} days.</p>
     </div>
     <el-divider></el-divider>
     <el-row :gutter="10">
@@ -52,9 +52,16 @@
         </el-button>
       </el-col>
     </el-row>
+    <el-divider content-position="left">Return Policy</el-divider>
+    <div>
+        <p class="lig"> - Make sure you place all your orders on this website.</p>
+        <p class="lig"> - we are not responsible for any orders or dealings outside of this platform.</p>
+        <p class="lig"> - We have a fixed <b>7</b> days return policy on all items.</p>
+        <p class="lig"> - We can <b>replace</b> item for you but can't give your money back.</p>
+    </div>
     <el-divider content-position="left"></el-divider>
     <div class="sbottom clearfix">
-      <ActionBtns :item="item" />
+      <ActionBtns :item="item.item" :seller="''+item.seller_id"/>
     </div>
   </el-card>
 </template>

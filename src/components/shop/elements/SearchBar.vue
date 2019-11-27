@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-input placeholder="Find something, or someone" size="small" v-model="search" class="input-with-select">
+  <el-input placeholder="Find something, or someone" size="small" v-model="search" class="input-with-select" disabled>
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
@@ -10,7 +10,7 @@
 export default {
   data(){
       return {
-          search:"",
+          search:"Search not available, scroll to bottom.",
       }
   }
 };

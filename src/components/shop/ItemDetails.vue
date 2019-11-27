@@ -10,7 +10,7 @@
         </el-row>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
-        <ItemDetailInfo :buyable="buyable" :editable="editable" :item="item.item" :options="item.item.options" />
+        <ItemDetailInfo :buyable="buyable" :editable="editable" :item="item" :options="item.item.options" />
       </el-col>
       <el-col style="margin-top:10px;margin-bottom:100px">
         <ItemTabInfo :item="item" />
@@ -161,6 +161,6 @@ export default {
   padding: 0px;
 }
 .details {
-  margin-top: 90px;
+  margin-top: 40px;
 }
 </style>

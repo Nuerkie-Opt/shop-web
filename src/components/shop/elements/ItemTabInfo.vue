@@ -10,37 +10,37 @@
       <span slot="label">
         <i class="el-icon-video-camera-solid"></i> Product Videos
       </span>
-      Product Videos
+      <!-- Product Videos -->
     </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-s-shop"></i> More from Seller
       </span>
-      More from Seller
+      <!-- More from Seller -->
     </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-s-goods"></i> Similar Products
       </span>
-      Similar Products
+      <!-- Similar Products -->
     </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-s-claim"></i> Recommended for you
       </span>
-      Recommended for you
+      <!-- Recommended for you -->
     </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-star-on"></i> Product Reviews
       </span>
-      Product Reviews
+      <!-- Product Reviews -->
     </el-tab-pane>
     <el-tab-pane>
       <span slot="label">
         <i class="el-icon-thumb"></i> FAQs
       </span>
-      FAQs
+      <!-- FAQs -->
     </el-tab-pane>
   </el-tabs>
 </template>

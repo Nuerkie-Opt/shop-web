@@ -78,6 +78,6 @@ export default {
 
 <style scoped>
 .display{
-  margin-top: 90px;
+  margin-top: 40px;
 }
 </style>

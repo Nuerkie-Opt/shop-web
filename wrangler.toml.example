@@ -1,0 +1,12 @@
+name = "shop-web"
+type = "webpack"
+account_id = ""
+workers_dev = true
+
+[site]
+bucket = "./dist"
+entry-point = "workers-site"
+
+[env.production]
+zone_id = ""
+route = "africaniz.com/*"
