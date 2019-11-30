@@ -8,53 +8,65 @@ import Messages from "./Messages.vue";
 export const profileRoutes = [
     {
         path: '',
-        component: Products
+        component: Products,
+        name:"Products"
     },
     {
         path: 'combos',
-        component: Combos
+        component: Combos,
+        name:"Combos"
     },
     {
         path: 'posts',
-        component: Posts
+        component: Posts,
+        name:"Posts"
     },
     {
         path: 'activity', // likes, follows, followers, reviews, orders
-        component: Activity
+        component: Activity,
+        name:"Activity"
     },
     {
         path: '*',
-        component: Products
+        component: Products,
+        name:"ProductsFallBack"
     },
 ];
 
 export const userProfileRoutes = [
     {
         path: '',
-        component: Products
+        component: Products,
+        name:"UserProducts"
     },
     {
         path: 'combos',
-        component: Combos
+        component: Combos,
+        name:"UserCombos"
     },
     {
         path: 'posts',
-        component: Posts
+        component: Posts,
+        name:"UserPosts"
     },
     {
         path: 'activity', // likes, follows, followers, reviews, orders
-        component: Activity
+        component: Activity,
+        name:"UserActivity"
     },
     {
         path: 'messages',
-        component: Messages
+        component: Messages,
+        name:"UserMessages"
     },
     {
         path:'settings',
-        component: Settings
+        component: Settings,
+        name:"UserSettings"
     },
     {
         path: '*',
-        component: Products
+        component: Products,
+        name:"UserProductsFallBack"
     },
 ];

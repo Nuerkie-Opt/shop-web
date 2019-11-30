@@ -47,7 +47,7 @@ export default {
   props: ["item"],
   computed: {
     itemTags() {
-      return "Africanizing,Africanize" + this.item.item.tags.join(",");
+      return "Africanizing,Africanize," + this.item.item.tags.join(",");
     },
     itemUrl() {
       return `https://www.africaniz.com/items/${this.item.id}`;

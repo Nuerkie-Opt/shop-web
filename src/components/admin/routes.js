@@ -17,76 +17,90 @@ import Users from './Users.vue';
 const adminRoutes = [
     {
         path:'',
-        component:AdminDashboard
+        component:AdminDashboard,
+        name:'AdminDashboardDefault'
     },
     {
         path:'dashboard',
-        component:AdminDashboard
+        component:AdminDashboard,
+        name:"AdminDashboard"
     },
     {
         path:'settings',
-        component:AdminSettings
+        component:AdminSettings,
+        name:"AdminSettings"
     },
     {
         path:'items',
-        component:ItemsList
+        component:ItemsList,
+        name:"ItemsList"
     },
     {
         path:'items/plus',
         component:ItemsPlus,
+        name:"ItemsPlus"
 
     },
     {
         path:'item/edit/:item',
-        component:ItemEdit
+        component:ItemEdit,
+        name:"ItemEdit"
     },
     {
         path:'item/view/:item',
-        component:ItemDetail
+        component:ItemDetail,
+        name:"ItemDetail"
     },
     {
         path:'orders',
-        component:OrdersList
+        component:OrdersList,
+        name:"OrdersList"
     },
     {
         path:'orders/items',
         component:OrdersItems,
-
+        name:"OrdersItems"
     },
     {
         path:'analytics',
-        component:DescriptiveAnalytics
+        component:DescriptiveAnalytics,
+        name:"Analytics"
     },
     {
         path:'analytics/desc',
         component:DescriptiveAnalytics,
-
+        name:"DescriptiveAnalytics"
     },
     {
         path:'analytics/pred',
         component:PredictiveAnalytics,
-
+        name:"PredictiveAnalytics"
     },
     {
         path:'users',
-        component: Users
+        component: Users,
+        name:"Users"
     },
     {
         path:'users/new',
-        component: NewUser
+        component: NewUser,
+        name:"NewUser"
     },
     {
         path:'users/edit/:user',
-        component: EditUser
+        component: EditUser,
+        name:"EditUser"
     },
     ,
     {
         path:'seller/switch',
-        component: AccountSwitch
+        component: AccountSwitch,
+        name:"AccountSwitch"
     },
     {
         path:'*',
-        component:AdminDashboard
+        component:AdminDashboard,
+        name:"AdminDashboardFallBack"
     }
 ];
 

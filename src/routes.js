@@ -11,11 +11,11 @@ import adminRoutes from './components/admin/routes.js';
 
 
 const routes = [
-    { path:'', component: Shop, children: shopRoutes },
-    {path:'/profile', component: UserProfile, children: userProfileRoutes },
-    { path:'/p/:user', component: Profile, children: profileRoutes },
-    { path:'/a', component: Admin, children: adminRoutes },
-    { path:'*', component: Shop, children: shopRoutes }
+    { path:'', component: Shop, children: shopRoutes, name:'Shop' },
+    {path:'/profile', component: UserProfile, children: userProfileRoutes, name:'UserProfile' },
+    { path:'/p/:user', component: Profile, children: profileRoutes, name:'Profile' },
+    { path:'/a', component: Admin, children: adminRoutes, name:'Admin' },
+    { path:'*', component: Shop, children: shopRoutes, name:'ShopFallBack' }
 ];
 
 export default routes;

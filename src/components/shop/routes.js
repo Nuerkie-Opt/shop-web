@@ -13,49 +13,59 @@ import Reset from './elements/Reset.vue';
 const shopRoutes = [
     {
         path:'',
-        component:ItemDisplay
+        component:ItemDisplay,
+        name:"ItemDisplay"
     },
     {
         path:'s/:c/:t*',
-        component:ItemDisplay
+        component:ItemDisplay,
+        name:"ItemDispalySearch"
     },
     {
         path:'auth/',
         component:Auth,
+        name:"Auth",
         children:[
             {
                 path:'login',
                 component:Login,
-
+                name:"Login"
             },
             {
                 path:'register',
                 component:Register,
+                name:"Register"
             },
             {
                 path:'reset',
                 component:Reset,
+                name:"Reset"
             }
         ]
     },
     {
         path:'items/:item/',
-        component:ItemDetails
+        component:ItemDetails,
+        name:"ItemDetails"
     },
     {
         path: 'checkout',
-        component: Checkout
+        component: Checkout,
+        name:"Checkout"
     },
     {
         path: 'cart',
-        component: Cart
+        component: Cart,
+        name:"Cart"
     },
     {
         path: 'social/:media',
-        component: Social
+        component: Social,
+        name:"Social"
     },
     {
-        path:'search/:query'
+        path:'search/:query',
+        name:"Search"
     }
 ];
 

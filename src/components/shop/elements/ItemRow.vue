@@ -5,7 +5,9 @@
     v-for="(item, i) in rowData" 
     :key="i">
 
-      <ItemCard :item="item"/>
+      <ItemCarousel :item="item" />
+
+      <!-- <ItemCard :item="item"/> -->
 
       <!-- <ItemJumbo 
       v-if="isCanvasType('jumbo', col)" 
@@ -23,9 +25,11 @@
 import ItemCard from "./ItemCard.vue";
 import ItemJumbo from "./ItemJumbo.vue";
 import ItemCollage from "./ItemCollage.vue";
+import ItemCarousel from "./ItemCarousel.vue";
 
 export default {
   components:{
+      ItemCarousel,
       ItemCollage,
       ItemJumbo,
       ItemCard

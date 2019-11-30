@@ -1,27 +1,31 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" shadow="hover">
-    <el-image
-      :src="$urlTo(item.item.images[0].url,'g')"
-      @click="itemDetails"
-      lazy
+    <el-carousel
+      :interval="10000"
+      arrow="always"
+      :initial-index="0"
+      :autoplay="true"
+      indicator-position="outside"
     >
-      <div slot="placeholder" class="image-slot block">
-        <i class="el-icon-loading"></i>
-      </div>
-      <div slot="error" class="image-slot block">
-        <i class="el-icon-picture-outline"></i>
-      </div>
-    </el-image>
+      <el-carousel-item v-for="(image, i) in item.item.images" :key="i" @click.native="itemDetails">
+        <el-image :src="$urlTo(image.url,'g')">
+          <div slot="placeholder" class="image-slot block">
+            <i class="el-icon-loading"></i>
+          </div>
+          <div slot="error" class="image-slot block">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
+      </el-carousel-item>
+    </el-carousel>
     <el-divider></el-divider>
     <div>
       <div class="bottom">
         <span>{{item.item.name}}</span>
       </div>
-
       <el-divider></el-divider>
-
       <div class="sbottom clearfix">
-          <ActionBtns :item="item" />
+        <ActionBtns :item="item" />
       </div>
     </div>
   </el-card>
@@ -36,8 +40,8 @@ export default {
   },
   props: ["item"],
   methods: {
-    itemDetails(){
-      this.$router.push({ path:`/items/${this.item.id}`});
+    itemDetails() {
+      this.$router.push({ path: `/items/${this.item.id}` });
     }
   }
 };

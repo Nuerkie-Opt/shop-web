@@ -4,10 +4,10 @@
       <i>Order Summary</i>
     </el-divider>
     <el-row style="font-size:18px">
-      <el-col :span="18">
+      <el-col :span="16">
         <i>SubTotal :</i>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <i>
           <b>
             <el-tag style="margin-bottom:5px" type="primary" round>
@@ -18,10 +18,10 @@
       </el-col>
     </el-row>
     <el-row style="font-size:18px" v-if="getDelivery">
-      <el-col :span="18">
+      <el-col :span="16">
         <i>Delivery :</i>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <i>
           <b>
             <el-tag style="margin-bottom:5px" type="success" round>
@@ -42,10 +42,10 @@
       </el-col>
     </el-row> 
     <el-row style="font-size:18px">
-      <el-col :span="18">
+      <el-col :span="16">
         <i>Discount :</i>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <i><b>
           <el-tag style="margin-bottom:5px" type="danger" round>- <MoneySign :price="9" /></el-tag>
         </b></i>
@@ -53,7 +53,7 @@
     </el-row>-->
     <el-divider></el-divider>
     <el-row style="font-size:18px">
-      <el-col :span="18">
+      <el-col :span="16">
         <i>Total :</i>
       </el-col>
       <el-col :span="6">

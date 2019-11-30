@@ -73,7 +73,7 @@ Vue.use(VueAnalytics, {
   router,
   autoTracking:{
     exception:true,
-    // screenview: true,
+    screenview: true,
     pageviewOnLoad: false
 
   },
