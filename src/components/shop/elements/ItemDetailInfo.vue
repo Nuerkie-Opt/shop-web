@@ -1,10 +1,10 @@
 <template>
   <el-card>
     <div slot="header">
-      <h3 style="color:#606266">{{item.name}}</h3>
+      <h3 style="color:#606266">{{item.item.name}}</h3>
       <i style="color:#606266"><b>
         <el-tag type="info" size="medium" effect="dark">
-        <MoneySign :price="item.price" />
+        <MoneySign :price="item.item.price" />
         </el-tag>
       </b></i>
     </div>
@@ -16,9 +16,9 @@
     <el-divider content-position="left">Shipping Info</el-divider>
     <div>
         <p class="lig"> - This item ships to your location.</p>
-        <p class="lig"> - It takes {{item.days}} days for seller to complete order.</p>
+        <p class="lig"> - It takes {{item.item.days}} days for seller to complete order.</p>
         <p class="lig"> - It takes 3 days to ship to your locations.</p>
-        <p class="lig"> - Expect to get your order in {{ item.days + 3}} days.</p>
+        <p class="lig"> - Expect to get your order in {{ item.item.days + 3}} days.</p>
     </div>
     <el-divider></el-divider>
     <el-row :gutter="10">
@@ -61,7 +61,7 @@
     </div>
     <el-divider content-position="left"></el-divider>
     <div class="sbottom clearfix">
-      <ActionBtns :item="item.item" :seller="''+item.seller_id"/>
+      <ActionBtns :item="item" :seller="true"/>
     </div>
   </el-card>
 </template>

@@ -144,9 +144,9 @@
               <p style="font-size:16px">
                 <i>This is how we mostly keep in touch with our customers with fun news and product updates. Feel free to inbox us direclty on any issue at all.</i>
               </p>
-              <el-button type="primary" @click="openUrl('facebook')">Facebook</el-button>
-              <el-button type="info" @click="openUrl('twitter')">Twitter</el-button>
-              <el-button type="danger" @click="openUrl('instagram')">Instagram</el-button>
+              <el-button type="primary" @click="$openMediaUrl('facebook')">Facebook</el-button>
+              <el-button type="info" @click="$openMediaUrl('twitter')">Twitter</el-button>
+              <el-button type="danger" @click="$openMediaUrl('instagram')">Instagram</el-button>
             </el-card>
           </el-timeline-item>
           <el-timeline-item type="warning">
@@ -160,7 +160,7 @@
               <p style="font-size:16px">
                 <i>Just fill out this form and we will contact you shortly. We are happy to work with you. Only made in Africa products only.</i>
               </p>
-              <el-button type="primary" @click="openUrl('form')">Fill Out Seller Forms.</el-button><i> or call us</i> <el-tag type="warning" style="font-size:20px"><b>+233 55 333 97 28</b></el-tag>
+              <el-button type="primary" @click="$openMediaUrl('form')">Fill Out Seller Forms.</el-button><i> or call us</i> <el-tag type="warning" style="font-size:20px"><b>+233 55 333 97 28</b></el-tag>
             </el-card>
           </el-timeline-item>
         </el-timeline>
@@ -203,26 +203,6 @@ export default {
     };
   },
   methods: {
-    openUrl(media){
-      let url='https://';
-      switch (media) {
-        case 'facebook':
-          url += 'facebook.com/shop.africaniz';
-          break;
-        case 'twitter':
-          url += 'twitter.com/shop_africaniz';
-          break;
-        case 'instagram':
-          url += 'instagram.com/shop.africaniz/'
-          break;
-        case 'form':
-          url += 'forms.gle/1H2DZfctVreiKS8Z6'
-        default:
-          break;
-      }
-
-     window.open(url,"_blank");
-    },
     checkout() {
       this.dialogVisible = true;
       return;

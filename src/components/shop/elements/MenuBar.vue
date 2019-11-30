@@ -1,6 +1,6 @@
 <template>
   <el-menu mode="horizontal" :default-active="activeIndex" :unique-opened="true" class="menubar">
-    <el-menu-item index="/" @click="goto('/')">Shop</el-menu-item>
+    <el-menu-item index="/" @click="goto('/')" v-if="!small">Shop</el-menu-item>
     <el-submenu index="c">
       <template slot="title">Categories</template>
       <template v-for="(menu, i) in getMenus">
@@ -15,7 +15,7 @@
         </div>
       </template>
     </el-submenu>
-    <el-submenu index="t">
+    <el-submenu index="t" v-if="!small">
       <template slot="title">Tags</template>
 
       <el-menu-item index="/t" @click="goto('/t')">All Tags</el-menu-item>
@@ -25,7 +25,7 @@
     <!-- <el-submenu index="v">
       <template slot="title">Vendors</template>
     <el-menu-item index="/vendors" @click="goto('/vendors')">All Vendors</el-menu-item>-->
-    <el-menu-item index="/sell" @click="dialogVisible = true;">Become a Vendor</el-menu-item>
+    <el-menu-item index="/sell" @click="dialogVisible = true;" v-if="!small">Become a Vendor</el-menu-item>
     <!-- </el-submenu> -->
     <el-dialog :visible.sync="dialogVisible" width="90%" append-to-body>
       <div style="font-size:18px">
@@ -42,7 +42,7 @@
               <p style="font-size:16px">
                 <i>Just fill out this form and we will contact you shortly. We are happy to work with you. Only made in Africa products only.</i>
               </p>
-              <el-button size="small" type="primary" @click="openUrl('form')">Fill Out Seller Forms.</el-button>
+              <el-button size="small" type="primary" @click="$openMediaUrl('form')">Fill Out Seller Forms.</el-button>
               <i>or call us</i>
               <el-tag type="warning" style="font-size:20px">
                 <b>+233 55 333 97 28</b>
@@ -60,9 +60,9 @@
               <p style="font-size:16px">
                 <i>This is how we mostly keep in touch with our stakeholders with fun news and product updates. Feel free to inbox us direclty on any issue at all.</i>
               </p>
-              <el-button type="primary" @click="openUrl('facebook')">Facebook</el-button>
-              <el-button type="info" @click="openUrl('twitter')">Twitter</el-button>
-              <el-button type="danger" @click="openUrl('instagram')">Instagram</el-button>
+              <el-button type="primary" @click="$openMediaUrl('facebook')">Facebook</el-button>
+              <el-button type="info" @click="$openMediaUrl('twitter')">Twitter</el-button>
+              <el-button type="danger" @click="$openMediaUrl('instagram')">Instagram</el-button>
             </el-card>
           </el-timeline-item>
         </el-timeline>
@@ -83,6 +83,12 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  props:{
+    small:{
+      type:Boolean,
+      default:false
+    }
+  },
   data() {
     return {
       dialogVisible: false
@@ -100,24 +106,6 @@ export default {
     },
     makeQ(q) {
       this.$router.push(`/s/${q}/`).catch(err => {});
-    },
-    openUrl(media) {
-      let url = "https://";
-      switch (media) {
-        case "facebook":
-          url += "facebook.com/shop.africaniz";
-          break;
-        case "twitter":
-          url += "twitter.com/shop_africaniz";
-          break;
-        case "instagram":
-          url += "instagram.com/shop.africaniz/";
-          break;
-        case "form":
-          url += "forms.gle/1H2DZfctVreiKS8Z6";
-        default:
-          break;
-      }
     }
   }
 };

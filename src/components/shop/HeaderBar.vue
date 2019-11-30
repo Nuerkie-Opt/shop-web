@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <el-row :gutter="10" type="flex" align="middle" justify="center">
-      <el-col :xs="4" :sm="4">
+      <el-col :xs="3" :sm="4">
         <el-button
           @click="drawer = true"
           type="primary"
@@ -13,10 +13,11 @@
         ></el-button>
         <span style="font-size:18px" class="hidden-xs-only">AFRICANIZ</span>
       </el-col>
-      <el-col :xs="10" :sm="15">
-        <MenuBar class="hidden-xs-only" v-if="$route.path !== '/checkout'" />
+      <el-col :xs="12" :sm="15">
+        <MenuBar class="hidden-xs-only"/>
+        <MenuBar class="hidden-sm-and-up" :small="true"/>
       </el-col>
-      <el-col :xs="10" :sm="4">
+      <el-col :xs="9" :sm="4">
         <el-row :gutter="10" type="flex" align="middle" justify="end">
           <el-col>
             <el-tooltip content="Search / Filter" placement="bottom" effect="light">

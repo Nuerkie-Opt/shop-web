@@ -12,10 +12,12 @@ import eventBus from './eventBus.js';
 import locale from 'element-ui/lib/locale/lang/en'
 import { browserFingerPrint, baseURL } from "./utils.js";
 import VueAnalytics from 'vue-analytics';
+import SocialSharing from 'vue-social-sharing';
 
 Vue.use(ElementUI, { locale })
 Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(SocialSharing);
 
 const store = new Vuex.Store(data);
 
@@ -45,6 +47,27 @@ Vue.prototype.$urlTo = (url, to) => {
 
 };
 
+Vue.prototype.$openMediaUrl = (media) => {
+  let url = "https://";
+  switch (media) {
+    case "facebook":
+      url += "facebook.com/shop.africaniz";
+      break;
+    case "twitter":
+      url += "twitter.com/shop_africaniz";
+      break;
+    case "instagram":
+      url += "instagram.com/shop.africaniz/";
+      break;
+    case "form":
+      url += "forms.gle/1H2DZfctVreiKS8Z6";
+    default:
+      break;
+  }
+
+  window.open(url,"_blank");
+}
+
 Vue.use(VueAnalytics, {
   id:'UA-153103867-1',
   router,
@@ -63,6 +86,7 @@ Vue.use(VueAnalytics, {
     enhanced: true
   }
 });
+
 
 new Vue({
   router,

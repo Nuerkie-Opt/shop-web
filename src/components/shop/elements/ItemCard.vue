@@ -21,7 +21,7 @@
       <el-divider></el-divider>
 
       <div class="sbottom clearfix">
-          <ActionBtns :item="item.item" />
+          <ActionBtns :item="item" />
       </div>
     </div>
   </el-card>
