@@ -107,7 +107,7 @@
           <i>Sales begins on</i>
           <el-tag style="font-size:18px">
             <b>
-              <i>1st January 2020.</i>
+              <i>Soon.</i>
             </b>
           </el-tag>
         </div>

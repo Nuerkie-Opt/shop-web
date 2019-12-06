@@ -34,9 +34,10 @@
 <script>
 import ActionBtns from "./ActionBtns.vue";
 
+
 export default {
   components: {
-    ActionBtns
+    ActionBtns,
   },
   props: ["item"],
   methods: {

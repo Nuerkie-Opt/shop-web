@@ -66,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['currentSeller'])
+    ...mapGetters(['currentSeller','currentUser'])
   },
   methods: {
     submit() {
@@ -132,9 +132,14 @@ export default {
         "000": ["111"]
       };
       // show loader
+      const fp = await this.$browser();
       this.$actions
         .post("/action", payload, {
-          headers: { Authorization: "a8cd3aa542c5b1c9f6f92d663e32bc0fe682238a" }
+          headers: { 
+            Authorization: this.currentUser.token, 
+            'Account-ID':this.currentUser.user.email, 
+            'Device-ID': fp.deviceHash
+            }
         })
         .then(response => {
           // handle success

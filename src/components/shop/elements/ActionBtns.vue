@@ -1,51 +1,68 @@
 <template>
   <div>
-    <el-tooltip :content="user_liked ? 'Unlike' : 'Like' " placement="bottom" effect="light">
-      <el-button :type="user_liked ? 'primary' : ''" class="bots" size="small" @click="like" round>
-        {{likes}}
-        <i class="el-icon-star-on"></i>
-      </el-button>
-    </el-tooltip>
-    <el-tooltip content="Share" placement="bottom" effect="light">
-      <el-popover placement="right" trigger="click">
-        <Socials :item="item"/>
-        <el-button
-          class="bots"
-          icon="el-icon-share"
-          slot="reference"
-          size="small"
-          circle
-        ></el-button>
-      </el-popover>
-    </el-tooltip>
-    <el-tooltip content="Combos" placement="bottom" effect="light">
-      <el-button
-        class="bots"
-        icon="el-icon-loading"
-        size="small"
-        @click="$message.info('Combos coming soon 😋 ...')"
-        circle
-      ></el-button>
-    </el-tooltip>
-    <el-tooltip content="Seller Profile" placement="bottom" effect="light">
-      <el-button
-        type="primary"
-        v-if="seller"
-        class="bots"
-        size="small"
-        @click="$router.push(`/p/${item.seller_id}`)"
-        round
-      >Seller</el-button>
-    </el-tooltip>
+    <!-- <el-tooltip :content="user_liked ? 'Unlike' : 'Like' " placement="bottom" effect="light"> -->
+    <el-button :type="user_liked ? 'primary' : ''" class="bots" size="small" @click="like" round>
+      {{likes}}
+      <i class="el-icon-star-on"></i>
+    </el-button>
+    <!-- </el-tooltip> -->
+    <!-- <el-tooltip content="Share" placement="bottom" effect="light"> -->
+    <el-popover placement="right" trigger="click">
+      <Socials :item="item" />
+      <el-button class="bots" icon="el-icon-share" slot="reference" size="small" circle></el-button>
+    </el-popover>
+    <!-- </el-tooltip> -->
+    <!-- <el-tooltip content="Combos" placement="bottom" effect="light"> -->
+    <el-button
+      class="bots"
+      icon="el-icon-loading"
+      size="small"
+      @click="combo"
+      circle
+    ></el-button>
+    <!-- </el-tooltip> -->
+    <!-- <el-tooltip content="Seller Profile" placement="bottom" effect="light"> -->
+    <el-button
+      type="primary"
+      v-if="seller"
+      class="bots"
+      size="small"
+      @click="$router.push(`/p/${item.seller_id}`)"
+      round
+    >Seller</el-button>
+    <!-- </el-tooltip> -->
     <el-button class="rbutton bots" size="small" round>
       <MoneySign :price="item.item.price" />
     </el-button>
+    <el-dialog width="90%" :visible.sync="loginDialogVisible" append-to-body>
+      <template slot="title">
+        <div style="font-size:18px">
+          <el-tag style="font-size:18px">
+            <b>
+              <i>Hello there 👋</i>
+            </b>
+          </el-tag>
+        </div>
+      </template>
+      <span style="font-size:18px"><i>We see you love this item 🤗, well, this item also loves you back 😻. Kindly login or register to be able to like items 😁.</i></span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="$router.push('/auth/login')">Login.</el-button>
+        <el-button type="primary" @click="$router.push('/auth/register')">Register.</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog :visible.sync="comboAppendVisible" width="90%" append-to-body>
+      <ComboAdd :item="item.id"/>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MoneySign from "./MoneySign.vue";
 import Socials from "./Socials.vue";
+import { mapGetters } from "vuex";
+import ComboAdd from "./ComboAdd.vue";
+
 export default {
   props: {
     item: {
@@ -55,6 +72,7 @@ export default {
         }
       }
     },
+
     seller: {
       type: Boolean,
       default: false
@@ -62,25 +80,39 @@ export default {
   },
   components: {
     MoneySign,
+    ComboAdd,
     Socials
   },
   data() {
     return {
       liked: false,
-      likx: 0
+      likx: 0,
+      loginDialogVisible: false,
+      comboAppendVisible:false
     };
   },
   computed: {
+    ...mapGetters(["currentUser"]),
     user_liked() {
       return this.item.liked || this.liked;
     },
     likes() {
       const itm = this.item.likes ? this.item.likes : 0;
-      return this.likx + 0;
+      return this.likx + itm;
     }
   },
   methods: {
+    combo(){
+      if (!this.currentUser) {
+        this.loginDialogVisible = true;
+        return;
+      }
+    },
     like() {
+      if (!this.currentUser) {
+        this.loginDialogVisible = true;
+        return;
+      }
       if (this.user_liked) {
         this.liked = false;
         this.likx -= 1;

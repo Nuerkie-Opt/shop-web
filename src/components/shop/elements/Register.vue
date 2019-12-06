@@ -66,7 +66,7 @@ export default {
         lock: true,
         text: "Registering...",
         spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
+        background: "rgba(255, 255, 255, 0.5)"
       });
       const payload = {
         "111": {
