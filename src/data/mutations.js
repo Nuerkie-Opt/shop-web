@@ -7,6 +7,10 @@ const mutations = {
         state.userprofile = profile;
         sessionStorage.profile = JSON.stringify(profile);
     },
+    set_location(state, location){
+        state.location = location;
+        sessionStorage.location = JSON.stringify(location);
+    },
     append_items(state, items){
         state.items = items;
         sessionStorage.items = JSON.stringify(state.items);

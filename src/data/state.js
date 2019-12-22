@@ -10,7 +10,8 @@ let state = {
     userprofile: {},
     isLoggedIn: false,
     seller:{},
-    user:{}
+    user:{},
+    location:{},
 };
 
 export default state;

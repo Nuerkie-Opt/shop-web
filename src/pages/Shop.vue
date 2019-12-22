@@ -14,11 +14,28 @@
 
 <script>
 import HeaderBar from "../components/shop/HeaderBar.vue";
+import axios from 'axios';
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
     HeaderBar
-  }
+  },
+  computed: {
+    ...mapGetters(['userLoc']),
+  },
+  methods: {
+    ...mapMutations(['set_location'])
+  },
+  created() {
+    if (this.userLoc) {
+      return;
+    }
+
+    axios.get('https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572').then(res=>{
+      this.set_location(res.data);
+    })
+  },
 };
 </script>
 

@@ -43,6 +43,17 @@ const getters = {
 
         return false;
     },
+    userLoc(state) {
+        if (Object.keys(state.location).length !== 0) {
+            return state.location;
+        }
+
+        if (sessionStorage.location) {
+            return JSON.parse(sessionStorage.location);
+        }
+
+        return false;
+    },
     cartCount(state, getters) {
         
         return getters.cartItems ? getters.cartItems.length : 0;

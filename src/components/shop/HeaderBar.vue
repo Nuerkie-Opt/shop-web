@@ -20,17 +20,12 @@
       <el-col :xs="9" :sm="4">
         <el-row :gutter="10" type="flex" align="middle" justify="end">
           <el-col>
-            <el-tooltip content="Search / Filter" placement="bottom" effect="light">
               <el-button @click="searchFilterVisible = true" type="primary" size="small" icon="el-icon-search" plain circle></el-button>
-            </el-tooltip>
           </el-col>
           <el-col>
-            <el-tooltip content="Combination" placement="bottom" effect="light">
               <el-button type="primary" size="small" icon="el-icon-loading" @click="$message.info('Combos coming soon 😋 ...')" plain circle></el-button>
-            </el-tooltip>
           </el-col>
           <el-col>
-            <el-tooltip content="Cart" placement="bottom" effect="light">
               <el-badge :value="cartCount" :max="99" class="counter">
                 <el-button
                   type="danger"
@@ -41,7 +36,6 @@
                   circle
                 ></el-button>
               </el-badge>
-            </el-tooltip>
           </el-col>
           <el-col>
             <el-dropdown>

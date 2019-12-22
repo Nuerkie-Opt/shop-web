@@ -2,7 +2,7 @@
   <el-card :body-style="{ padding: '0px' }" shadow="hover">
     <el-carousel
       :interval="10000"
-      arrow="always"
+      arrow="never"
       :initial-index="0"
       :autoplay="true"
       indicator-position="outside"
