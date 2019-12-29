@@ -28,7 +28,7 @@
         <el-button type="info" size="mini">Telegram</el-button>
       </network>
       <network network="twitter">
-        <el-button type="info" size="mini" plain>Twitter</el-button>
+        <el-button type="success" size="mini" plain>Twitter</el-button>
       </network>
       <br />
       <br />
@@ -38,6 +38,7 @@
       <network network="whatsapp">
         <el-button type="success" size="mini">Whatsapp</el-button>
       </network>
+        <el-button type="info" size="mini" plain>Copy Link</el-button>
     </div>
   </social-sharing>
 </template>
@@ -45,6 +46,11 @@
 <script>
 export default {
   props: ["item"],
+  data() {
+    return {
+      copyMsg: ""
+    };
+  },
   computed: {
     itemTags() {
       return "Africanizing,Africanize," + this.item.item.tags.join(",");
@@ -58,6 +64,9 @@ export default {
     itemSummary() {
       return this.item.item.summary;
     }
+  },
+  created() {
+    this.copyMsg = this.itemUrl;
   }
 };
 </script>

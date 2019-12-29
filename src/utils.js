@@ -62,7 +62,6 @@ export const isLoggedIn = async () => {
             }
         })
         .catch( (error) =>{
-            console.log(error);
             status = false;
         });
 

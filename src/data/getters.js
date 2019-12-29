@@ -15,9 +15,9 @@ const getters = {
             return state.products;
         }
 
-        if (sessionStorage.products) {
-            return JSON.parse(sessionStorage.products);
-        }
+        // if (sessionStorage.products) {
+        //     return JSON.parse(sessionStorage.products);
+        // }
 
         return false;
     },
@@ -26,9 +26,9 @@ const getters = {
             return state.items;
         }
 
-        if (sessionStorage.items) {
-            return JSON.parse(sessionStorage.items);
-        }
+        // if (sessionStorage.items) {
+        //     return JSON.parse(sessionStorage.items);
+        // }
 
         return false;
     },
@@ -37,9 +37,9 @@ const getters = {
             return state.itemsD;
         }
 
-        if (sessionStorage.itemsD) {
-            return JSON.parse(sessionStorage.itemsD);
-        }
+        // if (sessionStorage.itemsD) {
+        //     return JSON.parse(sessionStorage.itemsD);
+        // }
 
         return false;
     },

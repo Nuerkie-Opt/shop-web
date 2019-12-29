@@ -1,7 +1,7 @@
 const mutations = {
     append_products(state, products){
         state.products = products;
-        sessionStorage.products = JSON.stringify(state.products);
+        // sessionStorage.products = JSON.stringify(state.products);
     },
     set_profile(state, profile){
         state.userprofile = profile;
@@ -13,7 +13,7 @@ const mutations = {
     },
     append_items(state, items){
         state.items = items;
-        sessionStorage.items = JSON.stringify(state.items);
+        // sessionStorage.items = JSON.stringify(state.items);
     },
     append_orders(state, orders ){
         
@@ -39,7 +39,7 @@ const mutations = {
     set_item_d(state, itemsD){
         state.itemsD = itemsD;
 
-        sessionStorage.itemsD = JSON.stringify(itemsD);
+        // sessionStorage.itemsD = JSON.stringify(itemsD);
     },
     set_login(state, status){
         state.isLoggedIn = status;

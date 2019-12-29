@@ -44,7 +44,7 @@
           </el-tag>
         </div>
       </template>
-      <span style="font-size:18px"><i>We see you love this item 🤗, well, this item also loves you back 😻. Kindly login or register to be able to like items 😁.</i></span>
+      <span style="font-size:18px"><i>We see you love this item 🤗, well, this item also loves you back 😻. Kindly login or register to be able to like items or create combos 😋.</i></span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="$router.push('/auth/login')">Login.</el-button>
         <el-button type="primary" @click="$router.push('/auth/register')">Register.</el-button>
@@ -52,7 +52,7 @@
     </el-dialog>
 
     <el-dialog :visible.sync="comboAppendVisible" width="90%" append-to-body>
-      <ComboAdd :item="item.id"/>
+      <ComboAdd :item="item"/>
     </el-dialog>
   </div>
 </template>
@@ -107,6 +107,7 @@ export default {
         this.loginDialogVisible = true;
         return;
       }
+      this.comboAppendVisible = true;
     },
     like() {
       if (!this.currentUser) {
@@ -121,7 +122,10 @@ export default {
         this.likx += 1;
       }
     }
-  }
+  },
+  mounted() {
+    this.$eventBus.$on("closeCombo", ()=>this.comboAppendVisible = false);
+  },
 };
 </script>
 

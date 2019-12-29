@@ -14,6 +14,7 @@ import { browserFingerPrint, baseURL } from "./utils.js";
 import VueAnalytics from 'vue-analytics';
 import SocialSharing from 'vue-social-sharing';
 
+
 Vue.use(ElementUI, { locale })
 Vue.use(Vuex);
 Vue.use(VueRouter);
