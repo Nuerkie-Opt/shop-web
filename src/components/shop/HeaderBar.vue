@@ -23,7 +23,7 @@
               <el-button @click="searchFilterVisible = true" type="primary" size="small" icon="el-icon-search" plain circle></el-button>
           </el-col>
           <el-col>
-              <el-button type="primary" size="small" icon="el-icon-loading" @click="$message.info('Combos coming soon 😋 ...')" plain circle></el-button>
+              <el-button type="primary" size="small" icon="el-icon-loading" @click="$router.push('/combinations')" plain circle></el-button>
           </el-col>
           <el-col>
               <el-badge :value="cartCount" :max="99" class="counter">

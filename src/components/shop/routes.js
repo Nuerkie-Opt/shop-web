@@ -1,5 +1,6 @@
 import ItemDisplay from './ItemDisplay.vue';
 import ItemDetails from './ItemDetails.vue';
+import Combos from './Combinations.vue';
 import Checkout from './Checkout.vue';
 import Social from './Social.vue';
 import Cart from './Cart.vue';
@@ -42,6 +43,11 @@ const shopRoutes = [
                 name:"Reset"
             }
         ]
+    },
+    {
+        path:'combinations',
+        component:Combos,
+        name:"Combinations"
     },
     {
         path:'items/:item/',
